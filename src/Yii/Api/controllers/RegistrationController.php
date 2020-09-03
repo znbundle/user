@@ -2,8 +2,9 @@
 
 namespace PhpBundle\User\Yii\Api\controllers;
 
-use PhpBundle\User\Domain\Forms\CreateAccountForm;
-use PhpBundle\User\Domain\Forms\RequestCodeForm;
+use PhpBundle\User\Domain\Forms\Registration\CreateAccountForm;
+use PhpBundle\User\Domain\Forms\Registration\RequestCodeForm;
+use PhpBundle\User\Domain\Forms\Registration\VerifyCodeForm;
 use PhpBundle\User\Domain\Services\RegistrationService;
 use PhpBundle\User\Domain\Symfony\Authenticator;
 use PhpBundle\User\Domain\Traits\AccessTrait;
@@ -34,8 +35,7 @@ class RegistrationController extends BaseCrudController
         Module $module,
         array $config = [],
         RegistrationService $registrationService
-    )
-    {
+    ) {
         parent::__construct($id, $module, $config);
         $this->registrationService = $registrationService;
     }
@@ -43,25 +43,21 @@ class RegistrationController extends BaseCrudController
     public function actionRequestActivationCode() {
         $post = \Yii::$app->request->post();
         $form = new RequestCodeForm;
-        $form->phone = $post['phone'];
+        EntityHelper::setAttributesW($form, $post);
         $this->registrationService->requestActivationCode($form);
     }
 
     public function actionVerifyActivationCode() {
-        return '';
-        /*$post = \Yii::$app->request->post();
-        $form = new RequestCodeForm;
-        $form->phone = $post['phone'];
-        $form->activation_code = $post['activation_code'];
-        $this->registrationService->verifyActivationCode($form);*/
+        $post = \Yii::$app->request->post();
+        $form = new VerifyCodeForm;
+        EntityHelper::setAttributes($form, $post);
+        $this->registrationService->verifyActivationCode($form);
     }
 
     public function actionCreateAccount() {
         $post = \Yii::$app->request->post();
         $form = new CreateAccountForm;
-        $form->phone = $post['phone'];
-        $form->activation_code = $post['activation_code'];
-
+        EntityHelper::setAttributes($form, $post);
         $this->registrationService->createAccount($form);
     }
 }

@@ -4,7 +4,17 @@ $version = API_VERSION_STRING;
 
 return [
 
-    "POST {$version}/registration/<action>" => "user/registration/<action>",
-//    "POST {$version}/registration/verify-activation-code" => "user/registration/verify-activation-code",
+    "GET {$version}/auth" => "account/auth/info",
+    "POST {$version}/auth" => "account/auth/login",
+    "OPTIONS {$version}/auth" => "account/auth/options",
+
+    "{$version}/registration/<action>" => "user/registration/<action>",
+
+    "{$version}/restore-password/<action>" => "account/restore-password/<action>",
+
+    "{$version}/security/<action>" => "account/security/<action>",
+
+    ["class" => "yii\\rest\UrlRule", "controller" => ["{$version}/user" => "account/user"]],
+    ["class" => "yii\\rest\UrlRule", "controller" => ["{$version}/identity" => "account/identity"]],
 
 ];
