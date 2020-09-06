@@ -10,9 +10,11 @@ class AuthForm
     public $login;
     public $password;
 
-    public function __construct($data)
+    public function __construct($data = null)
     {
-        ClassHelper::configure($this, $data);
+        if($data) {
+            ClassHelper::configure($this, $data);
+        }
     }
 
 }

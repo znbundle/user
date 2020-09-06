@@ -2,15 +2,17 @@
 
 namespace PhpBundle\User\Domain\Entities;
 
+use PhpBundle\User\Domain\Interfaces\Entities\IdentityEntityIterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
 use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 
-class IdentityEntity implements ValidateEntityInterface, EntityIdInterface
+class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, IdentityEntityIterface
 {
 
     private $id = null;
     private $login = null;
+    private $roles = [];
     private $status = null;
     private $createdAt = null;
     private $updatedAt = null;
@@ -38,6 +40,18 @@ class IdentityEntity implements ValidateEntityInterface, EntityIdInterface
     public function getLogin()
     {
         return $this->login;
+    }
+
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles($roles): void
+    {
+        if($roles) {
+            $this->roles = $roles;
+        }
     }
 
     public function setStatus($value)
