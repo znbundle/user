@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpBundle\User\Domain\Interfaces;
+namespace PhpBundle\User\Domain\Interfaces\Repositories;
 
 use PhpLab\Core\Domain\Interfaces\Repository\CrudRepositoryInterface;
 

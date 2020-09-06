@@ -4,7 +4,7 @@ namespace PhpBundle\User\Domain\Repositories\Eloquent;
 
 use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpBundle\User\Domain\Entities\Identity;
-use PhpBundle\User\Domain\Interfaces\UserRepositoryInterface;
+use PhpBundle\User\Domain\Interfaces\Repositories\UserRepositoryInterface;
 
 class UserRepository extends BaseEloquentCrudRepository implements UserRepositoryInterface
 {

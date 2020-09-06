@@ -7,7 +7,7 @@ class TokenEntity
 
     private $token;
     private $type;
-    private $identity_id;
+    private $identityId;
     private $identity;
 
     public function getToken()
@@ -32,12 +32,12 @@ class TokenEntity
 
     public function getIdentityId()
     {
-        return $this->identity_id;
+        return $this->identityId;
     }
 
-    public function setIdentityId($identity_id): void
+    public function setIdentityId($identityId): void
     {
-        $this->identity_id = $identity_id;
+        $this->identityId = $identityId;
     }
 
     public function getIdentity()
