@@ -8,6 +8,7 @@ use PhpBundle\User\Domain\Forms\Registration\CreateAccountForm;
 use PhpBundle\User\Domain\Forms\Registration\RequestCodeForm;
 use PhpBundle\User\Domain\Forms\Registration\VerifyCodeForm;
 use PhpLab\Core\Domain\Helpers\ValidationHelper;
+use PhpLab\Core\Libs\I18Next\Facades\I18Next;
 use yii2bundle\account\domain\v3\helpers\ConfirmHelper;
 
 class RegistrationService
@@ -17,7 +18,8 @@ class RegistrationService
 
     public function __construct(
         SmsService $smsService
-    ) {
+    )
+    {
         $this->smsService = $smsService;
     }
 
@@ -28,7 +30,8 @@ class RegistrationService
         $smsEntity = new SmsEntity;
         $smsEntity->setPhone($requestCodeForm->getPhone());
         $code = ConfirmHelper::generateCode();
-        $message = 'Код для регистрации: ' . $code;
+        $message = I18Next::t('user', 'registration.activate_account_sms', ['code' => $code]);
+        //$message = 'Код для регистрации: ' . $code;
         // todo: use i18next
         $smsEntity->setMessage($message);
         $this->smsService->push($smsEntity);
