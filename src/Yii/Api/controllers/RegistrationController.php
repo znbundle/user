@@ -34,6 +34,7 @@ class RegistrationController extends BaseController
         $form = new RequestCodeForm;
         EntityHelper::setAttributes($form, $post);
         $this->registrationService->requestActivationCode($form);
+        Yii::$app->response->setStatusCode(201);
     }
 
     public function actionVerifyActivationCode()
@@ -42,6 +43,7 @@ class RegistrationController extends BaseController
         $form = new VerifyCodeForm;
         EntityHelper::setAttributes($form, $post);
         $this->registrationService->verifyActivationCode($form);
+        Yii::$app->response->setStatusCode(204);
     }
 
     public function actionCreateAccount()
@@ -50,5 +52,6 @@ class RegistrationController extends BaseController
         $form = new CreateAccountForm;
         EntityHelper::setAttributes($form, $post);
         $this->registrationService->createAccount($form);
+        Yii::$app->response->setStatusCode(201);
     }
 }

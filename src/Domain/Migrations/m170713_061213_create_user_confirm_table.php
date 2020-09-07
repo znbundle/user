@@ -19,7 +19,7 @@ class m170713_061213_create_user_confirm_table extends BaseCreateTableMigration
             $table->string('action');
             $table->string('code');
             $table->boolean('is_activated');
-            $table->text('data');
+            $table->text('data')->nullable();
             $table->integer('expire');
             $table->dateTime('created_at');
 

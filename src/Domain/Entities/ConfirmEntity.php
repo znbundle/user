@@ -2,12 +2,15 @@
 
 namespace PhpBundle\User\Domain\Entities;
 
+use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
 use DateTime;
 
-class ConfirmEntity implements ValidateEntityInterface
+class ConfirmEntity implements ValidateEntityInterface, EntityIdInterface
 {
+
+    private $id = null;
 
     private $login = null;
 
@@ -40,12 +43,12 @@ class ConfirmEntity implements ValidateEntityInterface
             'code' => [
                 new Assert\NotBlank,
             ],
-            'isActivated' => [
+            /*'isActivated' => [
                 new Assert\NotBlank,
-            ],
-            'data' => [
+            ],*/
+            /*'data' => [
                 new Assert\NotBlank,
-            ],
+            ],*/
             'expire' => [
                 new Assert\NotBlank,
             ],
@@ -53,6 +56,16 @@ class ConfirmEntity implements ValidateEntityInterface
                 new Assert\NotBlank,
             ],
         ];
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     public function setLogin($value) : void
@@ -85,12 +98,12 @@ class ConfirmEntity implements ValidateEntityInterface
         return $this->code;
     }
 
-    public function setIsActivated($value) : void
+    public function setIsActivated(bool $value) : void
     {
         $this->isActivated = $value;
     }
 
-    public function getIsActivated()
+    public function getIsActivated(): bool
     {
         return $this->isActivated;
     }
