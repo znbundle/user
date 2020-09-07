@@ -30,7 +30,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
     }
 
     public function isVerify(string $login, string $action, string $code): bool {
-        $confirmEntity = $this->oneByUnique($login, $action);
+        $confirmEntity = $this->repository->oneByUnique($login, $action);
         return $code == $confirmEntity->getCode();
     }
 
@@ -60,7 +60,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         $this->smsService->push($smsEntity);
     }
 
-    public function isHasByUnique(string $login, string $action): bool
+    private function isHasByUnique(string $login, string $action): bool
     {
         $query = new Query;
         $query->whereNew(new Where('login', $login));
@@ -69,22 +69,10 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         return $collection->count() > 0;
     }
 
-    public function getTimeLeft(string $login, string $action): int
+    private function getTimeLeft(string $login, string $action): int
     {
-        $confirmEntity = $this->oneByUnique($login, $action);
+        $confirmEntity = $this->repository->oneByUnique($login, $action);
         return $confirmEntity->getExpire() - time();
-    }
-
-    public function oneByUnique(string $login, string $action): ConfirmEntity
-    {
-        $query = new Query;
-        $query->whereNew(new Where('login', $login));
-        $query->whereNew(new Where('action', $action));
-        $collection = $this->repository->all($query);
-        if($collection->count() == 0) {
-            throw new NotFoundException();
-        }
-        return $collection->first();
     }
 
 }

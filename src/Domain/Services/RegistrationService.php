@@ -17,15 +17,12 @@ use PhpLab\Core\Libs\I18Next\Facades\I18Next;
 class RegistrationService
 {
 
-    private $smsService;
     private $confirmService;
 
     public function __construct(
-        SmsService $smsService,
         ConfirmService $confirmService
     )
     {
-        $this->smsService = $smsService;
         $this->confirmService = $confirmService;
     }
 
@@ -40,7 +37,6 @@ class RegistrationService
         try {
             $this->confirmService->sendConfirmBySms($confirmEntity, ['user', 'registration.activate_account_sms']);
         } catch (AlreadyExistsException $e) {
-            //$timeLeft = $this->confirmService->getTimeLeft($phone, ConfirmActionEnum::REGISTRATION);
             $message = I18Next::t('user', 'registration.user_already_exists_but_not_activation_time_left', ['timeLeft' => $e->getMessage()]);
             throw new AlreadyExistsException($message);
         }

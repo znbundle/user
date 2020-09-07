@@ -5,6 +5,7 @@ namespace PhpBundle\User\Domain\Repositories\Eloquent;
 use PhpLab\Core\Domain\Entities\Query\Where;
 use PhpLab\Core\Domain\Enums\OperatorEnum;
 use PhpLab\Core\Domain\Libs\Query;
+use PhpLab\Core\Exceptions\NotFoundException;
 use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
 use PhpBundle\User\Domain\Entities\ConfirmEntity;
 use PhpBundle\User\Domain\Interfaces\Repositories\ConfirmRepositoryInterface;
@@ -28,4 +29,15 @@ class ConfirmRepository extends BaseEloquentCrudRepository implements ConfirmRep
         $queryBuilder->delete();
     }
 
+    public function oneByUnique(string $login, string $action): ConfirmEntity
+    {
+        $query = new Query;
+        $query->whereNew(new Where('login', $login));
+        $query->whereNew(new Where('action', $action));
+        $collection = $this->all($query);
+        if($collection->count() == 0) {
+            throw new NotFoundException();
+        }
+        return $collection->first();
+    }
 }
