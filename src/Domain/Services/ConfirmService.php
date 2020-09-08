@@ -1,20 +1,20 @@
 <?php
 
-namespace PhpBundle\User\Domain\Services;
+namespace ZnBundle\User\Domain\Services;
 
-use PhpBundle\Notify\Domain\Entities\SmsEntity;
-use PhpBundle\Notify\Domain\Interfaces\Services\SmsServiceInterface;
-use PhpBundle\Notify\Domain\Services\SmsService;
-use PhpBundle\User\Domain\Entities\ConfirmEntity;
-use PhpBundle\User\Domain\Enums\ConfirmActionEnum;
-use PhpBundle\User\Domain\Interfaces\Repositories\ConfirmRepositoryInterface;
-use PhpBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface;
-use PhpLab\Core\Domain\Base\BaseCrudService;
-use PhpLab\Core\Domain\Entities\Query\Where;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Exceptions\AlreadyExistsException;
-use PhpLab\Core\Exceptions\NotFoundException;
-use PhpLab\Core\Libs\I18Next\Facades\I18Next;
+use ZnBundle\Notify\Domain\Entities\SmsEntity;
+use ZnBundle\Notify\Domain\Interfaces\Services\SmsServiceInterface;
+use ZnBundle\Notify\Domain\Services\SmsService;
+use ZnBundle\User\Domain\Entities\ConfirmEntity;
+use ZnBundle\User\Domain\Enums\ConfirmActionEnum;
+use ZnBundle\User\Domain\Interfaces\Repositories\ConfirmRepositoryInterface;
+use ZnBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface;
+use ZnCore\Base\Domain\Base\BaseCrudService;
+use ZnCore\Base\Domain\Entities\Query\Where;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Exceptions\AlreadyExistsException;
+use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use yii2bundle\account\domain\v3\helpers\ConfirmHelper;
 
 class ConfirmService extends BaseCrudService implements ConfirmServiceInterface

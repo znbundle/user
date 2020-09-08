@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpBundle\User\Domain\Forms;
+namespace ZnBundle\User\Domain\Forms;
 
-use PhpLab\Core\Helpers\ClassHelper;
+use ZnCore\Base\Helpers\ClassHelper;
 
 class AuthForm
 {

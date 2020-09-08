@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpBundle\User\Symfony;
+namespace ZnBundle\User\Symfony;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

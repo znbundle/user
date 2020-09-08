@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpBundle\User\Domain\Entities;
+namespace ZnBundle\User\Domain\Entities;
 
-use PhpBundle\User\Domain\Interfaces\Entities\IdentityEntityIterface;
+use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityIterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
-use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+use ZnCore\Base\Domain\Interfaces\Entity\ValidateEntityInterface;
+use ZnCore\Base\Domain\Interfaces\Entity\EntityIdInterface;
 
 class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, IdentityEntityIterface
 {

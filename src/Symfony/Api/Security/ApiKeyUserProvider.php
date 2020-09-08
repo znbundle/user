@@ -1,7 +1,7 @@
 <?php
 
 
-namespace PhpBundle\User\Symfony\Api\Security;
+namespace ZnBundle\User\Symfony\Api\Security;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\User;

@@ -1,13 +1,13 @@
 <?php
 
-namespace PhpBundle\User\Symfony\Api\Controllers;
+namespace ZnBundle\User\Symfony\Api\Controllers;
 
-use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
-use PhpLab\Rest\Libs\Serializer\JsonRestSerializer;
-use PhpBundle\User\Domain\Entities\User;
-use PhpBundle\User\Domain\Forms\AuthForm;
-use PhpBundle\User\Domain\Services\AuthService;
-use PhpLab\Core\Enums\Http\HttpHeaderEnum;
+use ZnCore\Base\Domain\Exceptions\UnprocessibleEntityException;
+use ZnLib\Rest\Libs\Serializer\JsonRestSerializer;
+use ZnBundle\User\Domain\Entities\User;
+use ZnBundle\User\Domain\Forms\AuthForm;
+use ZnBundle\User\Domain\Services\AuthService;
+use ZnCore\Base\Enums\Http\HttpHeaderEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

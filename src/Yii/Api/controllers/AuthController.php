@@ -1,13 +1,13 @@
 <?php
 
-namespace PhpBundle\User\Yii\Api\controllers;
+namespace ZnBundle\User\Yii\Api\controllers;
 
-use PhpBundle\User\Domain\Forms\AuthForm;
-use PhpBundle\User\Domain\Services\AuthService;
-use PhpBundle\User\Domain\Services\AuthService2;
-use PhpBundle\User\Domain\Services\RegistrationService;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
-use PhpLab\Core\Enums\Http\HttpStatusCodeEnum;
+use ZnBundle\User\Domain\Forms\AuthForm;
+use ZnBundle\User\Domain\Services\AuthService;
+use ZnBundle\User\Domain\Services\AuthService2;
+use ZnBundle\User\Domain\Services\RegistrationService;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Enums\Http\HttpStatusCodeEnum;
 use RocketLab\Bundle\Rest\Base\BaseController;
 use yii\base\Module;
 use yii\filters\AccessControl;

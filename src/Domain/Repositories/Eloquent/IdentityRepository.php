@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpBundle\User\Domain\Repositories\Eloquent;
+namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
-use PhpBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
-use PhpBundle\User\Domain\Entities\IdentityEntity;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Db\Db\Base\BaseEloquentCrudRepository;
+use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
+use ZnBundle\User\Domain\Entities\IdentityEntity;
 
 class IdentityRepository extends BaseEloquentCrudRepository implements IdentityRepositoryInterface
 {

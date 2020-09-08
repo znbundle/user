@@ -1,24 +1,24 @@
 <?php
 
-namespace PhpBundle\User\Domain\Services;
+namespace ZnBundle\User\Domain\Services;
 
 use Illuminate\Support\Collection;
-use PhpBundle\Crypt\Domain\Exceptions\InvalidPasswordException;
-use PhpBundle\Crypt\Domain\Services\PasswordService;
-use PhpBundle\Jwt\Domain\Entities\JwtEntity;
-use PhpBundle\Jwt\Domain\Services\JwtService;
-use PhpBundle\User\Domain\Entities\IdentityEntity;
-use PhpBundle\User\Domain\Interfaces\Entities\IdentityEntityIterface;
-use PhpBundle\User\Domain\Entities\TokenEntity;
-use PhpBundle\User\Domain\Forms\AuthForm;
-use PhpBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
-use PhpBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface;
-use PhpBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
-use PhpLab\Core\Domain\Base\BaseCrudService;
-use PhpLab\Core\Domain\Entities\ValidateErrorEntity;
-use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
+use ZnCrypt\Base\Domain\Services\PasswordService;
+use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
+use ZnCrypt\Jwt\Domain\Services\JwtService;
+use ZnBundle\User\Domain\Entities\IdentityEntity;
+use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityIterface;
+use ZnBundle\User\Domain\Entities\TokenEntity;
+use ZnBundle\User\Domain\Forms\AuthForm;
+use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
+use ZnBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface;
+use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
+use ZnCore\Base\Domain\Base\BaseCrudService;
+use ZnCore\Base\Domain\Entities\ValidateErrorEntity;
+use ZnCore\Base\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use Yii;
 use yii\web\IdentityInterface;
 

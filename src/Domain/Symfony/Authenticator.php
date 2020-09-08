@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpBundle\User\Domain\Symfony;
+namespace ZnBundle\User\Domain\Symfony;
 
-use PhpBundle\User\Domain\Entities\User;
-use PhpBundle\User\Domain\Services\AuthService;
-use PhpLab\Core\Enums\Http\HttpHeaderEnum;
-use PhpLab\Core\Exceptions\NotFoundException;
+use ZnBundle\User\Domain\Entities\User;
+use ZnBundle\User\Domain\Services\AuthService;
+use ZnCore\Base\Enums\Http\HttpHeaderEnum;
+use ZnCore\Base\Exceptions\NotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;

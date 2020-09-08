@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpBundle\User\Domain\Interfaces\Entities;
+namespace ZnBundle\User\Domain\Interfaces\Entities;
 
 interface IdentityEntityIterface
 {

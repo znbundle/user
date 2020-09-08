@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpBundle\User\Domain\Entities;
+namespace ZnBundle\User\Domain\Entities;
 
 class TokenEntity
 {

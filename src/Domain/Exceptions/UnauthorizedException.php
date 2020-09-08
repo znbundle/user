@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpBundle\User\Domain\Exceptions;
+namespace ZnBundle\User\Domain\Exceptions;
 
 use Exception;
 

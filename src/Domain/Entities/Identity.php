@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpBundle\User\Domain\Entities;
+namespace ZnBundle\User\Domain\Entities;
 
-use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
+use ZnCore\Base\Domain\Interfaces\Entity\EntityIdInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class Identity implements UserInterface, EntityIdInterface

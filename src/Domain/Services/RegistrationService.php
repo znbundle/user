@@ -1,18 +1,18 @@
 <?php
 
-namespace PhpBundle\User\Domain\Services;
+namespace ZnBundle\User\Domain\Services;
 
-use PhpBundle\Notify\Domain\Services\SmsService;
-use PhpBundle\User\Domain\Entities\ConfirmEntity;
-use PhpBundle\User\Domain\Enums\ConfirmActionEnum;
-use PhpBundle\User\Domain\Forms\Registration\CreateAccountForm;
-use PhpBundle\User\Domain\Forms\Registration\RequestCodeForm;
-use PhpBundle\User\Domain\Forms\Registration\VerifyCodeForm;
-use PhpLab\Core\Domain\Helpers\ValidationHelper;
-use PhpLab\Core\Enums\Measure\TimeEnum;
-use PhpLab\Core\Exceptions\AlreadyExistsException;
-use PhpLab\Core\Exceptions\NotFoundException;
-use PhpLab\Core\Libs\I18Next\Facades\I18Next;
+use ZnBundle\Notify\Domain\Services\SmsService;
+use ZnBundle\User\Domain\Entities\ConfirmEntity;
+use ZnBundle\User\Domain\Enums\ConfirmActionEnum;
+use ZnBundle\User\Domain\Forms\Registration\CreateAccountForm;
+use ZnBundle\User\Domain\Forms\Registration\RequestCodeForm;
+use ZnBundle\User\Domain\Forms\Registration\VerifyCodeForm;
+use ZnCore\Base\Domain\Helpers\ValidationHelper;
+use ZnCore\Base\Enums\Measure\TimeEnum;
+use ZnCore\Base\Exceptions\AlreadyExistsException;
+use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 
 class RegistrationService
 {

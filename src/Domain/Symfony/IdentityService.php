@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpBundle\User\Domain\Services;
+namespace ZnBundle\User\Domain\Services;
 
-use PhpBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
-use PhpBundle\User\Domain\Interfaces\Services\IdentityServiceInterface;
-use PhpLab\Core\Domain\Base\BaseCrudService;
+use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
+use ZnBundle\User\Domain\Interfaces\Services\IdentityServiceInterface;
+use ZnCore\Base\Domain\Base\BaseCrudService;
 
 class IdentityService extends BaseCrudService implements IdentityServiceInterface
 {

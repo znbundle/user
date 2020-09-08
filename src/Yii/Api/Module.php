@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpBundle\User\Yii\Api;
+namespace ZnBundle\User\Yii\Api;
 
 use yii\base\Module as YiiModule;
 use yii\filters\AccessControl;

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpBundle\User\Domain\Entities;
+namespace ZnBundle\User\Domain\Entities;
 
 use yii2rails\domain\BaseEntity;
 

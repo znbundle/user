@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpBundle\User\Domain\Forms\Registration;
+namespace ZnBundle\User\Domain\Forms\Registration;
 
 use Symfony\Component\Validator\Constraints as Assert;
 

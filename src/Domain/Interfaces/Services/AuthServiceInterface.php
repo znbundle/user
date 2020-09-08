@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpBundle\User\Domain\Interfaces\Services;
+namespace ZnBundle\User\Domain\Interfaces\Services;
 
-use PhpLab\Core\Domain\Interfaces\Service\CrudServiceInterface;
+use ZnCore\Base\Domain\Interfaces\Service\CrudServiceInterface;
 
 interface AuthServiceInterface extends CrudServiceInterface
 {

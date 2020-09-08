@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpBundle\User\Domain\Traits;
+namespace ZnBundle\User\Domain\Traits;
 
-use PhpBundle\User\Domain\Exceptions\UnauthorizedException;
+use ZnBundle\User\Domain\Exceptions\UnauthorizedException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 

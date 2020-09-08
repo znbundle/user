@@ -1,24 +1,24 @@
 <?php
 
-namespace PhpBundle\User\Domain\Services;
+namespace ZnBundle\User\Domain\Services;
 
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Illuminate\Support\Collection;
-use PhpBundle\Jwt\Domain\Entities\JwtEntity;
-use PhpBundle\Crypt\Domain\Exceptions\InvalidPasswordException;
-use PhpBundle\Jwt\Domain\Helpers\JwtHelper;
-use PhpBundle\Jwt\Domain\Interfaces\Services\JwtServiceInterface;
-use PhpBundle\Crypt\Domain\Interfaces\Services\PasswordServiceInterface;
-use PhpBundle\Jwt\Domain\Repositories\Config\ProfileRepository;
-use PhpBundle\Jwt\Domain\Services\JwtService;
-use PhpBundle\User\Domain\Entities\User;
-use PhpBundle\User\Domain\Exceptions\UnauthorizedException;
-use PhpBundle\User\Domain\Forms\AuthForm;
-use PhpLab\Core\Domain\Entities\ValidateErrorEntity;
-use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
-use PhpLab\Core\Exceptions\NotFoundException;
+use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
+use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
+use ZnCrypt\Jwt\Domain\Helpers\JwtHelper;
+use ZnCrypt\Jwt\Domain\Interfaces\Services\JwtServiceInterface;
+use ZnCrypt\Base\Domain\Interfaces\Services\PasswordServiceInterface;
+use ZnCrypt\Jwt\Domain\Repositories\Config\ProfileRepository;
+use ZnCrypt\Jwt\Domain\Services\JwtService;
+use ZnBundle\User\Domain\Entities\User;
+use ZnBundle\User\Domain\Exceptions\UnauthorizedException;
+use ZnBundle\User\Domain\Forms\AuthForm;
+use ZnCore\Base\Domain\Entities\ValidateErrorEntity;
+use ZnCore\Base\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Base\Exceptions\NotFoundException;
 
 class AuthService
 {

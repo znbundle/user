@@ -3,7 +3,7 @@
 namespace Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
-use PhpLab\Eloquent\Migration\Base\BaseCreateTableMigration;
+use ZnCore\Db\Migration\Base\BaseCreateTableMigration;
 
 class m170104_202556_create_user_identity_table extends BaseCreateTableMigration
 {

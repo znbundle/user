@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpBundle\User\Domain\Enums;
+namespace ZnBundle\User\Domain\Enums;
 
 use yii2rails\extension\enum\base\BaseEnum;
 

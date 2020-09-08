@@ -2,9 +2,9 @@
 api_auth_index:
     methods: [GET]
     path: auth
-    controller: PhpBundle\User\Symfony\Api\Controllers\AuthController::index
+    controller: ZnBundle\User\Symfony\Api\Controllers\AuthController::index
 
 api_auth_login:
     path: auth
     methods: [POST]
-    controller: PhpBundle\User\Symfony\Api\Controllers\AuthController::login
+    controller: ZnBundle\User\Symfony\Api\Controllers\AuthController::login

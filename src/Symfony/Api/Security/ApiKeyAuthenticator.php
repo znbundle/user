@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpBundle\User\Symfony\Api\Security;
+namespace ZnBundle\User\Symfony\Api\Security;
 
 use App\Security\ApiKeyUserProvider;
 use Symfony\Component\HttpFoundation\Request;

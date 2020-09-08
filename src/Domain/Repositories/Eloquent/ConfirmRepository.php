@@ -1,14 +1,14 @@
 <?php
 
-namespace PhpBundle\User\Domain\Repositories\Eloquent;
+namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
-use PhpLab\Core\Domain\Entities\Query\Where;
-use PhpLab\Core\Domain\Enums\OperatorEnum;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Exceptions\NotFoundException;
-use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
-use PhpBundle\User\Domain\Entities\ConfirmEntity;
-use PhpBundle\User\Domain\Interfaces\Repositories\ConfirmRepositoryInterface;
+use ZnCore\Base\Domain\Entities\Query\Where;
+use ZnCore\Base\Domain\Enums\OperatorEnum;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Db\Db\Base\BaseEloquentCrudRepository;
+use ZnBundle\User\Domain\Entities\ConfirmEntity;
+use ZnBundle\User\Domain\Interfaces\Repositories\ConfirmRepositoryInterface;
 
 class ConfirmRepository extends BaseEloquentCrudRepository implements ConfirmRepositoryInterface
 {

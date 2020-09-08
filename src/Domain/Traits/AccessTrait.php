@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpBundle\User\Domain\Traits;
+namespace ZnBundle\User\Domain\Traits;
 
 use http\Env\Request;
-use PhpBundle\User\Domain\Symfony\Authenticator;
+use ZnBundle\User\Domain\Symfony\Authenticator;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 

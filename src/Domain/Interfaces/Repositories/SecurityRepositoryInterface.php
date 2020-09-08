@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpBundle\User\Domain\Interfaces\Repositories;
+namespace ZnBundle\User\Domain\Interfaces\Repositories;
 
-use PhpBundle\User\Domain\Entities\SecurityEntity;
-use PhpLab\Core\Domain\Interfaces\Repository\CrudRepositoryInterface;
+use ZnBundle\User\Domain\Entities\SecurityEntity;
+use ZnCore\Base\Domain\Interfaces\Repository\CrudRepositoryInterface;
 
 interface SecurityRepositoryInterface extends CrudRepositoryInterface
 {

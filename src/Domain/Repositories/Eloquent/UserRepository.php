@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpBundle\User\Domain\Repositories\Eloquent;
+namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
-use PhpLab\Eloquent\Db\Base\BaseEloquentCrudRepository;
-use PhpBundle\User\Domain\Entities\Identity;
-use PhpBundle\User\Domain\Interfaces\Repositories\UserRepositoryInterface;
+use ZnCore\Db\Db\Base\BaseEloquentCrudRepository;
+use ZnBundle\User\Domain\Entities\Identity;
+use ZnBundle\User\Domain\Interfaces\Repositories\UserRepositoryInterface;
 
 class UserRepository extends BaseEloquentCrudRepository implements UserRepositoryInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpBundle\User\Domain\Forms\Registration;
+namespace ZnBundle\User\Domain\Forms\Registration;
 
-use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
-use PhpLab\Core\Enums\Http\HttpMethodEnum;
-use PhpLab\Core\Helpers\StringHelper;
+use ZnCore\Base\Domain\Interfaces\Entity\ValidateEntityInterface;
+use ZnCore\Base\Enums\Http\HttpMethodEnum;
+use ZnCore\Base\Helpers\StringHelper;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class RequestCodeForm implements ValidateEntityInterface
