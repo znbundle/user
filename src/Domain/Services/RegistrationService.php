@@ -49,7 +49,7 @@ class RegistrationService
             $isVerify = $this->confirmService->isVerify($requestCodeForm->getPhone(), ConfirmActionEnum::REGISTRATION, $requestCodeForm->getActivationCode());
             if(! $isVerify) {
                 $message = I18Next::t('user', 'registration.invalid_activation_code');
-                ValidationHelper::throwUnprocessable(['phone' => $message]);
+                ValidationHelper::throwUnprocessable(['activation_code' => $message]);
             }
         } catch (NotFoundException $e) {
             $message = I18Next::t('user', 'registration.temp_user_not_found');
