@@ -14,8 +14,6 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"PhpBundle\\User\\": "src",
-			"PhpBundle\\User\\Tests\\": "tests",
 			"ZnBundle\\User\\": "src",
 			"ZnBundle\\User\\Tests\\": "tests"
 		}
