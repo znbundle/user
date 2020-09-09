@@ -8,7 +8,7 @@ use ZnBundle\User\Domain\Enums\ConfirmActionEnum;
 use ZnBundle\User\Domain\Forms\Registration\CreateAccountForm;
 use ZnBundle\User\Domain\Forms\Registration\RequestCodeForm;
 use ZnBundle\User\Domain\Forms\Registration\VerifyCodeForm;
-use ZnCore\Base\Domain\Helpers\ValidationHelper;
+use ZnCore\Domain\Helpers\ValidationHelper;
 use ZnCore\Base\Enums\Measure\TimeEnum;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\NotFoundException;

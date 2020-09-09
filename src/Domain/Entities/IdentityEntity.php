@@ -4,8 +4,8 @@ namespace ZnBundle\User\Domain\Entities;
 
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityIterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use ZnCore\Base\Domain\Interfaces\Entity\ValidateEntityInterface;
-use ZnCore\Base\Domain\Interfaces\Entity\EntityIdInterface;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
+use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 
 class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, IdentityEntityIterface
 {

@@ -2,7 +2,7 @@
 
 namespace ZnBundle\User\Domain\Forms\Registration;
 
-use ZnCore\Base\Domain\Interfaces\Entity\ValidateEntityInterface;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
 use ZnCore\Base\Enums\Http\HttpMethodEnum;
 use Symfony\Component\Validator\Constraints as Assert;
 

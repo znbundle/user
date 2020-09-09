@@ -2,7 +2,7 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
-use ZnCore\Base\Domain\Interfaces\Entity\EntityIdInterface;
+use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class Identity implements UserInterface, EntityIdInterface

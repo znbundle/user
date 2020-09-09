@@ -2,9 +2,9 @@
 
 namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
-use ZnCore\Base\Domain\Entities\Query\Where;
-use ZnCore\Base\Domain\Enums\OperatorEnum;
-use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Domain\Entities\Query\Where;
+use ZnCore\Domain\Enums\OperatorEnum;
+use ZnCore\Domain\Libs\Query;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Db\Db\Base\BaseEloquentCrudRepository;
 use ZnBundle\User\Domain\Entities\ConfirmEntity;

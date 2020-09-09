@@ -4,7 +4,7 @@ namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
 use ZnBundle\User\Domain\Entities\SecurityEntity;
 use ZnBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface;
-use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Domain\Libs\Query;
 use ZnCore\Db\Db\Base\BaseEloquentCrudRepository;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Entities\IdentityEntity;

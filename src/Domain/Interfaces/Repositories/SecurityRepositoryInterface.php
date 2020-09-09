@@ -3,7 +3,7 @@
 namespace ZnBundle\User\Domain\Interfaces\Repositories;
 
 use ZnBundle\User\Domain\Entities\SecurityEntity;
-use ZnCore\Base\Domain\Interfaces\Repository\CrudRepositoryInterface;
+use ZnCore\Domain\Interfaces\Repository\CrudRepositoryInterface;
 
 interface SecurityRepositoryInterface extends CrudRepositoryInterface
 {

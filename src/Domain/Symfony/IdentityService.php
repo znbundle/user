@@ -4,7 +4,7 @@ namespace ZnBundle\User\Domain\Services;
 
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\IdentityServiceInterface;
-use ZnCore\Base\Domain\Base\BaseCrudService;
+use ZnCore\Domain\Base\BaseCrudService;
 
 class IdentityService extends BaseCrudService implements IdentityServiceInterface
 {

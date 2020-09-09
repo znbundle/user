@@ -6,7 +6,7 @@ use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Services\AuthService;
 use ZnBundle\User\Domain\Services\AuthService2;
 use ZnBundle\User\Domain\Services\RegistrationService;
-use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Base\Enums\Http\HttpStatusCodeEnum;
 use RocketLab\Bundle\Rest\Base\BaseController;
 use yii\base\Module;

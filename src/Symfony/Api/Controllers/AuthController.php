@@ -2,7 +2,7 @@
 
 namespace ZnBundle\User\Symfony\Api\Controllers;
 
-use ZnCore\Base\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnLib\Rest\Libs\Serializer\JsonRestSerializer;
 use ZnBundle\User\Domain\Entities\User;
 use ZnBundle\User\Domain\Forms\AuthForm;

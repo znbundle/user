@@ -16,8 +16,8 @@ use ZnCrypt\Jwt\Domain\Services\JwtService;
 use ZnBundle\User\Domain\Entities\User;
 use ZnBundle\User\Domain\Exceptions\UnauthorizedException;
 use ZnBundle\User\Domain\Forms\AuthForm;
-use ZnCore\Base\Domain\Entities\ValidateErrorEntity;
-use ZnCore\Base\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Domain\Entities\ValidateErrorEntity;
+use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnCore\Base\Exceptions\NotFoundException;
 
 class AuthService
