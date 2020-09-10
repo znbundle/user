@@ -12,7 +12,7 @@ use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Domain\Helpers\ValidationHelper;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
-use RocketLab\Bundle\Rest\Base\BaseController;
+use ZnLib\Rest\Yii2\Base\BaseController;
 use yii\base\Module;
 use Yii;
 
