@@ -2,12 +2,12 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
-use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityIterface;
+use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 
-class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, IdentityEntityIterface
+class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, IdentityEntityInterface
 {
 
     private $id = null;

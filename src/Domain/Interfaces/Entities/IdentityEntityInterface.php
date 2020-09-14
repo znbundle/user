@@ -2,7 +2,7 @@
 
 namespace ZnBundle\User\Domain\Interfaces\Entities;
 
-interface IdentityEntityIterface
+interface IdentityEntityInterface
 {
 
     public function setId($value);

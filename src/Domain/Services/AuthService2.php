@@ -8,7 +8,7 @@ use ZnCrypt\Base\Domain\Services\PasswordService;
 use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
 use ZnCrypt\Jwt\Domain\Services\JwtService;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
-use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityIterface;
+use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
@@ -41,7 +41,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         $this->securityRepository = $securityRepository;
     }
 
-    public function getIdentity(): IdentityEntityIterface
+    public function getIdentity(): IdentityEntityInterface
     {
         $identityEntity = $this->forgeIdentityEntity(Yii::$app->user->identity);
         return $identityEntity;
@@ -87,7 +87,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         //return $userEntity;
     }
 
-    private function verificationPassword(IdentityEntityIterface $identityEntity, string $password): bool
+    private function verificationPassword(IdentityEntityInterface $identityEntity, string $password): bool
     {
         try {
             $securityEntity = $this->securityRepository->oneByIdentityId($identityEntity->getId());
@@ -105,7 +105,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         }
     }
 
-    private function forgeTokenEntity(IdentityEntityIterface $identityEntity): TokenEntity
+    private function forgeTokenEntity(IdentityEntityInterface $identityEntity): TokenEntity
     {
         $jwtEntity = new JwtEntity;
         $jwtEntity->subject = ['id' => $identityEntity->getId()];

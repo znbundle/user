@@ -3,9 +3,10 @@
 namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
 use Illuminate\Container\Container;
+use Illuminate\Container\EntryNotFoundException;
 use Psr\Container\ContainerInterface;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
-use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityIterface;
+use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnCore\Db\Db\Base\BaseEloquentCrudRepository;
 use ZnCore\Db\Db\Helpers\Manager;
@@ -27,7 +28,12 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
     public function getEntityClass(): string
     {
         if(empty(static::$entityClass)) {
-            static::$entityClass = get_class($this->container->get(IdentityEntityIterface::class));
+            try {
+                $entity = $this->container->get(IdentityEntityInterface::class);
+                static::$entityClass = get_class($entity);
+            } catch (EntryNotFoundException $e) {
+                static::$entityClass = IdentityEntity::class;
+            }
         }
         return static::$entityClass;
     }
