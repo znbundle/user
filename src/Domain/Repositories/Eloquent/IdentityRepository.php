@@ -16,6 +16,7 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
 
     protected $tableName = 'user_identity';
     protected $container;
+    protected static $entityClass;
 
     public function __construct(Manager $capsule, ContainerInterface $container)
     {
@@ -25,7 +26,10 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
 
     public function getEntityClass(): string
     {
-        return get_class($this->container->get(IdentityEntityIterface::class));
+        if(empty(static::$entityClass)) {
+            static::$entityClass = get_class($this->container->get(IdentityEntityIterface::class));
+        }
+        return static::$entityClass;
     }
 
     public function findUserByUsername(string $username): IdentityEntity
