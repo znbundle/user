@@ -6,7 +6,7 @@ use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use Yii;
 use yii2bundle\account\domain\v3\validators\PasswordValidator;
 use yii2rails\domain\base\Model;
-use yii2bundle\lang\domain\helpers\LangHelper;
+use ZnSandbox\Sandbox\Lang\Yii2\Helpers\LangHelper;
 
 class LoginForm extends Model
 {

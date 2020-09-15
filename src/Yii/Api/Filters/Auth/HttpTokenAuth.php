@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnBundle\User\Yii\Filters\Auth;
+namespace ZnBundle\User\Yii\Api\Filters\Auth;
 
 use Illuminate\Container\Container;
 use yii\filters\auth\AuthMethod;
