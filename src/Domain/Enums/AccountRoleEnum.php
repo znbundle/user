@@ -2,7 +2,7 @@
 
 namespace ZnBundle\User\Domain\Enums;
 
-use yii2rails\extension\enum\base\BaseEnum;
+use ZnCore\Domain\Base\BaseEnum;
 
 class AccountRoleEnum extends BaseEnum
 {

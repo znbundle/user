@@ -4,6 +4,7 @@ namespace ZnBundle\User\Yii\Entities;
 
 use Illuminate\Container\Container;
 use yii2rails\domain\data\Query;
+use ZnCore\Base\Legacy\Traits\MagicAttribute\MagicAttributeTrait;
 use ZnCore\Base\Libs\ArrayTools\Helpers\ArrayIterator;
 use yubundle\staff\domain\v1\entities\CompanyEntity;
 use yii\base\Behavior;
@@ -40,8 +41,10 @@ use yii\web\IdentityInterface;
  * @property CompanyEntity $company
  * @property AssignmentEntity[] $assignments
  */
-class LoginEntity extends BaseEntity implements IdentityInterface {
-	
+class LoginEntity /*extends BaseEntity*/ implements IdentityInterface {
+
+    use MagicAttributeTrait;
+
 	protected $id;
 	protected $login;
 	protected $status = 1;
