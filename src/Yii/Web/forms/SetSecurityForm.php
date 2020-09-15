@@ -4,7 +4,7 @@ namespace ZnBundle\User\Yii\Web\forms;
 
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use Yii;
-use yii2rails\domain\base\Model;
+use ZnSandbox\Sandbox\Yii2\Base\Model;
 
 class SetSecurityForm extends Model
 {
