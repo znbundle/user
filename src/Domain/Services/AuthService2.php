@@ -3,6 +3,8 @@
 namespace ZnBundle\User\Domain\Services;
 
 use Illuminate\Support\Collection;
+use yii2bundle\account\domain\v3\forms\LoginForm;
+use yii2bundle\account\domain\v3\helpers\AuthHelper;
 use ZnBundle\User\Domain\Entities\User;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Domain\Libs\Query;
@@ -50,9 +52,34 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         return $identityEntity;
     }
 
+    public function logout() {
+        Yii::$app->user->logout();
+    }
+
     public function authByIdentity(object $identity)
     {
 
+    }
+
+    public function authenticationByForm(LoginForm $loginForm)
+    {
+        try {
+            $query = new Query;
+            $query->with('roles');
+            $userEntity = $this->repository->findUserByUsername($loginForm->login);
+        } catch (NotFoundException $e) {
+            $errorCollection = new Collection;
+            $validateErrorEntity = new ValidateErrorEntity;
+            $validateErrorEntity->setField('login');
+            $validateErrorEntity->setMessage('User not found');
+            $errorCollection->add($validateErrorEntity);
+            $exception = new UnprocessibleEntityException;
+            $exception->setErrorCollection($errorCollection);
+            throw $exception;
+        }
+
+        $this->verificationPassword($userEntity, $loginForm->password);
+        Yii::$app->user->login($userEntity);
     }
 
     public function authenticationByToken(string $token)

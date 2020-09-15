@@ -60,14 +60,14 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
         ];
     }
 
-    public function findUserByUsername(string $username): IdentityEntity
+    public function findUserByUsername(string $username, Query $query = null): IdentityEntity
     {
-        return $this->findUserBy(['login' => $username]);
+        return $this->findUserBy(['login' => $username], $query);
     }
 
-    public function findUserBy(array $condition): IdentityEntity
+    public function findUserBy(array $condition, Query $query = null): IdentityEntity
     {
-        $query = new Query;
+        $query = Query::forge($query);
         $query->whereFromCondition($condition);
         return $this->one($query);
     }
