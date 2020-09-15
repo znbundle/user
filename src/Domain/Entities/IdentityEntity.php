@@ -10,12 +10,12 @@ use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, IdentityEntityInterface
 {
 
-    private $id = null;
-    private $login = null;
-    private $roles = [];
-    private $status = null;
-    private $createdAt = null;
-    private $updatedAt = null;
+    protected $id = null;
+    protected $login = null;
+    protected $roles = [];
+    protected $status = null;
+    protected $createdAt = null;
+    protected $updatedAt = null;
 
     public function validationRules()
     {

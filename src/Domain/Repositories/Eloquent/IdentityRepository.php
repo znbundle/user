@@ -4,25 +4,30 @@ namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
 use Illuminate\Container\Container;
 use Illuminate\Container\EntryNotFoundException;
+use Illuminate\Support\Collection;
 use Psr\Container\ContainerInterface;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnCore\Db\Db\Base\BaseEloquentCrudRepository;
 use ZnCore\Db\Db\Helpers\Manager;
+use ZnCore\Domain\Enums\RelationEnum;
 use ZnCore\Domain\Libs\Query;
+use ZnCore\Domain\Libs\Relation\OneToMany;
 
 class IdentityRepository extends BaseEloquentCrudRepository implements IdentityRepositoryInterface
 {
 
     protected $tableName = 'user_identity';
     protected $container;
+    protected $assignmentRepository;
     protected static $entityClass;
 
-    public function __construct(Manager $capsule, ContainerInterface $container)
+    public function __construct(Manager $capsule, ContainerInterface $container, AssignmentRepository $assignmentRepository)
     {
         parent::__construct($capsule);
         $this->container = $container;
+        $this->assignmentRepository = $assignmentRepository;
     }
 
     public function getEntityClass(): string
@@ -36,6 +41,23 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
             }
         }
         return static::$entityClass;
+    }
+
+    public function relations()
+    {
+        return [
+            'roles' => [
+                'type' => RelationEnum::CALLBACK,
+                'callback' => function (Collection $collection) {
+                    $m2m = new OneToMany;
+                    $m2m->selfModel = $this;
+                    $m2m->foreignModel = $this->assignmentRepository;
+                    $m2m->selfField = 'userId';
+                    $m2m->foreignContainerField = 'assignments';
+                    $m2m->run($collection);
+                },
+            ],
+        ];
     }
 
     public function findUserByUsername(string $username): IdentityEntity

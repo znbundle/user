@@ -3,6 +3,9 @@
 namespace ZnBundle\User\Domain\Services;
 
 use Illuminate\Support\Collection;
+use ZnBundle\User\Domain\Entities\User;
+use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Domain\Libs\Query;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Base\Domain\Services\PasswordService;
 use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
@@ -50,6 +53,41 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
     public function authByIdentity(object $identity)
     {
 
+    }
+
+    public function authenticationByToken(string $token)
+    {
+        /** @var User $userEntity */
+
+        $token = explode(' ', $token)[1];
+
+        $jwtEntity = $this->jwtService->verify($token, 'auth');
+        $dto = $this->jwtService->decode($token);
+
+        $userId = $dto->payload->subject->id;
+        //prr($userId);
+        $query = new Query;
+        $query->with('roles');
+        $userEntity = $this->repository->oneById($userId, $query);
+        //dd($userEntity);
+
+        //$userEntity = $this->userManager->findUserByUsername($form->login);
+        if (empty($userEntity)) {
+            throw new NotFoundException();
+            /*$errorCollection = new Collection;
+            $validateErrorEntity = new ValidateErrorEntity;
+            $validateErrorEntity->setField('login');
+            $validateErrorEntity->setMessage('User not found');
+            $errorCollection->add($validateErrorEntity);
+            $exception = new UnprocessibleEntityException;
+            $exception->setErrorCollection($errorCollection);
+            throw $exception;*/
+        }
+        //$this->verificationPassword($userEntity, $form->password);
+        //$token = $this->forgeToken($userEntity);
+        //$token = StringHelper::generateRandomString(64);
+        //$userEntity->setApiToken($token);
+        return $userEntity;
     }
 
     private function forgeIdentityEntity(IdentityInterface $identity) {

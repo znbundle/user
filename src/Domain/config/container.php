@@ -5,5 +5,4 @@ return [
     'ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface' => 'ZnBundle\User\Domain\Repositories\Eloquent\IdentityRepository',
     'ZnBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface' => 'ZnBundle\User\Domain\Repositories\Eloquent\SecurityRepository',
     'ZnBundle\\User\\Domain\\Interfaces\\Repositories\\ConfirmRepositoryInterface' => 'ZnBundle\\User\\Domain\\Repositories\\Eloquent\\ConfirmRepository',
-    'ZnBundle\\Notify\\Domain\\Interfaces\\Services\\SmsServiceInterface' => 'ZnBundle\\Notify\\Domain\\Services\\SmsService',
 ];
