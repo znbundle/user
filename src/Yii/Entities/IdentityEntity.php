@@ -4,7 +4,6 @@
 namespace ZnBundle\User\Yii\Entities;
 
 use yii\web\IdentityInterface;
-use yii2rails\extension\common\enums\StatusEnum;
 use ZnCore\Base\Legacy\Traits\MagicAttribute\MagicAttributeTrait;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Domain\Helpers\EntityHelper;
@@ -17,7 +16,7 @@ class IdentityEntity extends \ZnBundle\User\Domain\Entities\IdentityEntity imple
     public $created_at = null;
     private $assignments;
 
-    protected $status = StatusEnum::ENABLE;
+    protected $status = 1;
     //public $roles;
     public $token;
     public $person_id;

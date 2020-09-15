@@ -4,8 +4,7 @@ namespace ZnBundle\User\Yii\Entities;
 
 use Illuminate\Container\Container;
 use yii2rails\domain\data\Query;
-use yii2rails\extension\arrayTools\helpers\ArrayIterator;
-use yii2rails\extension\common\enums\StatusEnum;
+use ZnCore\Base\Libs\ArrayTools\Helpers\ArrayIterator;
 use yubundle\staff\domain\v1\entities\CompanyEntity;
 use yii\base\Behavior;
 use yii\base\Event;
@@ -45,7 +44,7 @@ class LoginEntity extends BaseEntity implements IdentityInterface {
 	
 	protected $id;
 	protected $login;
-	protected $status = StatusEnum::ENABLE;
+	protected $status = 1;
 	protected $roles;
 	protected $token;
 	protected $created_at;
