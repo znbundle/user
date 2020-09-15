@@ -15,7 +15,7 @@ use ZnCore\Domain\Libs\Query;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
-use yii2bundle\account\domain\v3\helpers\ConfirmHelper;
+use ZnBundle\User\Yii\Helpers\ConfirmHelper;
 
 class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
 {

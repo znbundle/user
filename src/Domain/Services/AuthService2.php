@@ -3,8 +3,8 @@
 namespace ZnBundle\User\Domain\Services;
 
 use Illuminate\Support\Collection;
-use yii2bundle\account\domain\v3\forms\LoginForm;
-use yii2bundle\account\domain\v3\helpers\AuthHelper;
+use ZnBundle\User\Yii\Forms\LoginForm;
+use ZnBundle\User\Yii\Helpers\AuthHelper;
 use ZnBundle\User\Domain\Entities\User;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Domain\Libs\Query;
