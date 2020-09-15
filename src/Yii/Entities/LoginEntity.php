@@ -19,6 +19,7 @@ use yii2rails\domain\values\TimeValue;
 use yii2bundle\account\domain\v3\entities\SecurityEntity;
 use ZnBundle\User\Yii\Interfaces\Entities\LoginEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
+use yii\web\IdentityInterface;
 
 /**
  * Class LoginEntity
@@ -40,7 +41,7 @@ use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
  * @property CompanyEntity $company
  * @property AssignmentEntity[] $assignments
  */
-class LoginEntity extends BaseEntity implements LoginEntityInterface {
+class LoginEntity extends BaseEntity implements IdentityInterface {
 	
 	protected $id;
 	protected $login;
