@@ -82,7 +82,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         Yii::$app->user->login($userEntity);
     }
 
-    public function authenticationByToken(string $token)
+    public function authenticationByToken(string $token, string $authenticatorClassName = null)
     {
         /** @var User $userEntity */
 
