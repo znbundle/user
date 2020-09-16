@@ -8,7 +8,7 @@ use yii2bundle\account\domain\v3\entities\SecurityEntity;
 use ZnBundle\User\Yii\Web\forms\ChangePasswordForm;
 use Yii;
 use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
-use ZnSandbox\Sandbox\Html\Yii2\Widgets\Toastr\widgets\Alert;
+use ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert;
 use yii2bundle\account\domain\v3\forms\ChangeEmailForm;
 use ZnBundle\User\Yii\Web\helpers\SecurityMenu;
 
@@ -41,7 +41,7 @@ class SecurityController extends Controller {
 			if($model->validate()) {
 				try {
 					\App::$domain->account->security->changeEmail($model->getAttributes());
-					\ZnSandbox\Sandbox\Html\Yii2\Widgets\Toastr\widgets\Alert::create(['account/security', 'email_changed_success'], Alert::TYPE_SUCCESS);
+					\ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert::create(['account/security', 'email_changed_success'], Alert::TYPE_SUCCESS);
 				} catch (UnprocessableEntityHttpException $e) {
 					$model->addErrorsFromException($e);
 				}
@@ -66,7 +66,7 @@ class SecurityController extends Controller {
 				$bodyPassword = $model->getAttributes(['password', 'new_password']);
 				try {
 					\App::$domain->account->security->changePassword($bodyPassword);
-					\ZnSandbox\Sandbox\Html\Yii2\Widgets\Toastr\widgets\Alert::create(['account/security', 'password_changed_success'], Alert::TYPE_SUCCESS);
+					\ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert::create(['account/security', 'password_changed_success'], Alert::TYPE_SUCCESS);
 				} catch (UnprocessableEntityHttpException $e) {
 					$model->addErrorsFromException($e);
 				}

@@ -9,7 +9,7 @@ use ZnBundle\User\Yii\Forms\LoginForm;
 use yii2bundle\applicationTemplate\common\enums\ApplicationPermissionEnum;
 use ZnBundle\User\Domain\Services\AuthService2;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
-use ZnSandbox\Sandbox\Html\Yii2\Widgets\Toastr\widgets\Alert;
+use ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert;
 use ZnLib\Rest\Yii2\Helpers\Behavior;
 
 /**
