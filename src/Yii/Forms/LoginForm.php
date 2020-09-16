@@ -2,10 +2,10 @@
 
 namespace ZnBundle\User\Yii\Forms;
 
+use yii\base\Model;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use Yii;
 use yii2bundle\account\domain\v3\validators\PasswordValidator;
-use ZnSandbox\Sandbox\Yii2\Base\Model;
 use ZnSandbox\Sandbox\Lang\Yii2\Helpers\LangHelper;
 
 class LoginForm extends Model

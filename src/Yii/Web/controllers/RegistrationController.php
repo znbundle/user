@@ -3,15 +3,15 @@
 namespace ZnBundle\User\Yii\Web\controllers;
 
 use Yii;
+use yii\base\Model;
 use yii\web\Controller;
 use yii2bundle\account\domain\v3\enums\AccountConfirmActionEnum;
 use yii2bundle\account\domain\v3\forms\RegistrationForm;
 use yii2bundle\account\domain\v3\services\RegistrationService;
-use ZnSandbox\Sandbox\Yii2\Base\Model;
 use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
 use ZnBundle\User\Yii\Web\forms\SetSecurityForm;
-use ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert;
 use ZnLib\Rest\Yii2\Helpers\Behavior;
+use ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert;
 
 class RegistrationController extends Controller
 {

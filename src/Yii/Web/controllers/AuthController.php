@@ -9,6 +9,7 @@ use ZnBundle\User\Yii\Forms\LoginForm;
 use yii2bundle\applicationTemplate\common\enums\ApplicationPermissionEnum;
 use ZnBundle\User\Domain\Services\AuthService2;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
+use ZnLib\Web\Yii2\Helpers\ErrorHelper;
 use ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert;
 use ZnLib\Rest\Yii2\Helpers\Behavior;
 
@@ -72,7 +73,7 @@ class AuthController extends Controller
                 Alert::create(['user', 'auth.login_success'], Alert::TYPE_SUCCESS);
                 return $this->goBack();
             } catch (UnprocessibleEntityException $e) {
-                $form->addErrorsFromException2($e);
+                ErrorHelper::addErrorsFromException($e, $form);
             }
         }
 
