@@ -11,7 +11,7 @@ use ZnSandbox\Sandbox\Yii2\Base\Model;
 use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
 use ZnBundle\User\Yii\Web\forms\SetSecurityForm;
 use ZnSandbox\Sandbox\Html\Yii2\Widgets\Toastr\widgets\Alert;
-use ZnSandbox\Sandbox\Yii2\Helpers\Behavior;
+use ZnLib\Rest\Yii2\Helpers\Behavior;
 
 class RegistrationController extends Controller
 {

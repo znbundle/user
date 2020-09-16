@@ -3,7 +3,7 @@
 namespace ZnBundle\User\Yii\Web\controllers;
 
 use yii\web\Controller;
-use ZnSandbox\Sandbox\Yii2\Helpers\Behavior;
+use ZnLib\Rest\Yii2\Helpers\Behavior;
 use yii2bundle\account\domain\v3\entities\SecurityEntity;
 use ZnBundle\User\Yii\Web\forms\ChangePasswordForm;
 use Yii;

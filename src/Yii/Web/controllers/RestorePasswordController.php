@@ -1,7 +1,7 @@
 <?php
 namespace ZnBundle\User\Yii\Web\controllers;
 
-use ZnSandbox\Sandbox\Yii2\Helpers\Behavior;
+use ZnLib\Rest\Yii2\Helpers\Behavior;
 use ZnBundle\User\Yii\Web\forms\RestorePasswordForm;
 use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
 use Yii;

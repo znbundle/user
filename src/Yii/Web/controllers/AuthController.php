@@ -10,7 +10,7 @@ use yii2bundle\applicationTemplate\common\enums\ApplicationPermissionEnum;
 use ZnBundle\User\Domain\Services\AuthService2;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnSandbox\Sandbox\Html\Yii2\Widgets\Toastr\widgets\Alert;
-use ZnSandbox\Sandbox\Yii2\Helpers\Behavior;
+use ZnLib\Rest\Yii2\Helpers\Behavior;
 
 /**
  * AuthController controller
