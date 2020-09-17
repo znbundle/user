@@ -4,7 +4,7 @@ namespace ZnBundle\User\Yii\Entities;
 
 use Illuminate\Container\Container;
 use yii2rails\domain\data\Query;
-use ZnCore\Base\Legacy\Traits\MagicAttribute\MagicAttributeTrait;
+use ZnCore\Base\Traits\MagicAttribute\MagicAttributeTrait;
 use ZnCore\Base\Libs\ArrayTools\Helpers\ArrayIterator;
 use yubundle\staff\domain\v1\entities\CompanyEntity;
 use yii\base\Behavior;

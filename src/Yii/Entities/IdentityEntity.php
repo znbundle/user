@@ -4,7 +4,7 @@
 namespace ZnBundle\User\Yii\Entities;
 
 use yii\web\IdentityInterface;
-use ZnCore\Base\Legacy\Traits\MagicAttribute\MagicAttributeTrait;
+use ZnCore\Base\Traits\MagicAttribute\MagicAttributeTrait;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Domain\Helpers\EntityHelper;
 
