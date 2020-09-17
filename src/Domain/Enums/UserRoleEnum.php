@@ -4,7 +4,7 @@ namespace ZnBundle\User\Domain\Enums;
 
 use ZnCore\Domain\Base\BaseEnum;
 
-class AccountRoleEnum extends BaseEnum
+class UserRoleEnum extends BaseEnum
 {
 
     // Администратор системы
