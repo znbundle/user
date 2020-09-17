@@ -5,7 +5,7 @@ namespace Migrations;
 use Illuminate\Database\Schema\Blueprint;
 use ZnCore\Db\Migration\Base\BaseCreateTableMigration;
 
-class m170713_061213_create_user_confirm_table extends BaseCreateTableMigration
+class m_2017_07_13_061213_create_user_confirm_table extends BaseCreateTableMigration
 {
 
     protected $tableName = 'user_confirm';

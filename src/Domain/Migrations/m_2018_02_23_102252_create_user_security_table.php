@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use ZnCore\Db\Migration\Base\BaseCreateTableMigration;
 use ZnCore\Db\Migration\Enums\ForeignActionEnum;
 
-class m180223_102252_create_user_security_table extends BaseCreateTableMigration
+class m_2018_02_23_102252_create_user_security_table extends BaseCreateTableMigration
 {
 
     protected $tableName = 'user_security';
