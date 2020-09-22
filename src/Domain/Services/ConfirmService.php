@@ -15,7 +15,7 @@ use ZnCore\Domain\Libs\Query;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
-use ZnBundle\User\Yii\Helpers\ConfirmHelper;
+use ZnBundle\User\Yii2\Helpers\ConfirmHelper;
 
 class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
 {

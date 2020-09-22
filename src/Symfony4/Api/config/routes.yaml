@@ -1,0 +1,10 @@
+
+api_auth_index:
+    methods: [GET]
+    path: auth
+    controller: ZnBundle\User\Symfony4\Api\Controllers\AuthController::index
+
+api_auth_login:
+    path: auth
+    methods: [POST]
+    controller: ZnBundle\User\Symfony4\Api\Controllers\AuthController::login

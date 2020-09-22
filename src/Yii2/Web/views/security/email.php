@@ -1,0 +1,34 @@
+<?php
+/**
+ * @var $this yii\web\View
+ * @var $model yii\base\Model
+ */
+
+use ZnCore\Base\Libs\I18Next\Facades\I18Next;
+use yii\bootstrap\Tabs;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use yii2rails\extension\menu\helpers\MenuHelper;
+
+$this->title = I18Next::t('account', 'security.email');
+//\App::$domain->navigation->breadcrumbs->create($this->title);
+
+?>
+
+<?= Tabs::widget([
+	'items' => MenuHelper::gen('ZnBundle\User\Yii2\Web\helpers\SecurityMenu'),
+]) ?>
+
+<br/>
+
+<?php $form = ActiveForm::begin(); ?>
+
+<?= $form->field($model, 'email')->textInput(['placeholder'=>$model->email]) ?>
+
+<?= $form->field($model, 'password')->passwordInput() ?>
+
+<div class="form-group">
+    <?= Html::submitButton(Yii::t('action', 'update'), ['class' => 'btn btn-primary']) ?>
+</div>
+
+<?php ActiveForm::end(); ?>
