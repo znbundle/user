@@ -3,47 +3,50 @@
 namespace ZnBundle\User\Domain\Services;
 
 use Illuminate\Support\Collection;
-use ZnBundle\User\Yii2\Forms\LoginForm;
-use ZnBundle\User\Yii2\Helpers\AuthHelper;
+use Psr\Log\LoggerInterface;
+use Yii;
+use yii\web\IdentityInterface;
+use ZnBundle\User\Domain\Entities\IdentityEntity;
+use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnBundle\User\Domain\Entities\User;
+use ZnBundle\User\Domain\Forms\AuthForm;
+use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
+use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
+use ZnBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface;
+use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
+use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Domain\Base\BaseCrudService;
+use ZnCore\Domain\Entities\ValidateErrorEntity;
+use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnCore\Domain\Libs\Query;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Base\Domain\Services\PasswordService;
 use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
 use ZnCrypt\Jwt\Domain\Services\JwtService;
-use ZnBundle\User\Domain\Entities\IdentityEntity;
-use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
-use ZnBundle\User\Domain\Entities\TokenEntity;
-use ZnBundle\User\Domain\Forms\AuthForm;
-use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
-use ZnBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface;
-use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
-use ZnCore\Domain\Base\BaseCrudService;
-use ZnCore\Domain\Entities\ValidateErrorEntity;
-use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
-use ZnCore\Domain\Helpers\EntityHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use Yii;
-use yii\web\IdentityInterface;
 
 class AuthService2 extends BaseCrudService implements AuthServiceInterface
 {
 
     private $passwordService;
     private $securityRepository;
+    private $identityRepository;
     private $jwtService;
+    private $logger;
 
     public function __construct(
-        IdentityRepositoryInterface $repository,
+        IdentityRepositoryInterface $identityRepository,
         SecurityRepositoryInterface $securityRepository,
         JwtService $jwtService,
-        PasswordService $passwordService)
+        PasswordService $passwordService,
+        LoggerInterface $logger
+    )
     {
-        $this->repository = $repository;
+        $this->identityRepository = $identityRepository;
         $this->passwordService = $passwordService;
         $this->jwtService = $jwtService;
         $this->securityRepository = $securityRepository;
+        $this->logger = $logger;
     }
 
     public function getIdentity(): IdentityEntityInterface
@@ -52,8 +55,10 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         return $identityEntity;
     }
 
-    public function logout() {
+    public function logout()
+    {
         Yii::$app->user->logout();
+        $this->logger->info('auth logout');
     }
 
     public function authByIdentity(object $identity)
@@ -66,7 +71,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         try {
             $query = new Query;
             $query->with('roles');
-            $userEntity = $this->repository->findUserByUsername($loginForm->login);
+            $userEntity = $this->identityRepository->findUserByUsername($loginForm->login);
         } catch (NotFoundException $e) {
             $errorCollection = new Collection;
             $validateErrorEntity = new ValidateErrorEntity;
@@ -75,11 +80,13 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
             $errorCollection->add($validateErrorEntity);
             $exception = new UnprocessibleEntityException;
             $exception->setErrorCollection($errorCollection);
+            $this->logger->warning('auth authenticationByForm');
             throw $exception;
         }
 
         $this->verificationPassword($userEntity, $loginForm->password);
         Yii::$app->user->login($userEntity);
+        $this->logger->info('auth authenticationByForm');
     }
 
     public function authenticationByToken(string $token, string $authenticatorClassName = null)
@@ -95,29 +102,31 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         //prr($userId);
         $query = new Query;
         $query->with('roles');
-        $userEntity = $this->repository->oneById($userId, $query);
+        $userEntity = $this->identityRepository->oneById($userId, $query);
         //dd($userEntity);
 
         //$userEntity = $this->userManager->findUserByUsername($form->login);
-        if (empty($userEntity)) {
-            throw new NotFoundException();
-            /*$errorCollection = new Collection;
-            $validateErrorEntity = new ValidateErrorEntity;
-            $validateErrorEntity->setField('login');
-            $validateErrorEntity->setMessage('User not found');
-            $errorCollection->add($validateErrorEntity);
-            $exception = new UnprocessibleEntityException;
-            $exception->setErrorCollection($errorCollection);
-            throw $exception;*/
-        }
+//        if (empty($userEntity)) {
+//            throw new NotFoundException();
+//            /*$errorCollection = new Collection;
+//            $validateErrorEntity = new ValidateErrorEntity;
+//            $validateErrorEntity->setField('login');
+//            $validateErrorEntity->setMessage('User not found');
+//            $errorCollection->add($validateErrorEntity);
+//            $exception = new UnprocessibleEntityException;
+//            $exception->setErrorCollection($errorCollection);
+//            throw $exception;*/
+//        }
         //$this->verificationPassword($userEntity, $form->password);
         //$token = $this->forgeToken($userEntity);
         //$token = StringHelper::generateRandomString(64);
         //$userEntity->setApiToken($token);
+        $this->logger->info('auth authenticationByToken');
         return $userEntity;
     }
 
-    private function forgeIdentityEntity(IdentityInterface $identity) {
+    private function forgeIdentityEntity(IdentityInterface $identity)
+    {
         $identityEntity = new IdentityEntity;
         $identityEntity->setId($identity->getId());
         $identityEntity->setLogin($identity->login);
@@ -132,7 +141,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
     {
         //prr($form);
         // @var User $userEntity */
-        $userEntity = $this->repository->findUserByUsername($form->login);
+        $userEntity = $this->identityRepository->findUserByUsername($form->login);
         //prr($userEntity);
         if (empty($userEntity)) {
             $errorCollection = new Collection;
@@ -142,22 +151,25 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
             $errorCollection->add($validateErrorEntity);
             $exception = new UnprocessibleEntityException;
             $exception->setErrorCollection($errorCollection);
+            $this->logger->warning('auth tokenByForm');
             throw $exception;
         }
         $this->verificationPassword($userEntity, $form->password);
         $token = $this->forgeTokenEntity($userEntity);
+        $this->logger->info('auth tokenByForm');
         return $token;
         //$token = StringHelper::generateRandomString(64);
         //$userEntity->setApiToken($token);
         //return $userEntity;
     }
 
-    private function verificationPassword(IdentityEntityInterface $identityEntity, string $password): bool
+    private function verificationPassword(IdentityEntityInterface $identityEntity, string $password)
     {
         try {
             $securityEntity = $this->securityRepository->oneByIdentityId($identityEntity->getId());
             //prr(EntityHelper::toArray($securityEntity));
-            return $this->passwordService->validate($password, $securityEntity->getPasswordHash());
+            $this->passwordService->validate($password, $securityEntity->getPasswordHash());
+            $this->logger->info('auth verificationPassword');
         } catch (InvalidPasswordException $e) {
             $errorCollection = new Collection;
             $validateErrorEntity = new ValidateErrorEntity;
@@ -166,6 +178,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
             $errorCollection->add($validateErrorEntity);
             $exception = new UnprocessibleEntityException;
             $exception->setErrorCollection($errorCollection);
+            $this->logger->warning('auth verificationPassword');
             throw $exception;
         }
     }

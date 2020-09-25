@@ -5,7 +5,6 @@ namespace ZnBundle\User\Domain\Repositories\Eloquent;
 use Illuminate\Container\EntryNotFoundException;
 use Illuminate\Support\Collection;
 use Psr\Container\ContainerInterface;
-use Psr\Log\LoggerInterface;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
@@ -20,21 +19,18 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
 
     protected $tableName = 'user_identity';
     protected $container;
-    protected $logger;
     protected $assignmentRepository;
     protected static $entityClass;
 
     public function __construct(
         Manager $capsule,
         ContainerInterface $container,
-        AssignmentRepository $assignmentRepository,
-        LoggerInterface $logger
+        AssignmentRepository $assignmentRepository
     )
     {
         parent::__construct($capsule);
         $this->container = $container;
         $this->assignmentRepository = $assignmentRepository;
-        $this->logger = $logger;
     }
 
     public function getEntityClass(): string

@@ -2,16 +2,14 @@
 
 namespace ZnBundle\User\Yii2\Api\controllers;
 
-use ZnBundle\User\Domain\Forms\AuthForm;
-use ZnBundle\User\Domain\Services\AuthService;
-use ZnBundle\User\Domain\Services\AuthService2;
-use ZnBundle\User\Domain\Services\RegistrationService;
-use ZnCore\Domain\Helpers\EntityHelper;
-use ZnCore\Base\Enums\Http\HttpStatusCodeEnum;
-use ZnLib\Rest\Yii2\Base\BaseController;
 use yii\base\Module;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use ZnBundle\User\Domain\Forms\AuthForm;
+use ZnBundle\User\Domain\Services\AuthService2;
+use ZnCore\Base\Enums\Http\HttpStatusCodeEnum;
+use ZnCore\Domain\Helpers\EntityHelper;
+use ZnLib\Rest\Yii2\Base\BaseController;
 
 class AuthController extends BaseController
 {
