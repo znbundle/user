@@ -24,6 +24,7 @@ use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Base\Domain\Services\PasswordService;
 use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
 use ZnCrypt\Jwt\Domain\Services\JwtService;
+use ZnSandbox\Sandbox\Log\Yii2\Logger;
 
 class AuthService2 extends BaseCrudService implements AuthServiceInterface
 {
