@@ -4,18 +4,15 @@ namespace ZnBundle\User\Domain\Services;
 
 use ZnBundle\Notify\Domain\Entities\SmsEntity;
 use ZnBundle\Notify\Domain\Interfaces\Services\SmsServiceInterface;
-use ZnBundle\Notify\Domain\Services\SmsService;
 use ZnBundle\User\Domain\Entities\ConfirmEntity;
-use ZnBundle\User\Domain\Enums\ConfirmActionEnum;
 use ZnBundle\User\Domain\Interfaces\Repositories\ConfirmRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface;
+use ZnBundle\User\Yii2\Helpers\ConfirmHelper;
+use ZnCore\Base\Exceptions\AlreadyExistsException;
+use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Domain\Base\BaseCrudService;
 use ZnCore\Domain\Entities\Query\Where;
 use ZnCore\Domain\Libs\Query;
-use ZnCore\Base\Exceptions\AlreadyExistsException;
-use ZnCore\Base\Exceptions\NotFoundException;
-use ZnCore\Base\Libs\I18Next\Facades\I18Next;
-use ZnBundle\User\Yii2\Helpers\ConfirmHelper;
 
 class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
 {
@@ -29,12 +26,14 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         $this->repository->deleteExpired();
     }
 
-    public function isVerify(string $login, string $action, string $code): bool {
+    public function isVerify(string $login, string $action, string $code): bool
+    {
         $confirmEntity = $this->repository->oneByUnique($login, $action);
         return $code == $confirmEntity->getCode();
     }
 
-    public function sendConfirmBySms(ConfirmEntity $confirmEntity, array $i18Next) {
+    public function sendConfirmBySms(ConfirmEntity $confirmEntity, array $i18Next)
+    {
         $this->checkExists($confirmEntity->getLogin(), $confirmEntity->getAction());
         $code = ConfirmHelper::generateCode();
         $confirmEntity->setCode($code);

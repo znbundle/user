@@ -2,12 +2,10 @@
 
 namespace ZnBundle\User\Domain\Enums;
 
-use ZnCore\Domain\Base\BaseEnum;
-
-class ConfirmActionEnum extends BaseEnum
+class ConfirmActionEnum
 {
 
     const REGISTRATION = 'registration';
-	const RESTORE_PASSWORD = 'restore-password';
+    const RESTORE_PASSWORD = 'restore-password';
 
 }
