@@ -6,11 +6,14 @@ use Illuminate\Support\Collection;
 use Psr\Log\LoggerInterface;
 use Yii;
 use yii\web\IdentityInterface;
+use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
 use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnBundle\User\Domain\Entities\User;
+use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
+use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
@@ -30,14 +33,14 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
 {
 
     private $passwordService;
-    private $securityRepository;
+    private $credentialRepository;
     private $identityRepository;
     private $jwtService;
     private $logger;
 
     public function __construct(
         IdentityRepositoryInterface $identityRepository,
-        SecurityRepositoryInterface $securityRepository,
+        CredentialRepositoryInterface $credentialRepository,
         JwtService $jwtService,
         PasswordService $passwordService,
         LoggerInterface $logger
@@ -46,7 +49,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         $this->identityRepository = $identityRepository;
         $this->passwordService = $passwordService;
         $this->jwtService = $jwtService;
-        $this->securityRepository = $securityRepository;
+        $this->credentialRepository = $credentialRepository;
         $this->logger = $logger;
     }
 
@@ -143,7 +146,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         //prr($form);
         // @var User $userEntity */
         $userEntity = $this->identityRepository->findUserByUsername($form->login);
-        //prr($userEntity);
+
         if (empty($userEntity)) {
             $errorCollection = new Collection;
             $validateErrorEntity = new ValidateErrorEntity;
@@ -167,9 +170,10 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
     private function verificationPassword(IdentityEntityInterface $identityEntity, string $password)
     {
         try {
-            $securityEntity = $this->securityRepository->oneByIdentityId($identityEntity->getId());
-            //prr(EntityHelper::toArray($securityEntity));
-            $this->passwordService->validate($password, $securityEntity->getPasswordHash());
+            /** @var CredentialEntity $credentialEntity */
+            $credentialEntity = $this->credentialRepository->oneByCredential($identityEntity->getLogin(), CredentialTypeEnum::LOGIN);
+            //prr(EntityHelper::toArray($credentialEntity));
+            $this->passwordService->validate($password, $credentialEntity->getValidation());
             $this->logger->info('auth verificationPassword');
         } catch (InvalidPasswordException $e) {
             $errorCollection = new Collection;

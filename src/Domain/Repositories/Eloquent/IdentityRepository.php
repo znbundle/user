@@ -11,6 +11,10 @@ use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnCore\Db\Db\Base\BaseEloquentCrudRepository;
 use ZnCore\Db\Db\Helpers\Manager;
 use ZnCore\Domain\Enums\RelationEnum;
+use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Domain\Helpers\EntityHelper;
+use ZnCore\Domain\Helpers\ValidationHelper;
+use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Libs\Relation\OneToMany;
 

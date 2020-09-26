@@ -72,7 +72,6 @@ class LoginForm extends Model
 
 	public function normalizeLogin($attribute)
 	{
-
         $this->$attribute = mb_strtolower($this->$attribute);
         return;
 		//$this->$attribute = LoginHelper::pregMatchLogin($this->$attribute);

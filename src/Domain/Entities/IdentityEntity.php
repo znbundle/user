@@ -17,6 +17,12 @@ class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, Iden
     protected $createdAt = null;
     protected $updatedAt = null;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
+    }
+
     public function validationRules()
     {
         return [];
@@ -42,12 +48,12 @@ class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, Iden
         return $this->login;
     }
 
-    public function getRoles(): array
+    public function getRoles(): ?array
     {
         return $this->roles;
     }
 
-    public function setRoles($roles): void
+    public function setRoles(array $roles): void
     {
         if($roles) {
             $this->roles = $roles;
