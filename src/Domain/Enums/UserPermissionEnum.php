@@ -2,7 +2,9 @@
 
 namespace ZnBundle\User\Domain\Enums;
 
-class UserPermissionEnum
+use ZnCore\Base\Interfaces\GetLabelsInterface;
+
+class UserPermissionEnum implements GetLabelsInterface
 {
 
     const IDENTITY_READ = 'oAccountIdentityRead';
