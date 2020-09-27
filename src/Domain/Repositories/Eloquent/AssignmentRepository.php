@@ -3,7 +3,7 @@
 namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
 use ZnBundle\User\Domain\Entities\AssignmentEntity;
-use ZnCore\Db\Db\Base\BaseEloquentCrudRepository;
+use ZnLib\Db\Base\BaseEloquentCrudRepository;
 
 class AssignmentRepository extends BaseEloquentCrudRepository /*implements AssignmentRepositoryInterface*/
 {

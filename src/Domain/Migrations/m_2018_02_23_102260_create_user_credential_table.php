@@ -3,8 +3,8 @@
 namespace Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
-use ZnCore\Db\Migration\Base\BaseCreateTableMigration;
-use ZnCore\Db\Migration\Enums\ForeignActionEnum;
+use ZnLib\Migration\Domain\Base\BaseCreateTableMigration;
+use ZnLib\Migration\Domain\Enums\ForeignActionEnum;
 
 class m_2018_02_23_102260_create_user_credential_table extends BaseCreateTableMigration
 {
