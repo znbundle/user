@@ -1,10 +1,10 @@
 <?php
 
-use ZnCore\Db\Fixture\Helpers\FixtureFactoryHelper;
+use ZnCore\Db\Fixture\Libs\FixtureGenerator;
 
-$fixture = new FixtureFactoryHelper;
+$fixture = new FixtureGenerator;
 $fixture->setCount(10);
-$fixture->setCallback(function ($index, FixtureFactoryHelper $fixtureFactory) {
+$fixture->setCallback(function ($index, FixtureGenerator $fixtureFactory) {
     $username = 'user' . $index;
     // каждый 3-й админ
     $isAdmin = $fixtureFactory->ordIndex($index, 3) == 1;
