@@ -1,6 +1,6 @@
 <?php
 
-$version = API_VERSION_STRING;
+//$version = API_VERSION_STRING;
 
 return [
 
