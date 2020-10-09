@@ -28,10 +28,10 @@ class AuthService
     private $passwordService;
     private $jwtService;
 
-    public function __construct(EntityManagerInterface $em, UserManagerInterface $userManager, JwtServiceInterface $jwtService, PasswordServiceInterface $passwordService)
+    public function __construct(/*EntityManagerInterface $emUserManagerInterface $userManager, , */JwtServiceInterface $jwtService, PasswordServiceInterface $passwordService)
     {
-        $this->em = $em;
-        $this->userManager = $userManager;
+        //$this->em = $em;
+        //$this->userManager = $userManager;
         $this->passwordService = $passwordService;
         $this->jwtService = $jwtService;
     }
