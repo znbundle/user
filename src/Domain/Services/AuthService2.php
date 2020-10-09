@@ -129,18 +129,6 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         return $userEntity;
     }
 
-    private function forgeIdentityEntity(IdentityInterface $identity)
-    {
-        $identityEntity = new IdentityEntity;
-        $identityEntity->setId($identity->getId());
-        $identityEntity->setLogin($identity->login);
-        $identityEntity->setRoles($identity->roles);
-        $identityEntity->setStatus($identity->status);
-        //$identityEntity->setUpdatedAt($identity->updated_at);
-        $identityEntity->setCreatedAt($identity->created_at);
-        return $identityEntity;
-    }
-
     public function tokenByForm(AuthForm $form)
     {
         //prr($form);
@@ -165,6 +153,18 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         //$token = StringHelper::generateRandomString(64);
         //$userEntity->setApiToken($token);
         //return $userEntity;
+    }
+
+    private function forgeIdentityEntity(IdentityInterface $identity)
+    {
+        $identityEntity = new IdentityEntity;
+        $identityEntity->setId($identity->getId());
+        $identityEntity->setLogin($identity->login);
+        $identityEntity->setRoles($identity->roles);
+        $identityEntity->setStatus($identity->status);
+        //$identityEntity->setUpdatedAt($identity->updated_at);
+        $identityEntity->setCreatedAt($identity->created_at);
+        return $identityEntity;
     }
 
     private function verificationPassword(IdentityEntityInterface $identityEntity, string $password)
