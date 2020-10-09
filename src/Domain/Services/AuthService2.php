@@ -15,7 +15,6 @@ use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
-use ZnBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Base\Exceptions\NotFoundException;
@@ -27,7 +26,6 @@ use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Base\Domain\Services\PasswordService;
 use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
 use ZnCrypt\Jwt\Domain\Services\JwtService;
-use ZnSandbox\Sandbox\Log\Yii2\Logger;
 
 class AuthService2 extends BaseCrudService implements AuthServiceInterface
 {
