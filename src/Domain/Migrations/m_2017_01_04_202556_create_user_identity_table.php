@@ -17,8 +17,8 @@ class m_2017_01_04_202556_create_user_identity_table extends BaseCreateTableMigr
             $table->integer('id')->autoIncrement()->comment('Идентификатор');
             $table->string('login')->comment('Логин');
             $table->integer('status')->comment('Статус');
-            $table->dateTime('created_at')->comment('Дата создания');
-            $table->dateTime('updated_at')->comment('Дата обновления');
+            $table->dateTime('created_at')->comment('Время создания');
+            $table->dateTime('updated_at')->comment('Время обновления');
 
             $table->unique('login');
         };

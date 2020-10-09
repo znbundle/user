@@ -15,13 +15,13 @@ class m_2017_07_13_061213_create_user_confirm_table extends BaseCreateTableMigra
     {
         return function (Blueprint $table) {
             $table->integer('id')->autoIncrement()->comment('Идентификатор');
-            $table->string('login');
-            $table->string('action');
-            $table->string('code');
-            $table->boolean('is_activated');
-            $table->text('data')->nullable();
-            $table->integer('expire');
-            $table->dateTime('created_at');
+            $table->string('login')->comment('Логин');
+            $table->string('action')->comment('Действие');
+            $table->string('code')->comment('Секретный код');
+            $table->boolean('is_activated')->comment('Активировано?');
+            $table->text('data')->nullable()->comment('Данные');
+            $table->integer('expire')->comment('Время истечения пригодности');
+            $table->dateTime('created_at')->comment('Время создания');
 
             $table->unique(['login', 'action']);
         };
