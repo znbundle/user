@@ -2,11 +2,13 @@
 
 namespace ZnBundle\User\Domain\Interfaces\Repositories;
 
-use ZnCore\Domain\Interfaces\Repository\CrudRepositoryInterface;
+use ZnBundle\User\Domain\Entities\CredentialEntity;
+use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
 
-interface CredentialRepositoryInterface extends CrudRepositoryInterface
+interface CredentialRepositoryInterface
 {
 
+    public function oneByCredential(string $credential, string $type = CredentialTypeEnum::LOGIN): CredentialEntity;
 
 }
 
