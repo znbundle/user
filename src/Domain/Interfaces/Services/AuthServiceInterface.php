@@ -2,6 +2,7 @@
 
 namespace ZnBundle\User\Domain\Interfaces\Services;
 
+use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Domain\Interfaces\Service\CrudServiceInterface;

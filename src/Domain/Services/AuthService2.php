@@ -30,11 +30,11 @@ use ZnCrypt\Jwt\Domain\Services\JwtService;
 class AuthService2 extends BaseCrudService implements AuthServiceInterface
 {
 
-    private $passwordService;
-    private $credentialRepository;
-    private $identityRepository;
-    private $jwtService;
-    private $logger;
+    protected $passwordService;
+    protected $credentialRepository;
+    protected $identityRepository;
+    protected $jwtService;
+    protected $logger;
 
     public function __construct(
         IdentityRepositoryInterface $identityRepository,
@@ -67,6 +67,8 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
     {
 
     }
+
+
 
     public function authenticationByForm(LoginForm $loginForm)
     {
@@ -127,7 +129,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         return $userEntity;
     }
 
-    public function tokenByForm(AuthForm $form)
+    public function tokenByForm(AuthForm $form): TokenEntity
     {
         //prr($form);
         // @var User $userEntity */
@@ -165,7 +167,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         return $identityEntity;
     }
 
-    private function verificationPassword(IdentityEntityInterface $identityEntity, string $password)
+    protected function verificationPassword(IdentityEntityInterface $identityEntity, string $password)
     {
         try {
             /** @var CredentialEntity $credentialEntity */
@@ -186,7 +188,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         }
     }
 
-    private function forgeTokenEntity(IdentityEntityInterface $identityEntity): TokenEntity
+    protected function forgeTokenEntity(IdentityEntityInterface $identityEntity): TokenEntity
     {
         $jwtEntity = new JwtEntity;
         $jwtEntity->subject = ['id' => $identityEntity->getId()];

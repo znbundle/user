@@ -58,7 +58,7 @@ class TokenEntity
         if (empty($this->type)) {
             return $this->token;
         }
-        return $this->type . SPC . $this->token;
+        return $this->type . " " . $this->token;
     }
 
 }
