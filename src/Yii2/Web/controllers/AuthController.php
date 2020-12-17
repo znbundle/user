@@ -5,6 +5,7 @@ namespace ZnBundle\User\Yii2\Web\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use yii2bundle\applicationTemplate\common\enums\ApplicationPermissionEnum;
 use ZnBundle\User\Domain\Services\AuthService2;
@@ -21,7 +22,7 @@ class AuthController extends Controller
     public $defaultAction = 'login';
     private $authService;
 
-    public function __construct($id, $module, $config = [], AuthService2 $authService)
+    public function __construct($id, $module, $config = [], AuthServiceInterface $authService)
     {
         parent::__construct($id, $module, $config);
         $this->authService = $authService;
