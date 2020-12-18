@@ -9,7 +9,6 @@ use yii2rails\app\domain\helpers\EnvService;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 
 $this->title = I18Next::t('account', 'auth.login_title');
-////\App::$domain->navigation->breadcrumbs->create($this->title);
 
 $loginForm = $this->render('helpers/_loginForm.php', [
 	'model' => $model,
@@ -38,29 +37,9 @@ if(count($items) > 1) {
 
 ?>
 
-<?php if(APP == BACKEND) { ?>
-
-	<div class="login-box">
-		<div class="login-logo">
-			<?= Html::encode($this->title) ?>
-		</div>
-		<div class="login-box-body">
-			<?= $loginForm ?>
-			<?= Html::a(Yii::t('main', 'go_to_frontend'), $_ENV['WEB_URL']) ?>
-		</div>
-	</div>
-
-<?php } else { ?>
-
-	<div class="user-login">
-		<h1>
-			<?= Html::encode($this->title) ?>
-		</h1>
-		<div class="row">
-			<div class="col-lg-5">
-                <?= $html ?>
-			</div>
-		</div>
-	</div>
-
-<?php } ?>
+<div class="user-login">
+    <h1>
+        <?= Html::encode($this->title) ?>
+    </h1>
+    <?= $html ?>
+</div>

@@ -13,7 +13,7 @@ use yii\web\NotFoundHttpException;
  */
 class Module extends YiiModule
 {
-	
+
 	public function beforeAction($action)
 	{
 
@@ -34,5 +34,4 @@ class Module extends YiiModule
 
 		return parent::beforeAction($action);
 	}
-
 }

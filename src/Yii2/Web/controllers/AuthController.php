@@ -2,12 +2,12 @@
 
 namespace ZnBundle\User\Yii2\Web\controllers;
 
+use common\enums\rbac\ApplicationPermissionEnum;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
-use yii2bundle\applicationTemplate\common\enums\ApplicationPermissionEnum;
 use ZnBundle\User\Domain\Services\AuthService2;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnLib\Web\Yii2\Helpers\ErrorHelper;
@@ -66,11 +66,6 @@ class AuthController extends Controller
         if ($isValid) {
             try {
                 $this->authService->authenticationByForm($form);
-                if (!$this->isBackendAccessAllowed()) {
-                    $this->authService->logout();
-                    Alert::create(['user', 'auth.login_access_error'], Alert::TYPE_DANGER);
-                    return $this->goHome();
-                }
                 Alert::create(['user', 'auth.login_success'], Alert::TYPE_SUCCESS);
                 return $this->goBack();
             } catch (UnprocessibleEntityException $e) {
@@ -96,16 +91,4 @@ class AuthController extends Controller
             return $this->goHome();
         }
     }
-
-    private function isBackendAccessAllowed()
-    {
-        if (APP != BACKEND) {
-            return true;
-        }
-        if (Yii::$app->user->can(ApplicationPermissionEnum::BACKEND_ALL)) {
-            return true;
-        }
-        return false;
-    }
-
 }
