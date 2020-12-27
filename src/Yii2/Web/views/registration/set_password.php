@@ -8,21 +8,21 @@ use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = I18Next::t('account', 'registration.set_password_title');
+$this->title = I18Next::t('user', 'registration.set_password_title');
 //\App::$domain->navigation->breadcrumbs->create(['account/registration', 'title']);
 //\App::$domain->navigation->breadcrumbs->create($this->title);
 ?>
 <div class="user-create">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= I18Next::t('account', 'registration.set_password_text') ?></p>
+    <p><?= I18Next::t('user', 'registration.set_password_text') ?></p>
 
     <div class="row">
         <div class="col-lg-5">
 			<?php $form = ActiveForm::begin(['id' => 'form-create']); ?>
 
             <div class="form-group field-setsecurityform-login required">
-                <label class="control-label" for="setsecurityform-login"><?= I18Next::t('account', 'main.login') ?></label>
+                <label class="control-label" for="setsecurityform-login"><?= I18Next::t('user', 'main.login') ?></label>
 	            <div><?= $login ?></div>
             </div>
             

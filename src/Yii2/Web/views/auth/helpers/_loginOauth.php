@@ -10,7 +10,7 @@ use yii\authclient\widgets\AuthChoice;
 
 <br/>
 
-<p class="login-box-msg"><?= I18Next::t('account', 'oauth.login_text') ?></p>
+<p class="login-box-msg"><?= I18Next::t('user', 'oauth.login_text') ?></p>
 
 <?= AuthChoice::widget([
 	'baseAuthUrl' => ['/user/oauth/login'],

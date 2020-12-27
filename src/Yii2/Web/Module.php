@@ -19,14 +19,14 @@ class Module extends YiiModule
 
         //$i18n = new TranslationService;
 
-        //I18Next::t('account', 'main.title');
+        //I18Next::t('user', 'main.title');
         //
         // $i18n->t('account', 'main.title')
         // Yii::t($moduleId . SL . $controllerId, 'title')
 
 		$controllerId = Yii::$app->controller->id;
 		$moduleId = 'account';
-		Yii::$app->view->title = I18Next::t('account', 'main.title');
+		Yii::$app->view->title = I18Next::t('user', 'main.title');
 
 
 		//\App::$domain->navigation->breadcrumbs->create(Yii::$app->view->title);

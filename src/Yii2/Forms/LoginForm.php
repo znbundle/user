@@ -30,7 +30,7 @@ class LoginForm extends Model
 			[['login', 'password', 'token_type'], 'trim'],
 			[['login', 'password'], 'required'],
 			//['email', 'email'],
-			//['login', 'match', 'pattern' => '/^[0-9_]{11,13}$/i', 'message' => I18Next::t('account', 'registration.login_not_valid')],
+			//['login', 'match', 'pattern' => '/^[0-9_]{11,13}$/i', 'message' => I18Next::t('user', 'registration.login_not_valid')],
 			//['login', LoginValidator::class],
 			'normalizeLogin' => ['login', 'normalizeLogin'],
 			//[['password'], PasswordValidator::class],
@@ -64,9 +64,9 @@ class LoginForm extends Model
 	public function attributeLabels()
 	{
 		return [
-			'login' 		=> I18Next::t('account', 'auth.login'),
-			'password' 		=> I18Next::t('account', 'main.password'),
-			'rememberMe' 		=> I18Next::t('account', 'auth.remember_me'),
+			'login' 		=> I18Next::t('user', 'auth.login'),
+			'password' 		=> I18Next::t('user', 'main.password'),
+			'rememberMe' 		=> I18Next::t('user', 'auth.remember_me'),
 		];
 	}
 

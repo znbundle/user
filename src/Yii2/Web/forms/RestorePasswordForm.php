@@ -28,7 +28,7 @@ class RestorePasswordForm extends ApiRestorePasswordForm {
 	public function attributeLabels()
 	{
 		return ArrayHelper::merge(parent::attributeLabels(), [
-			'new_password_repeat' => I18Next::t('account', 'security.new_password_repeat'),
+			'new_password_repeat' => I18Next::t('user', 'security.new_password_repeat'),
 		]);
 	}
 	

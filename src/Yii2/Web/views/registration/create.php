@@ -10,14 +10,14 @@ use yii\bootstrap\ActiveForm;
 use yii2rails\app\domain\helpers\EnvService;
 use yii2bundle\rest\domain\helpers\ApiVersionConfig;
 
-$this->title = I18Next::t('account', 'registration.create_title');
+$this->title = I18Next::t('user', 'registration.create_title');
 ////\App::$domain->navigation->breadcrumbs->create(['account/registration', 'title']);
 //\App::$domain->navigation->breadcrumbs->create($this->title);
 ?>
 <div class="user-signup">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= I18Next::t('account', 'auth.signup_text') ?></p>
+    <p><?= I18Next::t('user', 'auth.signup_text') ?></p>
 
     <script>
 		function sendSms() {
@@ -32,7 +32,7 @@ $this->title = I18Next::t('account', 'registration.create_title');
 				dataType: 'json',
 				data: data,
 				success: function () {
-					alert('<?= I18Next::t('account', 'registration.sms_with_code_sended') ?>');
+					alert('<?= I18Next::t('user', 'registration.sms_with_code_sended') ?>');
 				},
 				error: function (jqXHR) {
 					var message = '';
@@ -50,7 +50,7 @@ $this->title = I18Next::t('account', 'registration.create_title');
         <div class="col-lg-5">
 			<?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 			
-			<?php $buttonGetCode = Html::submitButton(I18Next::t('account', 'registration.send_activation_code'), [
+			<?php $buttonGetCode = Html::submitButton(I18Next::t('user', 'registration.send_activation_code'), [
 				'onclick' => 'return sendSms()',
 				'class' => 'btn btn-default btn-block',
 			]); ?>

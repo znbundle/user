@@ -10,7 +10,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii2rails\extension\menu\helpers\MenuHelper;
 
-$this->title = I18Next::t('account', 'security.email');
+$this->title = I18Next::t('user', 'security.email');
 //\App::$domain->navigation->breadcrumbs->create($this->title);
 
 ?>

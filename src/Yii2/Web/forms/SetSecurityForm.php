@@ -33,9 +33,9 @@ class SetSecurityForm extends Model
 	public function attributeLabels()
 	{
 		return [
-			'password' 		=> I18Next::t('account', 'main.password'),
-			'password_repeat' 		=> I18Next::t('account', 'main.password_repeat'),
-			'email' 		=> I18Next::t('account', 'main.email'),
+			'password' 		=> I18Next::t('user', 'main.password'),
+			'password_repeat' 		=> I18Next::t('user', 'main.password_repeat'),
+			'email' 		=> I18Next::t('user', 'main.email'),
 		];
 	}
 	
