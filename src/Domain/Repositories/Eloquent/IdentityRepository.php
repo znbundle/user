@@ -8,6 +8,7 @@ use Psr\Container\ContainerInterface;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
+use ZnCore\Domain\Libs\EntityManager;
 use ZnLib\Db\Base\BaseEloquentCrudRepository;
 use ZnLib\Db\Capsule\Manager;
 use ZnCore\Domain\Enums\RelationEnum;
@@ -22,18 +23,16 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
 {
 
     protected $tableName = 'user_identity';
-    protected $container;
     protected $assignmentRepository;
     protected static $entityClass;
 
     public function __construct(
+        EntityManager $em,
         Manager $capsule,
-        ContainerInterface $container,
         AssignmentRepository $assignmentRepository
     )
     {
-        parent::__construct($capsule);
-        $this->container = $container;
+        parent::__construct($em, $capsule);
         $this->assignmentRepository = $assignmentRepository;
     }
 
@@ -41,7 +40,8 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
     {
         if (empty(static::$entityClass)) {
             try {
-                $entity = $this->container->get(IdentityEntityInterface::class);
+                $entity = $this->getEntityManager()->createEntity(IdentityEntityInterface::class);
+//                $entity = $this->container->get(IdentityEntityInterface::class);
                 static::$entityClass = get_class($entity);
             } catch (EntryNotFoundException $e) {
                 static::$entityClass = IdentityEntity::class;
