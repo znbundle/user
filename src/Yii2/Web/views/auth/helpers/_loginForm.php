@@ -10,8 +10,6 @@ use yii\bootstrap\ActiveForm;
 
 ?>
 
-<br/>
-
 <p class="login-box-msg"><?= I18Next::t('user', 'auth.login_text') ?></p>
 
 <?php $form = ActiveForm::begin(); ?>
@@ -33,3 +31,4 @@ use yii\bootstrap\ActiveForm;
 <?= Html::a(I18Next::t('user', 'auth.register_new_user'), ['/user/registration']) ?>
     <br/>
 <?= Html::a(I18Next::t('user', 'auth.i_forgot_my_password'), ['/user/restore-password']) ?>
+
