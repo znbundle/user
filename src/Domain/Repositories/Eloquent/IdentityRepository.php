@@ -4,20 +4,15 @@ namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
 use Illuminate\Container\EntryNotFoundException;
 use Illuminate\Support\Collection;
-use Psr\Container\ContainerInterface;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
-use ZnCore\Domain\Libs\EntityManager;
-use ZnLib\Db\Base\BaseEloquentCrudRepository;
-use ZnLib\Db\Capsule\Manager;
 use ZnCore\Domain\Enums\RelationEnum;
-use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
-use ZnCore\Domain\Helpers\EntityHelper;
-use ZnCore\Domain\Helpers\ValidationHelper;
-use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
+use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Libs\Relation\OneToMany;
+use ZnLib\Db\Base\BaseEloquentCrudRepository;
+use ZnLib\Db\Capsule\Manager;
 
 class IdentityRepository extends BaseEloquentCrudRepository implements IdentityRepositoryInterface
 {
@@ -27,7 +22,7 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
     protected static $entityClass;
 
     public function __construct(
-        EntityManager $em,
+        EntityManagerInterface $em,
         Manager $capsule,
         AssignmentRepository $assignmentRepository
     )
