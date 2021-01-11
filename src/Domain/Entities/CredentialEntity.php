@@ -22,9 +22,9 @@ class CredentialEntity implements ValidateEntityInterface, EntityIdInterface
     public function validationRules()
     {
         return [
-            'id' => [
+            /*'id' => [
                 new Assert\NotBlank,
-            ],
+            ],*/
             'identityId' => [
                 new Assert\NotBlank,
             ],
