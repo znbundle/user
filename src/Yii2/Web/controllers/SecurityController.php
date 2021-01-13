@@ -29,7 +29,7 @@ class SecurityController extends Controller {
 		$menuInstance = new SecurityMenu();
 		$menu = $menuInstance->toArray();
 		$url = $menu[0]['url'];
-		$this->redirect([SL . $url]);
+		$this->redirect(['/' . $url]);
 	}
 	
 	public function actionEmail()

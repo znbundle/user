@@ -36,9 +36,9 @@ class Menu implements MenuInterface {
 	
 	private static function getLabel() {
 		if(Yii::$app->user->isGuest) {
-			return Html::fa('user') . NBSP . I18Next::t('user', 'auth.title');
+			return Html::fa('user') . '&nbsp;' . I18Next::t('user', 'auth.title');
 		} else {
-			return !class_exists(Avatar::class) ? self::getUseName() : Avatar::widget() . NBSP . self::getUseName();
+			return !class_exists(Avatar::class) ? self::getUseName() : Avatar::widget() . '&nbsp;' . self::getUseName();
 		}
 	}
 	

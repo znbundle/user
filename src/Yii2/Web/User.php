@@ -12,6 +12,7 @@ use yii\base\InvalidValueException;
 use yii\filters\auth\AuthMethod;
 use yii\web\IdentityInterface;
 use ZnBundle\User\Yii2\Helpers\AuthHelper;
+use ZnCore\Base\Helpers\EnvHelper;
 
 /**
  * @property-read User $model
@@ -42,7 +43,7 @@ class User extends \yii\web\User
 		if ($this->beforeLogin($identity, false, $duration)) {
 			$this->switchIdentity($identity, $duration);
 			$id = $identity->getId();
-			if(APP != CONSOLE) {
+			if(!EnvHelper::isConsole()) {
 				$ip = Yii::$app->getRequest()->getUserIP();
 				if ($this->enableSession) {
 					$log = "User '$id' logged in from $ip with duration $duration.";

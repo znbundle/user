@@ -10,6 +10,7 @@ use yii2rails\extension\registry\helpers\Registry;
 use ZnCore\Base\Enums\Http\HttpHeaderEnum;
 use yii2bundle\account\domain\v3\dto\TokenDto;
 use ZnBundle\User\Yii2\Entities\LoginEntity;
+use ZnCore\Base\Helpers\EnvHelper;
 
 class AuthHelper {
 
@@ -80,7 +81,7 @@ class AuthHelper {
 	}
 	
 	public static function getTokenFromQuery() {
-		if(APP == CONSOLE) {
+		if(EnvHelper::isConsole()) {
 			return null;
 		}
 		return self::getTokenFromRequest(Yii::$app->request);
