@@ -4,6 +4,7 @@ namespace ZnBundle\User\Domain\Entities;
 
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 
@@ -16,6 +17,7 @@ class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, Iden
     protected $status = null;
     protected $createdAt = null;
     protected $updatedAt = null;
+    protected $assignments = null;
 
     public function __construct()
     {
@@ -99,4 +101,18 @@ class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, Iden
     {
         return $this->getLogin();
     }
+
+    public function getAssignments()
+    {
+        return $this->assignments;
+    }
+
+    public function setAssignments($assignments): void
+    {
+        if($assignments) {
+            $this->roles = EntityHelper::getColumn($assignments, 'itemName');
+        }
+        $this->assignments = $assignments;
+    }
+
 }
