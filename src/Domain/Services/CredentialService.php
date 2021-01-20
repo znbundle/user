@@ -13,7 +13,4 @@ class CredentialService extends BaseService implements CredentialServiceInterfac
     {
         $this->repository = $repository;
     }
-
-
 }
-
