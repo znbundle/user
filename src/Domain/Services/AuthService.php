@@ -50,7 +50,7 @@ class AuthService
     public function authentication(AuthForm $form): UserInterface
     {
         /** @var User $userEntity */
-        $userEntity = $this->userManager->findUserByUsername($form->login);
+        $userEntity = $this->userManager->findUserByUsername($form->getLogin());
         if (empty($userEntity)) {
             $errorCollection = new Collection;
             $validateErrorEntity = new ValidateErrorEntity;
@@ -61,7 +61,7 @@ class AuthService
             $exception->setErrorCollection($errorCollection);
             throw $exception;
         }
-        $this->verificationPassword($userEntity, $form->password);
+        $this->verificationPassword($userEntity, $form->getPassword());
         $token = $this->forgeToken($userEntity);
         //$token = StringHelper::generateRandomString(64);
         $userEntity->setApiToken($token);

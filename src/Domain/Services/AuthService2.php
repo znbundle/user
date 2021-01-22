@@ -139,7 +139,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
     {
         //prr($form);
         // @var User $userEntity */
-        $userEntity = $this->identityRepository->findUserByUsername($form->login);
+        $userEntity = $this->identityRepository->findUserByUsername($form->getLogin());
 
         if (empty($userEntity)) {
             $errorCollection = new Collection;
@@ -152,7 +152,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
             $this->logger->warning('auth tokenByForm');
             throw $exception;
         }
-        $this->verificationPassword($userEntity, $form->password);
+        $this->verificationPassword($userEntity, $form->getPassword());
         $token = $this->forgeTokenEntity($userEntity);
         $this->logger->info('auth tokenByForm');
         return $token;
