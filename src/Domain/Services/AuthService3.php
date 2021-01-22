@@ -4,7 +4,6 @@ namespace ZnBundle\User\Domain\Services;
 
 use Illuminate\Support\Collection;
 use Psr\Log\LoggerInterface;
-use Yii;
 use yii\web\IdentityInterface;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\TokenEntity;
@@ -55,14 +54,11 @@ class AuthService3 extends BaseCrudService implements AuthServiceInterface
     public function setIdentity(IdentityEntityInterface $identityEntity)
     {
         $this->identityEntity = $identityEntity;
-        Yii::$app->user->login($identityEntity);
     }
 
     public function getIdentity(): IdentityEntityInterface
     {
-        return Yii::$app->user->identity;
-//        $identityEntity = $this->forgeIdentityEntity(Yii::$app->user->identity);
-//        return $identityEntity;
+        return $this->identityEntity;
     }
 
     public function isGuest(): bool
@@ -72,7 +68,7 @@ class AuthService3 extends BaseCrudService implements AuthServiceInterface
 
     public function logout()
     {
-        Yii::$app->user->logout();
+        $this->identityEntity = null;
         $this->logger->info('auth logout');
     }
 
@@ -102,10 +98,10 @@ class AuthService3 extends BaseCrudService implements AuthServiceInterface
         return $token;
     }
 
-    public function authenticationByForm(LoginForm $loginForm)
+    public function authByForm(AuthForm $authForm)
     {
         try {
-            $credentialEntity = $this->credentialRepository->oneByCredential($loginForm->login, 'login');
+            $credentialEntity = $this->credentialRepository->oneByCredential($authForm->getLogin(), 'login');
         } catch (NotFoundException $e) {
             $errorCollection = new Collection;
             $validateErrorEntity = new ValidateErrorEntity;
@@ -117,9 +113,19 @@ class AuthService3 extends BaseCrudService implements AuthServiceInterface
             $this->logger->warning('auth authenticationByForm');
             throw $exception;
         }
-        $this->verificationPasswordByCredential($credentialEntity, $loginForm->password);
+        $this->verificationPasswordByCredential($credentialEntity, $authForm->getPassword());
         $userEntity = $this->identityRepository->oneById($credentialEntity->getIdentityId());
         $this->setIdentity($userEntity);
+    }
+
+    public function authenticationByForm(LoginForm $loginForm)
+    {
+        $authForm = new AuthForm([
+            'login' => $loginForm->login,
+            'password' => $loginForm->password,
+            'rememberMe' => $loginForm->rememberMe,
+        ]);
+        $this->authByForm($authForm);
         $this->logger->info('auth authenticationByForm');
     }
 

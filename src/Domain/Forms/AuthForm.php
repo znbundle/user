@@ -11,6 +11,7 @@ class AuthForm implements ValidateEntityInterface
 
     private $login;
     private $password;
+    private $rememberMe = false;
 
     public function __construct($data = null)
     {
@@ -31,23 +32,33 @@ class AuthForm implements ValidateEntityInterface
         ];
     }
 
-    public function getLogin()
+    public function getLogin(): string
     {
         return $this->login;
     }
 
-    public function setLogin($login): void
+    public function setLogin(string $login): void
     {
         $this->login = $login;
     }
 
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function setPassword($password): void
+    public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+    
+    public function getRememberMe(): bool
+    {
+        return $this->rememberMe;
+    }
+
+    public function setRememberMe(bool $rememberMe): void
+    {
+        $this->rememberMe = $rememberMe;
     }
 }

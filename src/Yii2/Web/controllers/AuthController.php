@@ -5,6 +5,7 @@ namespace ZnBundle\User\Yii2\Web\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
@@ -56,7 +57,15 @@ class AuthController extends Controller
         $isValid = $form->load($body) && $form->validate();
         if ($isValid) {
             try {
-                $this->authService->authenticationByForm($form);
+
+                $authForm = new AuthForm([
+                    'login' => $form->login,
+                    'password' => $form->password,
+                    'rememberMe' => $form->rememberMe,
+                ]);
+                $this->authService->authByForm($authForm);
+                
+//                $this->authService->authenticationByForm($form);
                 Alert::create(['user', 'auth.login_success'], Alert::TYPE_SUCCESS);
                 return $this->goBack();
             } catch (UnprocessibleEntityException $e) {
