@@ -35,6 +35,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
     protected $identityRepository;
     protected $jwtService;
     protected $logger;
+    protected $identityEntity;
 
     public function __construct(
         IdentityRepositoryInterface $identityRepository,
