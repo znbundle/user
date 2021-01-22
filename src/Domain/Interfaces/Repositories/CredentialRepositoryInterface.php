@@ -18,5 +18,12 @@ interface CredentialRepositoryInterface extends CrudRepositoryInterface
      */
     public function oneByCredential(string $credential, string $type = CredentialTypeEnum::LOGIN): CredentialEntity;
 
+    /**
+     * @param string $validation
+     * @param string $type
+     * @return CredentialEntity
+     * @throws NotFoundException
+     */
+    public function oneByValidation(string $validation, string $type): CredentialEntity;
 }
 

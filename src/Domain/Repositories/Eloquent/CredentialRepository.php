@@ -29,4 +29,14 @@ class CredentialRepository extends \ZnLib\Db\Base\BaseEloquentCrudRepository imp
         ]);
         return $this->one($query);
     }
+
+    public function oneByValidation(string $validation, string $type): CredentialEntity
+    {
+        $query = new Query;
+        $query->where([
+            'validation' => $validation,
+            'type' => $type,
+        ]);
+        return $this->one($query);
+    }
 }

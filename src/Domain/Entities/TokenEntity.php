@@ -10,6 +10,13 @@ class TokenEntity
     private $identityId;
     private $identity;
 
+    public function __construct(string $token = null, string $type = null, int $identityId = null)
+    {
+        $this->token = $token;
+        $this->type = $type;
+        $this->identityId = $identityId;
+    }
+
     public function getToken()
     {
         return $this->token;

@@ -9,8 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class AuthForm implements ValidateEntityInterface
 {
 
-    public $login;
-    public $password;
+    private $login;
+    private $password;
 
     public function __construct($data = null)
     {
