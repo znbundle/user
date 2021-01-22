@@ -5,6 +5,7 @@ namespace ZnBundle\User\Domain\Entities;
 class TokenEntity
 {
 
+    private $id;
     private $token;
     private $type;
     private $identityId;
@@ -15,6 +16,16 @@ class TokenEntity
         $this->token = $token;
         $this->type = $type;
         $this->identityId = $identityId;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     public function getToken()

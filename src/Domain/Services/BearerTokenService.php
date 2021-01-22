@@ -43,6 +43,7 @@ class BearerTokenService implements TokenServiceInterface
             $this->credentialRepository->create($credentialEntity);
         }
         $tokenEntity = new TokenEntity($token, 'bearer', $identityEntity->getId());
+        $tokenEntity->setId($credentialEntity->getId());
         return $tokenEntity;
     }
 
