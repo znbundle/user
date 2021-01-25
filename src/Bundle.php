@@ -17,7 +17,7 @@ class Bundle extends BaseBundle
     public function migration(): array
     {
         return [
-
+            '/vendor/znbundle/user/src/Domain/Migrations',
         ];
     }
 
