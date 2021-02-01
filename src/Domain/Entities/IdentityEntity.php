@@ -2,13 +2,14 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use ZnCore\Domain\Helpers\EntityHelper;
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 
-class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, IdentityEntityInterface
+class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInterface, IdentityEntityInterface
 {
 
     protected $id = null;
@@ -25,9 +26,9 @@ class IdentityEntity implements ValidateEntityInterface, EntityIdInterface, Iden
         $this->updatedAt = new \DateTime;
     }
 
-    public function validationRules()
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        return [];
+
     }
 
     public function setId($value)

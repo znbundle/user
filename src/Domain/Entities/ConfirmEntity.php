@@ -2,12 +2,13 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 use DateTime;
 
-class ConfirmEntity implements ValidateEntityInterface, EntityIdInterface
+class ConfirmEntity implements ValidateEntityByMetadataInterface, EntityIdInterface
 {
 
     private $id = null;
@@ -31,31 +32,13 @@ class ConfirmEntity implements ValidateEntityInterface, EntityIdInterface
         $this->createdAt = new DateTime;
     }
 
-    public function validationRules()
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        return [
-            'login' => [
-                new Assert\NotBlank,
-            ],
-            'action' => [
-                new Assert\NotBlank,
-            ],
-            'code' => [
-                new Assert\NotBlank,
-            ],
-            /*'isActivated' => [
-                new Assert\NotBlank,
-            ],*/
-            /*'data' => [
-                new Assert\NotBlank,
-            ],*/
-            'expire' => [
-                new Assert\NotBlank,
-            ],
-            'createdAt' => [
-                new Assert\NotBlank,
-            ],
-        ];
+        $metadata->addPropertyConstraint('login', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('action', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('code', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('expire', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('createdAt', new Assert\NotBlank);
     }
 
     public function getId()

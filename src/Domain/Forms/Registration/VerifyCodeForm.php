@@ -2,7 +2,8 @@
 
 namespace ZnBundle\User\Domain\Forms\Registration;
 
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+ValidateEntityByMetadataInterface
 use ZnCore\Base\Enums\Http\HttpMethodEnum;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -11,16 +12,11 @@ class VerifyCodeForm extends RequestCodeForm implements ValidateEntityInterface
 
     protected $activationCode;
 
-    public function validationRules(): array
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        $rules = parent::validationRules();
-        return array_merge($rules, [
-            'activationCode' => [
-                new Assert\NotBlank,
-                new Assert\Positive,
-                new Assert\Length(['value' => 6]),
-            ],
-        ]);
+        $metadata->addPropertyConstraint('activationCode', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('activationCode', new Assert\Positive);
+        $metadata->addPropertyConstraint('activationCode', new Assert\Length(['value' => 6]));
     }
 
     public function getActivationCode()

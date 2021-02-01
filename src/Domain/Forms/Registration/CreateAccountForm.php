@@ -3,6 +3,7 @@
 namespace ZnBundle\User\Domain\Forms\Registration;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 class CreateAccountForm extends VerifyCodeForm
 {
@@ -11,25 +12,16 @@ class CreateAccountForm extends VerifyCodeForm
     private $email;
     private $password;
 
-    public function validationRules(): array
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        $rules = parent::validationRules();
-        return array_merge($rules, [
-            'username' => [
-                new Assert\NotBlank,
-                new Assert\Regex(array(
-                    'pattern' => '/^\w+$/',
-                )),
-            ],
-            'email' => [
-                new Assert\NotBlank,
-                new Assert\Email,
-            ],
-            'password' => [
-                new Assert\NotBlank,
-                new Assert\Length(['min' => 6, 'max' => 18]),
-            ],
-        ]);
+        $metadata->addPropertyConstraint('username', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('username', new Assert\Regex(array(
+            'pattern' => '/^\w+$/',
+        )));
+        $metadata->addPropertyConstraint('email', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('email', new Assert\Email);
+        $metadata->addPropertyConstraint('password', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('password', new Assert\Length(['min' => 6, 'max' => 18]));
     }
 
     public function getUsername()

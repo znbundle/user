@@ -3,10 +3,11 @@
 namespace ZnBundle\User\Domain\Entities;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 
-class CredentialEntity implements ValidateEntityInterface, EntityIdInterface
+class CredentialEntity implements ValidateEntityByMetadataInterface, EntityIdInterface
 {
 
     private $id = null;
@@ -19,22 +20,11 @@ class CredentialEntity implements ValidateEntityInterface, EntityIdInterface
 
     private $validation = null;
 
-    public function validationRules()
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        return [
-            /*'id' => [
-                new Assert\NotBlank,
-            ],*/
-            'identityId' => [
-                new Assert\NotBlank,
-            ],
-            'credential' => [
-                new Assert\NotBlank,
-            ],
-            'validation' => [
-                new Assert\NotBlank,
-            ],
-        ];
+        $metadata->addPropertyConstraint('identityId', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('credential', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('validation', new Assert\NotBlank);
     }
 
     public function setId($value) : void

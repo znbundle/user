@@ -2,28 +2,24 @@
 
 namespace ZnBundle\User\Domain\Forms\Registration;
 
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
-use ZnCore\Base\Enums\Http\HttpMethodEnum;
-use ZnCore\Base\Helpers\StringHelper;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ZnCore\Base\Helpers\StringHelper;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 
-class RequestCodeForm implements ValidateEntityInterface
+class RequestCodeForm implements ValidateEntityByMetadataInterface
 {
 
     protected $phone;
 
-    public function validationRules(): array
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        return [
-            'phone' => [
-                new Assert\NotBlank,
-                new Assert\Regex(array(
-                    'pattern' => '/^77[\d+]{9}$/',
-                )),
-            ],
-        ];
+        $metadata->addPropertyConstraint('phone', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('', new Assert\Regex(array(
+            'pattern' => '/^77[\d+]{9}$/',
+        )));
     }
-    
+
     public function getPhone()
     {
         return $this->phone;

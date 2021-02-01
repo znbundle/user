@@ -2,17 +2,16 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
-use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser implements ValidateEntityInterface
+class User extends BaseUser implements ValidateEntityByMetadataInterface
 {
     /**
      * @ORM\Id
@@ -26,14 +25,10 @@ class User extends BaseUser implements ValidateEntityInterface
      */
     private $apiToken;
 
-    public function validationRules(): array
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        return [
-            'username' => [
-                new Length(['min' => 3]),
-                new NotBlank,
-            ],
-        ];
+        $metadata->addPropertyConstraint('username', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('', new Assert\Length(['min' => 3]));
     }
 
     /**

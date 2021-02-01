@@ -2,11 +2,11 @@
 
 namespace ZnBundle\User\Domain\Forms;
 
-use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 
-class AuthForm implements ValidateEntityInterface
+class AuthForm implements ValidateEntityByMetadataInterface
 {
 
     private $login;
@@ -20,16 +20,10 @@ class AuthForm implements ValidateEntityInterface
         }
     }
 
-    public function validationRules()
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        return [
-            'login' => [
-                new Assert\NotBlank,
-            ],
-            'password' => [
-                new Assert\NotBlank,
-            ],
-        ];
+        $metadata->addPropertyConstraint('login', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('password', new Assert\NotBlank);
     }
 
     public function getLogin(): string
