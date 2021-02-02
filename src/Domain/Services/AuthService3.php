@@ -8,6 +8,7 @@ use yii\web\IdentityInterface;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnBundle\User\Domain\Entities\User;
+use ZnBundle\User\Domain\Exceptions\UnauthorizedException;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
@@ -58,6 +59,9 @@ class AuthService3 extends BaseCrudService implements AuthServiceInterface
 
     public function getIdentity(): IdentityEntityInterface
     {
+        if($this->isGuest()) {
+            throw new UnauthorizedException();
+        }
         return $this->identityEntity;
     }
 
