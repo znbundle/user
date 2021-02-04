@@ -23,7 +23,7 @@ class CredentialRepository extends \ZnLib\Db\Base\BaseEloquentCrudRepository imp
     public function oneByCredential(string $credential, string $type = CredentialTypeEnum::LOGIN): CredentialEntity
     {
         $query = new Query;
-        $query->where([
+        $query->whereByConditions([
             'credential' => $credential,
             'type' => $type,
         ]);
@@ -33,7 +33,7 @@ class CredentialRepository extends \ZnLib\Db\Base\BaseEloquentCrudRepository imp
     public function oneByValidation(string $validation, string $type): CredentialEntity
     {
         $query = new Query;
-        $query->where([
+        $query->whereByConditions([
             'validation' => $validation,
             'type' => $type,
         ]);

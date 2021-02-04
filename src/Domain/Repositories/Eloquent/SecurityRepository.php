@@ -24,7 +24,7 @@ class SecurityRepository extends BaseEloquentCrudRepository implements SecurityR
 
     public function oneByIdentityId(int $identityId): SecurityEntity {
         $query = new Query;
-        $query->where(['identity_id' => $identityId]);
+        $query->whereByConditions(['identity_id' => $identityId]);
         return $this->one($query);
     }
 }
