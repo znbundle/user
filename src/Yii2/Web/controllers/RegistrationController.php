@@ -11,7 +11,7 @@ use yii2bundle\account\domain\v3\services\RegistrationService;
 use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
 use ZnBundle\User\Yii2\Web\forms\SetSecurityForm;
 use ZnLib\Rest\Yii2\Helpers\Behavior;
-use ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert;
+use ZnYii\Web\Widgets\Toastr\Alert;
 
 class RegistrationController extends Controller
 {
@@ -58,14 +58,14 @@ class RegistrationController extends Controller
         }
         $isExists = \App::$domain->account->confirm->isHas($session['login'], AccountConfirmActionEnum::REGISTRATION);
         if (!$isExists) {
-            \ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert::create(['account/registration', 'temp_user_not_found'], Alert::TYPE_DANGER);
+            \ZnYii\Web\Widgets\Toastr\Alert::create(['account/registration', 'temp_user_not_found'], Alert::TYPE_DANGER);
             return $this->redirect(['/user/registration']);
         }
         $model = new SetSecurityForm();
         $callback = function ($model) use ($session) {
             \App::$domain->account->registration->createTpsAccount($session['login'], $session['activation_code'], $model->password, $model->email);
             \App::$domain->account->auth->authenticationFromWeb($session['login'], $model->password, true);
-            \ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert::create(['account/registration', 'registration_success'], Alert::TYPE_SUCCESS);
+            \ZnYii\Web\Widgets\Toastr\Alert::create(['account/registration', 'registration_success'], Alert::TYPE_SUCCESS);
             return $this->goHome();
         };
         $this->validateForm($model, $callback);

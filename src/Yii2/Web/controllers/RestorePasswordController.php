@@ -6,7 +6,7 @@ use ZnBundle\User\Yii2\Web\forms\RestorePasswordForm;
 use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
 use Yii;
 use yii\web\Controller;
-use ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert;
+use ZnYii\Web\Widgets\Toastr\Alert;
 
 /**
  * PasswordController controller
@@ -79,7 +79,7 @@ class RestorePasswordController extends Controller
 			$model->setAttributes($body, false);
 			try {
 				\App::$domain->account->restorePassword->confirm($model->login, $model->activation_code, $model->password);
-				\ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert::create(['account/restore-password', 'new_password_saved_success'], Alert::TYPE_SUCCESS);
+				\ZnYii\Web\Widgets\Toastr\Alert::create(['account/restore-password', 'new_password_saved_success'], Alert::TYPE_SUCCESS);
 				return $this->redirect('/' . Yii::$app->user->loginUrl[0]);
 			} catch (UnprocessableEntityHttpException $e){
 				$model->addErrorsFromException($e);

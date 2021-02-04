@@ -11,7 +11,7 @@ use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnLib\Rest\Yii2\Helpers\Behavior;
 use ZnLib\Web\Yii2\Helpers\ErrorHelper;
-use ZnLib\Web\Yii2\Widgets\Toastr\widgets\Alert;
+use ZnYii\Web\Widgets\Toastr\Alert;
 
 class AuthController extends Controller
 {
