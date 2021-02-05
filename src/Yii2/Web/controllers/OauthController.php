@@ -6,7 +6,7 @@ use yii\authclient\BaseOAuth;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\ServerErrorHttpException;
-use ZnYii\Web\Widgets\Toastr\Alert;
+use ZnYii\Web\Widgets\Toastr\Toastr;
 
 class OauthController extends Controller {
 	
@@ -44,11 +44,11 @@ class OauthController extends Controller {
 	
 	public function onLoginSuccess(BaseOAuth $client) {
 		\App::$domain->account->oauth->authByClient($client);
-		\ZnYii\Web\Widgets\Toastr\Alert::create(['account/auth', 'login_success'], Alert::TYPE_SUCCESS);
+		\ZnYii\Web\Widgets\Toastr\Toastr::create(['account/auth', 'login_success'], Toastr::TYPE_SUCCESS);
 	}
 	
 	public function onLoginCancel() {
-		\ZnYii\Web\Widgets\Toastr\Alert::create(['account/auth', 'login_access_error'], Alert::TYPE_DANGER);
+		\ZnYii\Web\Widgets\Toastr\Toastr::create(['account/auth', 'login_access_error'], Toastr::TYPE_DANGER);
 	}
 	
 }

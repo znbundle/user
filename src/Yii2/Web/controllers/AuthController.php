@@ -11,7 +11,7 @@ use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnLib\Rest\Yii2\Helpers\Behavior;
 use ZnLib\Web\Yii2\Helpers\ErrorHelper;
-use ZnYii\Web\Widgets\Toastr\Alert;
+use ZnYii\Web\Widgets\Toastr\Toastr;
 
 class AuthController extends Controller
 {
@@ -66,7 +66,7 @@ class AuthController extends Controller
                 $this->authService->authByForm($authForm);
                 
 //                $this->authService->authenticationByForm($form);
-                Alert::create(['user', 'auth.login_success'], Alert::TYPE_SUCCESS);
+                Toastr::create(['user', 'auth.login_success'], Toastr::TYPE_SUCCESS);
                 return $this->goBack();
             } catch (UnprocessibleEntityException $e) {
                 ErrorHelper::addErrorsFromException($e, $form);
@@ -80,7 +80,7 @@ class AuthController extends Controller
     public function actionLogout($redirect = null)
     {
         $this->authService->logout();
-        Alert::create(['user', 'auth.logout_success'], Alert::TYPE_SUCCESS);
+        Toastr::create(['user', 'auth.logout_success'], Toastr::TYPE_SUCCESS);
         return $this->goHome();
         /*if ($redirect) {
             return $this->redirect([SL . $redirect]);
