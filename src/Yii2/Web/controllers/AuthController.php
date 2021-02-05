@@ -5,25 +5,30 @@ namespace ZnBundle\User\Yii2\Web\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use ZnBundle\Notify\Domain\Interfaces\Services\ToastrServiceInterface;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnLib\Rest\Yii2\Helpers\Behavior;
 use ZnLib\Web\Yii2\Helpers\ErrorHelper;
-use ZnYii\Web\Widgets\Toastr\Toastr;
 
 class AuthController extends Controller
 {
 
     public $defaultAction = 'login';
     private $authService;
+    private $toastrService;
     protected $loginView = 'login';
 
-    public function __construct($id, $module, $config = [], AuthServiceInterface $authService)
+    public function __construct(
+        $id, $module, $config = [],
+        AuthServiceInterface $authService,
+        ToastrServiceInterface $toastrService)
     {
         parent::__construct($id, $module, $config);
         $this->authService = $authService;
+        $this->toastrService = $toastrService;
     }
 
     public function behaviors()
@@ -66,7 +71,7 @@ class AuthController extends Controller
                 $this->authService->authByForm($authForm);
                 
 //                $this->authService->authenticationByForm($form);
-                Toastr::create(['user', 'auth.login_success'], Toastr::TYPE_SUCCESS);
+                $this->toastrService->success(['user', 'auth.login_success']);
                 return $this->goBack();
             } catch (UnprocessibleEntityException $e) {
                 ErrorHelper::addErrorsFromException($e, $form);
@@ -80,7 +85,7 @@ class AuthController extends Controller
     public function actionLogout($redirect = null)
     {
         $this->authService->logout();
-        Toastr::create(['user', 'auth.logout_success'], Toastr::TYPE_SUCCESS);
+        $this->toastrService->success(['user', 'auth.logout_success']);
         return $this->goHome();
         /*if ($redirect) {
             return $this->redirect([SL . $redirect]);

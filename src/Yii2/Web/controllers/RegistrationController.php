@@ -4,19 +4,31 @@ namespace ZnBundle\User\Yii2\Web\controllers;
 
 use Yii;
 use yii\base\Model;
+use yii\base\Module;
 use yii\web\Controller;
 use yii2bundle\account\domain\v3\enums\AccountConfirmActionEnum;
 use yii2bundle\account\domain\v3\forms\RegistrationForm;
 use yii2bundle\account\domain\v3\services\RegistrationService;
 use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
+use ZnBundle\Notify\Domain\Interfaces\Services\ToastrServiceInterface;
 use ZnBundle\User\Yii2\Web\forms\SetSecurityForm;
 use ZnLib\Rest\Yii2\Helpers\Behavior;
-use ZnYii\Web\Widgets\Toastr\Toastr;
 
 class RegistrationController extends Controller
 {
 
     public $defaultAction = 'create';
+    private $toastrService;
+
+    public function __construct(
+        string $id,
+        Module $module, array $config = [],
+        ToastrServiceInterface $toastrService
+    )
+    {
+        parent::__construct($id, $module, $config);
+        $this->toastrService = $toastrService;
+    }
 
     /**
      * @inheritdoc
@@ -58,14 +70,14 @@ class RegistrationController extends Controller
         }
         $isExists = \App::$domain->account->confirm->isHas($session['login'], AccountConfirmActionEnum::REGISTRATION);
         if (!$isExists) {
-            \ZnYii\Web\Widgets\Toastr\Toastr::create(['account/registration', 'temp_user_not_found'], Toastr::TYPE_DANGER);
+            $this->toastrService->error(['account/registration', 'temp_user_not_found']);
             return $this->redirect(['/user/registration']);
         }
         $model = new SetSecurityForm();
         $callback = function ($model) use ($session) {
             \App::$domain->account->registration->createTpsAccount($session['login'], $session['activation_code'], $model->password, $model->email);
             \App::$domain->account->auth->authenticationFromWeb($session['login'], $model->password, true);
-            \ZnYii\Web\Widgets\Toastr\Toastr::create(['account/registration', 'registration_success'], Toastr::TYPE_SUCCESS);
+            $this->toastrService->success(['account/registration', 'registration_success']);
             return $this->goHome();
         };
         $this->validateForm($model, $callback);

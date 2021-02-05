@@ -2,19 +2,32 @@
 
 namespace ZnBundle\User\Yii2\Web\controllers;
 
-use yii\web\Controller;
-use ZnLib\Rest\Yii2\Helpers\Behavior;
-use yii2bundle\account\domain\v3\entities\SecurityEntity;
-use ZnBundle\User\Yii2\Web\forms\ChangePasswordForm;
 use Yii;
-use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
-use ZnYii\Web\Widgets\Toastr\Toastr;
+use yii\base\Module;
+use yii\web\Controller;
+use yii2bundle\account\domain\v3\entities\SecurityEntity;
 use yii2bundle\account\domain\v3\forms\ChangeEmailForm;
+use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
+use ZnBundle\Notify\Domain\Interfaces\Services\ToastrServiceInterface;
+use ZnBundle\User\Yii2\Web\forms\ChangePasswordForm;
 use ZnBundle\User\Yii2\Web\helpers\SecurityMenu;
+use ZnLib\Rest\Yii2\Helpers\Behavior;
 
 class SecurityController extends Controller {
-	
-	/**
+
+    private $toastrService;
+
+    public function __construct(
+        string $id,
+        Module $module, array $config = [],
+        ToastrServiceInterface $toastrService
+    )
+    {
+        parent::__construct($id, $module, $config);
+        $this->toastrService = $toastrService;
+    }
+
+    /**
 	 * @inheritdoc
 	 */
 	public function behaviors()
@@ -41,7 +54,7 @@ class SecurityController extends Controller {
 			if($model->validate()) {
 				try {
 					\App::$domain->account->security->changeEmail($model->getAttributes());
-					\ZnYii\Web\Widgets\Toastr\Toastr::create(['account/security', 'email_changed_success'], Toastr::TYPE_SUCCESS);
+                    $this->toastrService->success(['account/security', 'email_changed_success']);
 				} catch (UnprocessableEntityHttpException $e) {
 					$model->addErrorsFromException($e);
 				}
@@ -66,7 +79,7 @@ class SecurityController extends Controller {
 				$bodyPassword = $model->getAttributes(['password', 'new_password']);
 				try {
 					\App::$domain->account->security->changePassword($bodyPassword);
-					\ZnYii\Web\Widgets\Toastr\Toastr::create(['account/security', 'password_changed_success'], Toastr::TYPE_SUCCESS);
+                    $this->toastrService->success(['account/security', 'password_changed_success']);
 				} catch (UnprocessableEntityHttpException $e) {
 					$model->addErrorsFromException($e);
 				}
