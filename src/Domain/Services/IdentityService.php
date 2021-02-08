@@ -24,12 +24,12 @@ class IdentityService extends BaseCrudService implements IdentityServiceInterfac
         $this->credentialRepository = $credentialRepository;
     }
 
-    public function create($data): EntityIdInterface
+    public function create($attributes): EntityIdInterface
     {
-        $passwordHash = (new Security())->generatePasswordHash($data['password']);
-        unset($data['password']);
+        $passwordHash = (new Security())->generatePasswordHash($attributes['password']);
+        unset($attributes['password']);
         /** @var IdentityEntity $identityEntity */
-        $identityEntity = parent::create($data);
+        $identityEntity = parent::create($attributes);
         $credentialEntity = new CredentialEntity;
         $credentialEntity->setIdentityId($identityEntity->getId());
         $credentialEntity->setCredential($identityEntity->getLogin());
