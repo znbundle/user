@@ -21,14 +21,14 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
 
     public function __construct(ConfirmRepositoryInterface $repository, SmsServiceInterface $smsService)
     {
-        $this->repository = $repository;
+        $this->setRepository($repository);
         $this->smsService = $smsService;
-        $this->repository->deleteExpired();
+        $this->getRepository()->deleteExpired();
     }
 
     public function isVerify(string $login, string $action, string $code): bool
     {
-        $confirmEntity = $this->repository->oneByUnique($login, $action);
+        $confirmEntity = $this->getRepository()->oneByUnique($login, $action);
         return $code == $confirmEntity->getCode();
     }
 
@@ -64,13 +64,13 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         $query = new Query;
         $query->whereNew(new Where('login', $login));
         $query->whereNew(new Where('action', $action));
-        $collection = $this->repository->all($query);
+        $collection = $this->getRepository()->all($query);
         return $collection->count() > 0;
     }
 
     private function getTimeLeft(string $login, string $action): int
     {
-        $confirmEntity = $this->repository->oneByUnique($login, $action);
+        $confirmEntity = $this->getRepository()->oneByUnique($login, $action);
         return $confirmEntity->getExpire() - time();
     }
 

@@ -11,6 +11,6 @@ class CredentialService extends BaseService implements CredentialServiceInterfac
 
     public function __construct(CredentialRepositoryInterface $repository)
     {
-        $this->repository = $repository;
+        $this->setRepository($repository);
     }
 }

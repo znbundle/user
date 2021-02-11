@@ -20,7 +20,7 @@ class IdentityService extends BaseCrudService implements IdentityServiceInterfac
 
     public function __construct(IdentityRepositoryInterface $repository, CredentialRepositoryInterface $credentialRepository)
     {
-        $this->repository = $repository;
+        $this->setRepository($repository);
         $this->credentialRepository = $credentialRepository;
     }
 
