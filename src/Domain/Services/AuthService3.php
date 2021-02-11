@@ -22,14 +22,17 @@ use ZnCore\Domain\Entities\ValidateErrorEntity;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnCore\Domain\Helpers\ValidationHelper;
 use ZnCore\Domain\Libs\Query;
+use ZnCore\Domain\Traits\RepositoryAwareTrait;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Base\Domain\Services\PasswordService;
 use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
 use ZnCrypt\Jwt\Domain\Services\JwtService;
 
-class AuthService3 extends BaseCrudService implements AuthServiceInterface
+class AuthService3 implements AuthServiceInterface
 {
 
+    use RepositoryAwareTrait;
+    
     protected $tokenService;
     protected $passwordService;
     protected $credentialRepository;

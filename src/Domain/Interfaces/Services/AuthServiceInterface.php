@@ -9,7 +9,7 @@ use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Domain\Interfaces\Service\CrudServiceInterface;
 
-interface AuthServiceInterface extends CrudServiceInterface
+interface AuthServiceInterface //extends CrudServiceInterface
 {
 
     /**
