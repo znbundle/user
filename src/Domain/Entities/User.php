@@ -28,7 +28,7 @@ class User extends BaseUser implements ValidateEntityByMetadataInterface
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('username', new Assert\NotBlank);
-        $metadata->addPropertyConstraint('', new Assert\Length(['min' => 3]));
+        $metadata->addPropertyConstraint('username', new Assert\Length(['min' => 3]));
     }
 
     /**
