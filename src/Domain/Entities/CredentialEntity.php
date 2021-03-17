@@ -6,6 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
+use DateTime;
 
 class CredentialEntity implements ValidateEntityByMetadataInterface, EntityIdInterface
 {
@@ -19,6 +20,15 @@ class CredentialEntity implements ValidateEntityByMetadataInterface, EntityIdInt
     private $credential = null;
 
     private $validation = null;
+
+    private $createdAt = null;
+
+    private $expiredAt = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+    }
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
@@ -77,6 +87,25 @@ class CredentialEntity implements ValidateEntityByMetadataInterface, EntityIdInt
         return $this->validation;
     }
 
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function getExpiredAt()
+    {
+        return $this->expiredAt;
+    }
+
+    public function setExpiredAt($expiredAt): void
+    {
+        $this->expiredAt = $expiredAt;
+    }
 
 }
 
