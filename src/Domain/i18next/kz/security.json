@@ -1,0 +1,9 @@
+{
+  "title": "Қауіпсіздік",
+  "email": "Пошта",
+  "password": "Құпия сөз",
+  "email_changed_success": "Пошта сәтті өзгертілді",
+  "password_changed_success": "Құпия сөз сәтті өзгертілді",
+  "new_password_repeat": "Жаңа құпия сөзді растаңыз",
+  "new_password": "жаңа құпия сөз"
+}
