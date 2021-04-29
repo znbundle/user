@@ -2,6 +2,7 @@
 
 namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
+use Illuminate\Support\Collection;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
@@ -18,6 +19,16 @@ class CredentialRepository extends \ZnLib\Db\Base\BaseEloquentCrudRepository imp
     public function getEntityClass(): string
     {
         return CredentialEntity::class;
+    }
+
+    public function allByIdentityId(int $identityId, array $types = null): Collection
+    {
+        $query = new Query;
+        $query->whereByConditions([
+            'identity_id' => $identityId,
+            'type' => $types,
+        ]);
+        return $this->all($query);
     }
 
     public function oneByCredential(string $credential, string $type = CredentialTypeEnum::LOGIN): CredentialEntity

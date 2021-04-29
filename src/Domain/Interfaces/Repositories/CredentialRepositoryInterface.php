@@ -2,6 +2,7 @@
 
 namespace ZnBundle\User\Domain\Interfaces\Repositories;
 
+use Illuminate\Support\Collection;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
 use ZnCore\Base\Exceptions\NotFoundException;
@@ -9,6 +10,13 @@ use ZnCore\Domain\Interfaces\Repository\CrudRepositoryInterface;
 
 interface CredentialRepositoryInterface extends CrudRepositoryInterface
 {
+
+    /**
+     * @param int $identityId
+     * @param array|null $types
+     * @return Collection | CredentialEntity[]
+     */
+    public function allByIdentityId(int $identityId, array $types = null): Collection;
 
     /**
      * @param string $credential
