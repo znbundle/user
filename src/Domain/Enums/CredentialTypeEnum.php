@@ -6,5 +6,6 @@ class CredentialTypeEnum
 {
 
     const LOGIN = 'login';
+    const EMAIL = 'email';
 
 }
