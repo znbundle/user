@@ -41,6 +41,15 @@ class CredentialRepository extends \ZnLib\Db\Base\BaseEloquentCrudRepository imp
         return $this->one($query);
     }
 
+    public function oneByCredentialValue(string $credential): CredentialEntity
+    {
+        $query = new Query;
+        $query->whereByConditions([
+            'credential' => $credential,
+        ]);
+        return $this->one($query);
+    }
+
     public function oneByValidation(string $validation, string $type): CredentialEntity
     {
         $query = new Query;
