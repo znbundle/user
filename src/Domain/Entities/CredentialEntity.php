@@ -33,6 +33,7 @@ class CredentialEntity implements ValidateEntityByMetadataInterface, EntityIdInt
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('identityId', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('type', new Assert\NotBlank);
         $metadata->addPropertyConstraint('credential', new Assert\NotBlank);
         $metadata->addPropertyConstraint('validation', new Assert\NotBlank);
     }
