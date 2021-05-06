@@ -32,12 +32,33 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         return $code == $confirmEntity->getCode();
     }
 
-    public function sendConfirmBySms(ConfirmEntity $confirmEntity, array $i18Next)
+    public function activate(string $login, string $action, string $code)
+    {
+        /** @var ConfirmEntity $confirmEntity */
+        $confirmEntity = $this->getRepository()->oneByUnique($login, $action);
+        $isValidCode = $code == $confirmEntity->getCode();
+        if($isValidCode) {
+            $confirmEntity->setIsActivated(true);
+        } else {
+            throw new \Exception('Activation code invalid!');
+        }
+    }
+
+    public function add(ConfirmEntity $confirmEntity)
     {
         $this->checkExists($confirmEntity->getLogin(), $confirmEntity->getAction());
         $code = ConfirmHelper::generateCode();
         $confirmEntity->setCode($code);
         $this->persist($confirmEntity);
+    }
+
+    public function sendConfirmBySms(ConfirmEntity $confirmEntity, array $i18Next)
+    {
+        $this->add($confirmEntity);
+        /*$this->checkExists($confirmEntity->getLogin(), $confirmEntity->getAction());
+        $code = ConfirmHelper::generateCode();
+        $confirmEntity->setCode($code);
+        $this->persist($confirmEntity);*/
         $this->sendSmsWithCode($confirmEntity->getLogin(), $code, $i18Next);
     }
 
@@ -73,5 +94,4 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         $confirmEntity = $this->getRepository()->oneByUnique($login, $action);
         return $confirmEntity->getExpire() - time();
     }
-
 }
