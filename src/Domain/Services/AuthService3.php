@@ -95,7 +95,7 @@ class AuthService3 implements AuthServiceInterface
 
         $authEvent = new AuthEvent($loginForm);
         $this->getEventDispatcher()->dispatch($authEvent, AuthEventEnum::BEFORE_AUTH);
-        
+        //dd(4477);
         try {
             $credentialEntity = $this->credentialRepository->oneByCredential($loginForm->getLogin(), 'login');
         } catch (NotFoundException $e) {
@@ -107,7 +107,6 @@ class AuthService3 implements AuthServiceInterface
             $exception = new UnprocessibleEntityException;
             $exception->setErrorCollection($errorCollection);
             $this->logger->warning('auth authenticationByForm');
-            //dd(44);
             //$this->getEventDispatcher()->dispatch($authEvent, AuthEventEnum::AFTER_AUTH_ERROR);
             throw $exception;
         }
