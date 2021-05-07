@@ -1,5 +1,7 @@
 <?php
 
+\ZnCore\Base\Helpers\DeprecateHelper::softThrow();
+
 return [
     'ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface' => 'ZnBundle\User\Domain\Services\TokenService',
     'ZnBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface' => 'ZnBundle\User\Domain\Services\ConfirmService',
