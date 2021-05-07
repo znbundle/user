@@ -5,10 +5,11 @@ namespace ZnBundle\User\Domain\Entities;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use ZnCore\Domain\Interfaces\Entity\UniqueInterface;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 use DateTime;
 
-class ConfirmEntity implements ValidateEntityByMetadataInterface, EntityIdInterface
+class ConfirmEntity implements ValidateEntityByMetadataInterface, EntityIdInterface, UniqueInterface
 {
 
     private $id = null;
@@ -39,6 +40,13 @@ class ConfirmEntity implements ValidateEntityByMetadataInterface, EntityIdInterf
         $metadata->addPropertyConstraint('code', new Assert\NotBlank);
         $metadata->addPropertyConstraint('expire', new Assert\NotBlank);
         $metadata->addPropertyConstraint('createdAt', new Assert\NotBlank);
+    }
+
+    public function unique() : array
+    {
+        return [
+            ['login', 'action']
+        ];
     }
 
     public function getId()

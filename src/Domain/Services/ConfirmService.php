@@ -9,9 +9,11 @@ use ZnBundle\User\Domain\Interfaces\Repositories\ConfirmRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface;
 use ZnBundle\User\Yii2\Helpers\ConfirmHelper;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
+use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Domain\Base\BaseCrudService;
 use ZnCore\Domain\Entities\Query\Where;
+use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
 
 class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
@@ -19,29 +21,41 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
 
     private $smsService;
 
-    public function __construct(ConfirmRepositoryInterface $repository, SmsServiceInterface $smsService)
+    public function __construct(EntityManagerInterface $em, ConfirmRepositoryInterface $repository, SmsServiceInterface $smsService)
     {
+        $this->setEntityManager($em);
         $this->setRepository($repository);
         $this->smsService = $smsService;
         $this->getRepository()->deleteExpired();
     }
 
+    public function getEntityClass(): string
+    {
+        return ConfirmEntity::class;
+    }
+
     public function isVerify(string $login, string $action, string $code): bool
     {
-        $confirmEntity = $this->getRepository()->oneByUnique($login, $action);
+        try {
+            $confirmEntity = $this->oneByUnique($login, $action);
+        } catch (NotFoundException $e) {
+            throw new NotFoundException(I18Next::t('user', 'confirm.not_found'));
+        }
         return $code == $confirmEntity->getCode();
     }
 
     public function activate(string $login, string $action, string $code)
     {
         /** @var ConfirmEntity $confirmEntity */
-        $confirmEntity = $this->getRepository()->oneByUnique($login, $action);
+        $confirmEntity = $this->oneByUnique($login, $action);
         $isValidCode = $code == $confirmEntity->getCode();
         if($isValidCode) {
             $confirmEntity->setIsActivated(true);
         } else {
             throw new \Exception('Activation code invalid!');
         }
+        $this->getRepository()->deleteById($confirmEntity->getId());
+//        $this->getEntityManager()->persist($confirmEntity);
     }
 
     public function add(ConfirmEntity $confirmEntity)
@@ -60,6 +74,18 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         $confirmEntity->setCode($code);
         $this->persist($confirmEntity);*/
         $this->sendSmsWithCode($confirmEntity->getLogin(), $code, $i18Next);
+    }
+
+    private function oneByUnique(string $login, string $action): ConfirmEntity
+    {
+        /** @var ConfirmEntity $confirmEntity */
+        $confirmEntity = $this->getRepository()->oneByUnique($login, $action);
+        $lifeTime = $confirmEntity->getExpire() - time();
+        if($lifeTime <= 0) {
+            $this->getRepository()->deleteById($confirmEntity->getId());
+            throw new NotFoundException();
+        }
+        return $confirmEntity;
     }
 
     private function checkExists(string $phone, string $action)
