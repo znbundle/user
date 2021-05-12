@@ -2,8 +2,11 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+
+DeprecateHelper::hardThrow();
 
 class Identity implements UserInterface, EntityIdInterface
 {

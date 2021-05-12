@@ -5,7 +5,10 @@ namespace ZnBundle\User\Domain\Entities;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
+
+DeprecateHelper::hardThrow();
 
 /**
  * @ORM\Entity
