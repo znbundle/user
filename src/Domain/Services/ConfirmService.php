@@ -16,6 +16,9 @@ use ZnCore\Domain\Entities\Query\Where;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
 
+/**
+ * @method ConfirmRepositoryInterface getRepository
+ */
 class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
 {
 
