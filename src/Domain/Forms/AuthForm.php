@@ -2,11 +2,17 @@
 
 namespace ZnBundle\User\Domain\Forms;
 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
+use ZnLib\Web\Symfony4\MicroApp\Interfaces\BuildFormInterface;
 
-class AuthForm implements ValidateEntityByMetadataInterface
+class AuthForm implements ValidateEntityByMetadataInterface, BuildFormInterface
 {
 
     private $login;
@@ -23,9 +29,19 @@ class AuthForm implements ValidateEntityByMetadataInterface
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('login', new Assert\NotBlank);
+        //$metadata->addPropertyConstraint('login', new Assert\Positive());
         $metadata->addPropertyConstraint('password', new Assert\NotBlank);
     }
 
+    public function buildForm(FormBuilderInterface $formBuilder)
+    {
+        $formBuilder
+            ->add('login', TextType::class, ['label' => 'Login'])
+            ->add('password', PasswordType::class, ['label' => 'Password'])
+            ->add('rememberMe', CheckboxType::class, ['label' => 'Remember me', 'required' => false])
+            ->add('save', SubmitType::class, ['label' => 'Login']);
+    }
+    
     public function getLogin(): string
     {
         return $this->login;
@@ -55,4 +71,5 @@ class AuthForm implements ValidateEntityByMetadataInterface
     {
         $this->rememberMe = $rememberMe;
     }
+
 }
