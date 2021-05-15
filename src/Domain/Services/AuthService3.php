@@ -91,7 +91,7 @@ class AuthService3 implements AuthServiceInterface
 
     public function tokenByForm(AuthForm $loginForm): TokenEntity
     {
-        //ValidationHelper::validateEntity($loginForm);
+        ValidationHelper::validateEntity($loginForm);
 
         $authEvent = new AuthEvent($loginForm);
         $this->getEventDispatcher()->dispatch($authEvent, AuthEventEnum::BEFORE_AUTH);
