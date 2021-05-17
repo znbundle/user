@@ -3,7 +3,6 @@
 namespace ZnBundle\User\Domain\Services;
 
 use App\Rpc\Domain\Enums\RpcEventEnum;
-use App\Rpc\Domain\Events\RpcRequestEvent;
 use App\Rpc\Domain\Events\RpcResponseEvent;
 use App\Security\Domain\Entities\MethodEntity;
 use Illuminate\Support\Collection;
@@ -24,7 +23,6 @@ use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
-use ZnCore\Domain\Base\BaseCrudService;
 use ZnCore\Domain\Entities\ValidateErrorEntity;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnCore\Domain\Helpers\ValidationHelper;
@@ -32,8 +30,6 @@ use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Traits\RepositoryAwareTrait;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Base\Domain\Services\PasswordService;
-use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
-use ZnCrypt\Jwt\Domain\Services\JwtService;
 use ZnLib\Rpc\Domain\Entities\RpcRequestEntity;
 use ZnLib\Rpc\Domain\Entities\RpcResponseEntity;
 
