@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 use ZnLib\Web\Symfony4\MicroApp\Interfaces\BuildFormInterface;
 
@@ -38,10 +39,19 @@ class AuthForm implements ValidateEntityByMetadataInterface, BuildFormInterface
     public function buildForm(FormBuilderInterface $formBuilder)
     {
         $formBuilder
-            ->add('login', TextType::class, ['label' => 'Login'])
-            ->add('password', PasswordType::class, ['label' => 'Password'])
-            ->add('rememberMe', CheckboxType::class, ['label' => 'Remember me', 'required' => false])
-            ->add('save', SubmitType::class, ['label' => 'Login']);
+            ->add('login', TextType::class, [
+                'label' => I18Next::t('user', 'auth.login')
+            ])
+            ->add('password', PasswordType::class, [
+                'label' => I18Next::t('user', 'main.password')
+            ])
+            ->add('rememberMe', CheckboxType::class, [
+                'label' => I18Next::t('user', 'auth.remember_me'),
+                'required' => false
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => I18Next::t('user', 'auth.login_action')
+            ]);
     }
     
     public function getLogin(): string

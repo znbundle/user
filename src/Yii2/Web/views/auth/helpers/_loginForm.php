@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \ZnBundle\User\Yii2\Web\forms\LoginForm */
+/* @var $model \ZnBundle\User\Domain\Forms\AuthForm */
 
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use yii\helpers\Html;

@@ -2,12 +2,8 @@
 
 namespace ZnBundle\User\Domain\Services;
 
-use App\Rpc\Domain\Enums\RpcEventEnum;
-use App\Rpc\Domain\Events\RpcResponseEvent;
-use App\Security\Domain\Entities\MethodEntity;
 use Illuminate\Support\Collection;
 use Psr\Log\LoggerInterface;
-use yii\web\IdentityInterface;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnBundle\User\Domain\Entities\User;
@@ -32,8 +28,6 @@ use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Traits\RepositoryAwareTrait;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Base\Domain\Services\PasswordService;
-use ZnLib\Rpc\Domain\Entities\RpcRequestEntity;
-use ZnLib\Rpc\Domain\Entities\RpcResponseEntity;
 
 class AuthService3 implements AuthServiceInterface
 {
