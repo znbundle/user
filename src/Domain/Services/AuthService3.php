@@ -65,10 +65,10 @@ class AuthService3 implements AuthServiceInterface
 
     public function setIdentity(IdentityEntityInterface $identityEntity)
     {
-        $event = new IdentityEvent($identityEntity);
-        $this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_SET_IDENTITY);
+        //$event = new IdentityEvent($identityEntity);
+        //$this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_SET_IDENTITY);
         $this->identityEntity = $identityEntity;
-        $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_SET_IDENTITY);
+        //$this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_SET_IDENTITY);
     }
 
     public function getIdentity(): IdentityEntityInterface
@@ -181,16 +181,11 @@ class AuthService3 implements AuthServiceInterface
     protected function verificationPasswordByCredential(CredentialEntity $credentialEntity, string $password)
     {
         try {
-            /** @var CredentialEntity $credentialEntity */
-//            $credentialEntity = $this->credentialRepository->oneByCredential($identityEntity->getLogin(), CredentialTypeEnum::LOGIN);
-            //prr(EntityHelper::toArray($credentialEntity));
             $this->passwordService->validate($password, $credentialEntity->getValidation());
             $this->logger->info('auth verificationPassword');
         } catch (InvalidPasswordException $e) {
             $errorCollection = new Collection;
-            $validateErrorEntity = new ValidateErrorEntity;
-            $validateErrorEntity->setField('password');
-            $validateErrorEntity->setMessage('Bad password');
+            $validateErrorEntity = new ValidateErrorEntity('password', 'Bad password');
             $errorCollection->add($validateErrorEntity);
             $exception = new UnprocessibleEntityException;
             $exception->setErrorCollection($errorCollection);

@@ -21,8 +21,10 @@ class AuthForm implements ValidateEntityByMetadataInterface, BuildFormInterface
 
     public function __construct($data = null)
     {
-        foreach ($data as $name => $value) {
-            $this->{$name} = $value;
+        if($data) {
+            foreach ($data as $name => $value) {
+                $this->{$name} = $value;
+            }
         }
     }
 
