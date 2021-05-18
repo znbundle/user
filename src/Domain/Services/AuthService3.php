@@ -129,7 +129,7 @@ class AuthService3 implements AuthServiceInterface
         return $userEntity;
     }
 
-    public function authenticationByForm(LoginForm $loginForm)
+    /*public function authenticationByForm(LoginForm $loginForm)
     {
         DeprecateHelper::softThrow();
         $authForm = new AuthForm([
@@ -139,7 +139,7 @@ class AuthService3 implements AuthServiceInterface
         ]);
         $this->authByForm($authForm);
         $this->logger->info('auth authenticationByForm');
-    }
+    }*/
 
     private function getIdentityByForm(AuthForm $loginForm): IdentityEntityInterface {
         ValidationHelper::validateEntity($loginForm);

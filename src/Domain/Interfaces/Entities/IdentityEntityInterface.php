@@ -9,7 +9,7 @@ interface IdentityEntityInterface
 
     public function getId();
 
-    public function setLogin($value);
+//    public function setLogin($value);
 
-    public function getLogin();
+//    public function getLogin();
 }
