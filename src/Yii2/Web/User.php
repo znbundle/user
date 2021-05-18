@@ -5,18 +5,18 @@ namespace ZnBundle\User\Yii2\Web;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
-use ZnBundle\User\Yii2\Entities\LoginEntity;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidValueException;
 use yii\filters\auth\AuthMethod;
 use yii\web\IdentityInterface;
+use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Yii2\Helpers\AuthHelper;
 use ZnCore\Base\Helpers\EnvHelper;
 
 /**
  * @property-read User $model
- * @property-read LoginEntity $identity
+ * @property-read IdentityEntityInterface $identity
  */
 class User extends \yii\web\User
 {
@@ -111,7 +111,7 @@ class User extends \yii\web\User
 
 	protected function __renewAuthStatus()
 	{
-		/** @var LoginEntity|null $identity */
+		/** @var IdentityEntityInterface|null $identity */
 		$identity = null;
 		$session = Yii::$app->getSession();
 		$id = $session->getHasSessionId() || $session->getIsActive() ? $session->get($this->idParam) : null;
