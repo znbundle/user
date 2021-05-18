@@ -13,6 +13,7 @@ use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnBundle\User\Domain\Entities\User;
 use ZnBundle\User\Domain\Enums\AuthEventEnum;
 use ZnBundle\User\Domain\Events\AuthEvent;
+use ZnBundle\User\Domain\Events\IdentityEvent;
 use ZnBundle\User\Domain\Exceptions\UnauthorizedException;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
@@ -22,6 +23,7 @@ use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
 use ZnCore\Domain\Entities\ValidateErrorEntity;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
@@ -63,35 +65,92 @@ class AuthService3 implements AuthServiceInterface
 
     public function setIdentity(IdentityEntityInterface $identityEntity)
     {
+        $event = new IdentityEvent($identityEntity);
+        $this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_SET_IDENTITY);
         $this->identityEntity = $identityEntity;
+        $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_SET_IDENTITY);
     }
 
     public function getIdentity(): IdentityEntityInterface
     {
+        $event = new IdentityEvent();
+        $event->setIdentityEntity($this->identityEntity);
+        $this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_GET_IDENTITY);
+        /*if($event->getIdentityEntity()) {
+            return $event->getIdentityEntity();
+        }*/
         if($this->isGuest()) {
             throw new UnauthorizedException();
         }
-        return $this->identityEntity;
+        $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_GET_IDENTITY);
+        return $event->getIdentityEntity();
     }
 
     public function isGuest(): bool
     {
-        return !is_object($this->identityEntity);
+        if(is_object($this->identityEntity)) {
+            return false;
+        }
+        $event = new IdentityEvent($this->identityEntity);
+        $this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_IS_GUEST);
+        if(is_bool($event->getIsGuest())) {
+            return $event->getIsGuest();
+        }
+        $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_IS_GUEST);
+        return true;
     }
 
     public function logout()
     {
+        $event = new IdentityEvent($this->identityEntity);
+        $this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_LOGOUT);
+        
         $this->identityEntity = null;
         $this->logger->info('auth logout');
+        $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_LOGOUT);
     }
 
     public function tokenByForm(AuthForm $loginForm): TokenEntity
     {
-        ValidationHelper::validateEntity($loginForm);
+        $userEntity = $this->getIdentityByForm($loginForm);
+        $this->logger->info('auth tokenByForm');
+        //$authEvent = new AuthEvent($loginForm);
+        return $this->tokenService->getTokenByIdentity($userEntity);
+    }
+    
+    public function authByForm(AuthForm $authForm)
+    {
+        $userEntity = $this->getIdentityByForm($authForm);
+        $this->setIdentity($userEntity);
+    }
 
+    public function authenticationByToken(string $token, string $authenticatorClassName = null)
+    {
+        $userId = $this->tokenService->getIdentityIdByToken($token);
+        $query = new Query;
+        $query->with('roles');
+        /** @var User $userEntity */
+        $userEntity = $this->identityRepository->oneById($userId, $query);
+        $this->logger->info('auth authenticationByToken');
+        return $userEntity;
+    }
+
+    public function authenticationByForm(LoginForm $loginForm)
+    {
+        DeprecateHelper::softThrow();
+        $authForm = new AuthForm([
+            'login' => $loginForm->login,
+            'password' => $loginForm->password,
+            'rememberMe' => $loginForm->rememberMe,
+        ]);
+        $this->authByForm($authForm);
+        $this->logger->info('auth authenticationByForm');
+    }
+
+    private function getIdentityByForm(AuthForm $loginForm): IdentityEntityInterface {
+        ValidationHelper::validateEntity($loginForm);
         $authEvent = new AuthEvent($loginForm);
         $this->getEventDispatcher()->dispatch($authEvent, AuthEventEnum::BEFORE_AUTH);
-        //dd(4477);
         try {
             $credentialEntity = $this->credentialRepository->oneByCredential($loginForm->getLogin(), 'login');
         } catch (NotFoundException $e) {
@@ -114,65 +173,9 @@ class AuthService3 implements AuthServiceInterface
         }
 
         $userEntity = $this->identityRepository->oneById($credentialEntity->getIdentityId());
-        //$this->setIdentity($userEntity);
-
-        $token = $this->forgeTokenEntity($userEntity);
-        $this->logger->info('auth tokenByForm');
+        $authEvent->setIdentityEntity($userEntity);
         $this->getEventDispatcher()->dispatch($authEvent, AuthEventEnum::AFTER_AUTH_SUCCESS);
-        return $token;
-    }
-    
-    private function triggerBefore(RpcRequestEntity $requestEntity, MethodEntity $methodEntity) {
-        
-    }
-
-    private function triggerAfter(RpcRequestEntity $requestEntity, RpcResponseEntity $responseEntity) {
-        $responseEvent = new RpcResponseEvent($requestEntity, $responseEntity);
-        $this->getEventDispatcher()->dispatch($responseEvent, RpcEventEnum::AFTER_RUN_ACTION);
-    }
-    
-    public function authByForm(AuthForm $authForm)
-    {
-        
-        try {
-            $credentialEntity = $this->credentialRepository->oneByCredential($authForm->getLogin(), 'login');
-        } catch (NotFoundException $e) {
-            $errorCollection = new Collection;
-            $validateErrorEntity = new ValidateErrorEntity;
-            $validateErrorEntity->setField('login');
-            $validateErrorEntity->setMessage('User not found');
-            $errorCollection->add($validateErrorEntity);
-            $exception = new UnprocessibleEntityException;
-            $exception->setErrorCollection($errorCollection);
-            $this->logger->warning('auth authenticationByForm');
-            throw $exception;
-        }
-        $this->verificationPasswordByCredential($credentialEntity, $authForm->getPassword());
-        $userEntity = $this->identityRepository->oneById($credentialEntity->getIdentityId());
-        $this->setIdentity($userEntity);
-    }
-
-    public function authenticationByToken(string $token, string $authenticatorClassName = null)
-    {
-        $userId = $this->tokenService->getIdentityIdByToken($token);
-
-        $query = new Query;
-        $query->with('roles');
-        /** @var User $userEntity */
-        $userEntity = $this->identityRepository->oneById($userId, $query);
-        $this->logger->info('auth authenticationByToken');
         return $userEntity;
-    }
-
-    public function authenticationByForm(LoginForm $loginForm)
-    {
-        $authForm = new AuthForm([
-            'login' => $loginForm->login,
-            'password' => $loginForm->password,
-            'rememberMe' => $loginForm->rememberMe,
-        ]);
-        $this->authByForm($authForm);
-        $this->logger->info('auth authenticationByForm');
     }
 
     protected function verificationPasswordByCredential(CredentialEntity $credentialEntity, string $password)
@@ -195,10 +198,4 @@ class AuthService3 implements AuthServiceInterface
             throw $exception;
         }
     }
-
-    protected function forgeTokenEntity(IdentityEntityInterface $identityEntity): TokenEntity
-    {
-        return $this->tokenService->getTokenByIdentity($identityEntity);
-    }
-
 }

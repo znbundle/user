@@ -3,26 +3,20 @@
 namespace ZnBundle\User\Domain\Events;
 
 use Symfony\Contracts\EventDispatcher\Event;
-use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnCore\Domain\Traits\Event\EventSkipHandleTrait;
 
-class AuthEvent extends Event
+class IdentityEvent extends Event
 {
 
     use EventSkipHandleTrait;
 
-    private $loginForm;
     private $identityEntity;
+    private $isGuest = null;
 
-    public function __construct(AuthForm $loginForm)
+    public function __construct(IdentityEntityInterface $identityEntity = null)
     {
-        $this->loginForm = $loginForm;
-    }
-
-    public function getLoginForm(): AuthForm
-    {
-        return $this->loginForm;
+        $this->identityEntity = $identityEntity;
     }
 
     public function getIdentityEntity(): ?IdentityEntityInterface
@@ -30,8 +24,18 @@ class AuthEvent extends Event
         return $this->identityEntity;
     }
 
-    public function setIdentityEntity(IdentityEntityInterface $identityEntity): void
+    public function setIdentityEntity(?IdentityEntityInterface $identityEntity): void
     {
         $this->identityEntity = $identityEntity;
+    }
+
+    public function getIsGuest(): ?bool
+    {
+        return $this->isGuest;
+    }
+
+    public function setIsGuest(bool $isGuest): void
+    {
+        $this->isGuest = $isGuest;
     }
 }
