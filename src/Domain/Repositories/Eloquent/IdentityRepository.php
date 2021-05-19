@@ -77,7 +77,7 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
         return $this->findUserBy(['login' => $username], $query);
     }
 
-    public function findUserBy(array $condition, Query $query = null): IdentityEntity
+    private function findUserBy(array $condition, Query $query = null): IdentityEntity
     {
         $query = Query::forge($query);
         $query->whereFromCondition($condition);

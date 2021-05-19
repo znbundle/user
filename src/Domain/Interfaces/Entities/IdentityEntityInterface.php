@@ -2,14 +2,9 @@
 
 namespace ZnBundle\User\Domain\Interfaces\Entities;
 
-interface IdentityEntityInterface
+use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
+
+interface IdentityEntityInterface extends EntityIdInterface
 {
 
-    public function setId($value);
-
-    public function getId();
-
-//    public function setLogin($value);
-
-//    public function getLogin();
 }
