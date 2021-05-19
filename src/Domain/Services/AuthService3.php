@@ -125,6 +125,7 @@ class AuthService3 implements AuthServiceInterface
         $query->with('roles');
         /** @var User $userEntity */
         $userEntity = $this->identityRepository->oneById($userId, $query);
+       // dd($userEntity);
         $this->logger->info('auth authenticationByToken');
         return $userEntity;
     }
