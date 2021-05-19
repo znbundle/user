@@ -21,6 +21,7 @@ use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
+use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Domain\Entities\ValidateErrorEntity;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnCore\Domain\Helpers\ValidationHelper;
@@ -152,7 +153,7 @@ class AuthService3 implements AuthServiceInterface
             $errorCollection = new Collection;
             $validateErrorEntity = new ValidateErrorEntity;
             $validateErrorEntity->setField('login');
-            $validateErrorEntity->setMessage('User not found');
+            $validateErrorEntity->setMessage(I18Next::t('user', 'auth.user_not_found'));
             $errorCollection->add($validateErrorEntity);
             $exception = new UnprocessibleEntityException;
             $exception->setErrorCollection($errorCollection);
@@ -180,7 +181,7 @@ class AuthService3 implements AuthServiceInterface
             $this->logger->info('auth verificationPassword');
         } catch (InvalidPasswordException $e) {
             $errorCollection = new Collection;
-            $validateErrorEntity = new ValidateErrorEntity('password', 'Bad password');
+            $validateErrorEntity = new ValidateErrorEntity('password', I18Next::t('user', 'auth.incorrect_password'));
             $errorCollection->add($validateErrorEntity);
             $exception = new UnprocessibleEntityException;
             $exception->setErrorCollection($errorCollection);
