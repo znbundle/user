@@ -64,11 +64,11 @@ class User extends \yii\web\User
 	public function getIdentity($autoRenew = true)
 	{
 		$identity = parent::getIdentity($autoRenew);
-		if(!empty($identity) && !empty($identity->id)) {
+		if(!empty($identity) && !empty($identity->getId())) {
 			return $identity;
 		}
 		$identity = $this->runAuthMethod();
-		if(!empty($identity) && !empty($identity->id)) {
+		if(!empty($identity) && !empty($identity->getId())) {
 			$this->setIdentity($identity);
 		}
 		return $identity;
