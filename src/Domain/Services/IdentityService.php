@@ -5,6 +5,7 @@ namespace ZnBundle\User\Domain\Services;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
 use ZnBundle\User\Domain\Entities\SecurityEntity;
+use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface;
@@ -26,6 +27,7 @@ class IdentityService extends BaseCrudService implements IdentityServiceInterfac
 
     public function create($attributes): EntityIdInterface
     {
+        //dd($attributes);
         $passwordHash = (new Security())->generatePasswordHash($attributes['password']);
         unset($attributes['password']);
         /** @var IdentityEntity $identityEntity */
@@ -34,6 +36,7 @@ class IdentityService extends BaseCrudService implements IdentityServiceInterfac
         $credentialEntity->setIdentityId($identityEntity->getId());
         $credentialEntity->setCredential($identityEntity->getLogin());
         $credentialEntity->setValidation($passwordHash);
+        $credentialEntity->setType(CredentialTypeEnum::LOGIN);
         $this->credentialRepository->create($credentialEntity);
         return $identityEntity;
     }

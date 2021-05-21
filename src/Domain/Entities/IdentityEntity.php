@@ -5,6 +5,7 @@ namespace ZnBundle\User\Domain\Entities;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use ZnCore\Base\Enums\StatusEnum;
 use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
@@ -15,7 +16,7 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
     protected $id = null;
     protected $login = null;
     protected $roles = [];
-    protected $status = null;
+    protected $status = StatusEnum::ENABLED;
     protected $createdAt = null;
     protected $updatedAt = null;
     protected $assignments = null;
