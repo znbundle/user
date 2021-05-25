@@ -20,17 +20,17 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
 {
 
     protected $tableName = 'user_identity';
-    protected $assignmentRepository;
+//    protected $assignmentRepository;
     protected static $entityClass;
 
     public function __construct(
         EntityManagerInterface $em,
-        Manager $capsule,
-        AssignmentRepository $assignmentRepository
+        Manager $capsule
+        //AssignmentRepository $assignmentRepository
     )
     {
         parent::__construct($em, $capsule);
-        $this->assignmentRepository = $assignmentRepository;
+        //$this->assignmentRepository = $assignmentRepository;
     }
 
     public function getEntityClass(): string
@@ -58,26 +58,15 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
                 'foreignRepositoryClass' => AssignmentRepository::class,
                 'foreignAttribute' => 'user_id',
             ],
-            /*'roles' => [
-                'type' => RelationEnum::CALLBACK,
-                'callback' => function (Collection $collection) {
-                    $m2m = new OneToMany;
-                    $m2m->selfModel = $this;
-                    $m2m->foreignModel = $this->assignmentRepository;
-                    $m2m->selfField = 'userId';
-                    $m2m->foreignContainerField = 'assignments';
-                    $m2m->run($collection);
-                },
-            ],*/
         ];
     }
 
-    public function findUserByUsername(string $username, Query $query = null): IdentityEntity
+    public function findUserByUsername(string $username, Query $query = null): IdentityEntityInterface
     {
-        return $this->findUserBy(['login' => $username], $query);
+        return $this->findUserBy(['username' => $username], $query);
     }
 
-    private function findUserBy(array $condition, Query $query = null): IdentityEntity
+    private function findUserBy(array $condition, Query $query = null): IdentityEntityInterface
     {
         $query = Query::forge($query);
         $query->whereFromCondition($condition);
