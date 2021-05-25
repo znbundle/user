@@ -14,5 +14,6 @@ return [
     ],
     'entities' => [
         'ZnBundle\User\Domain\Entities\CredentialEntity' => 'ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface',
+        'ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface' => 'ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface',
     ],
 ];
