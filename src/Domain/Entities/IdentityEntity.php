@@ -15,6 +15,7 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
 
     protected $id = null;
     protected $login = null;
+    protected $username = null;
     protected $roles = [];
     protected $status = StatusEnum::ENABLED;
     protected $createdAt = null;
@@ -102,6 +103,11 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
     public function getUsername()
     {
         return $this->getLogin();
+    }
+
+    public function setUsername(string $username)
+    {
+        return $this->setLogin($username);
     }
 
     public function getAssignments()
