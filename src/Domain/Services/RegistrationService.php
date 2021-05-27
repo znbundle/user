@@ -2,17 +2,16 @@
 
 namespace ZnBundle\User\Domain\Services;
 
-use ZnBundle\Notify\Domain\Services\SmsService;
 use ZnBundle\User\Domain\Entities\ConfirmEntity;
 use ZnBundle\User\Domain\Enums\ConfirmActionEnum;
 use ZnBundle\User\Domain\Forms\Registration\CreateAccountForm;
 use ZnBundle\User\Domain\Forms\Registration\RequestCodeForm;
 use ZnBundle\User\Domain\Forms\Registration\VerifyCodeForm;
-use ZnCore\Domain\Helpers\ValidationHelper;
 use ZnCore\Base\Enums\Measure\TimeEnum;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
+use ZnCore\Domain\Helpers\ValidationHelper;
 
 class RegistrationService
 {
@@ -47,7 +46,7 @@ class RegistrationService
         ValidationHelper::validateEntity($requestCodeForm);
         try {
             $isVerify = $this->confirmService->isVerify($requestCodeForm->getPhone(), ConfirmActionEnum::REGISTRATION, $requestCodeForm->getActivationCode());
-            if(! $isVerify) {
+            if (!$isVerify) {
                 $message = I18Next::t('user', 'registration.invalid_activation_code');
                 ValidationHelper::throwUnprocessable(['activation_code' => $message]);
             }
@@ -62,5 +61,4 @@ class RegistrationService
         ValidationHelper::validateEntity($accountForm);
 
     }
-
 }

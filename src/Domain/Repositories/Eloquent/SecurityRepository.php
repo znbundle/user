@@ -7,8 +7,6 @@ use ZnBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface;
 use ZnCore\Base\Exceptions\DeprecatedException;
 use ZnCore\Domain\Libs\Query;
 use ZnLib\Db\Base\BaseEloquentCrudRepository;
-use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
-use ZnBundle\User\Domain\Entities\IdentityEntity;
 
 throw new DeprecatedException();
 
@@ -22,7 +20,8 @@ class SecurityRepository extends BaseEloquentCrudRepository implements SecurityR
         return SecurityEntity::class;
     }
 
-    public function oneByIdentityId(int $identityId): SecurityEntity {
+    public function oneByIdentityId(int $identityId): SecurityEntity
+    {
         $query = new Query;
         $query->whereByConditions(['identity_id' => $identityId]);
         return $this->one($query);
