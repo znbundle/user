@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Illuminate\Support\Collection;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Jwt\Domain\Helpers\JwtHelper;
@@ -19,6 +20,8 @@ use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnCore\Domain\Entities\ValidateErrorEntity;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnCore\Base\Exceptions\NotFoundException;
+
+DeprecateHelper::hardThrow();
 
 class AuthService
 {

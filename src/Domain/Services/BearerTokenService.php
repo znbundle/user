@@ -2,9 +2,6 @@
 
 namespace ZnBundle\User\Domain\Services;
 
-use Doctrine\ORM\EntityManagerInterface;
-use FOS\UserBundle\Model\UserInterface;
-use FOS\UserBundle\Model\UserManagerInterface;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
@@ -13,7 +10,6 @@ use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Legacy\Yii\Base\Security;
 use ZnCore\Domain\Helpers\EntityHelper;
-use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
 
 class BearerTokenService implements TokenServiceInterface
 {

@@ -30,7 +30,6 @@ class IdentityService extends BaseCrudService implements IdentityServiceInterfac
 
     public function create($attributes): EntityIdInterface
     {
-        //dd($attributes);
         $passwordHash = (new Security())->generatePasswordHash($attributes['password']);
         unset($attributes['password']);
         /** @var IdentityEntityInterface $identityEntity */
