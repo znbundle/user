@@ -10,6 +10,7 @@ use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
 use ZnLib\Db\Base\BaseEloquentCrudRepository;
 use ZnLib\Db\Capsule\Manager;
+use ZnSandbox\Sandbox\Casbin\Domain\Interfaces\Repositories\AssignmentRepositoryInterface;
 
 class IdentityRepository extends BaseEloquentCrudRepository implements IdentityRepositoryInterface
 {
@@ -42,13 +43,13 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
     public function relations2()
     {
         return [
-            /*[
+            [
                 'class' => OneToManyRelation::class,
                 'relationAttribute' => 'id',
                 'relationEntityAttribute' => 'roles',
                 'foreignRepositoryClass' => AssignmentRepositoryInterface::class,
                 'foreignAttribute' => 'identity_id',
-            ],*/
+            ],
         ];
     }
 
