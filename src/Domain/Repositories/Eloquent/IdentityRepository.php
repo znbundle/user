@@ -3,16 +3,11 @@
 namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
 use Illuminate\Container\EntryNotFoundException;
-use Illuminate\Support\Collection;
-use ZnBundle\Eav\Domain\Interfaces\Repositories\EnumRepositoryInterface;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
-use ZnCore\Domain\Enums\RelationEnum;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
-use ZnCore\Domain\Libs\Relation\OneToMany;
-use ZnCore\Domain\Relations\relations\OneToManyRelation;
 use ZnLib\Db\Base\BaseEloquentCrudRepository;
 use ZnLib\Db\Capsule\Manager;
 
@@ -20,17 +15,14 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
 {
 
     protected $tableName = 'user_identity';
-//    protected $assignmentRepository;
     protected static $entityClass;
 
     public function __construct(
         EntityManagerInterface $em,
         Manager $capsule
-        //AssignmentRepository $assignmentRepository
     )
     {
         parent::__construct($em, $capsule);
-        //$this->assignmentRepository = $assignmentRepository;
     }
 
     public function getEntityClass(): string
@@ -50,14 +42,13 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
     public function relations2()
     {
         return [
-            [
+            /*[
                 'class' => OneToManyRelation::class,
                 'relationAttribute' => 'id',
-                'name' => 'roles',
-                'relationEntityAttribute' => 'assignments',
-                'foreignRepositoryClass' => AssignmentRepository::class,
-                'foreignAttribute' => 'user_id',
-            ],
+                'relationEntityAttribute' => 'roles',
+                'foreignRepositoryClass' => AssignmentRepositoryInterface::class,
+                'foreignAttribute' => 'identity_id',
+            ],*/
         ];
     }
 
