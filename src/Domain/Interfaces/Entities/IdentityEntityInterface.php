@@ -2,9 +2,10 @@
 
 namespace ZnBundle\User\Domain\Interfaces\Entities;
 
-use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
-
-interface IdentityEntityInterface extends EntityIdInterface
+/**
+ * @deprecated
+ */
+interface IdentityEntityInterface extends \ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface
 {
 
 }
