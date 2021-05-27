@@ -2,9 +2,11 @@
 
 namespace ZnBundle\User\Domain\Exceptions;
 
-use Exception;
-
-class UnauthorizedException extends Exception
+/**
+ * @deprecated
+ * @see \ZnCore\Contract\User\Exceptions\UnauthorizedException
+ */
+class UnauthorizedException extends \ZnCore\Contract\User\Exceptions\UnauthorizedException
 {
 
 }
