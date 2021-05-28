@@ -2,51 +2,58 @@
 
 namespace ZnBundle\User\Domain\Services;
 
-use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\TokenEntity;
+use ZnBundle\User\Domain\Interfaces\Repositories\TokenRepositoryInterface;
+use ZnBundle\User\Domain\Entities\TokenValueEntity;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
-use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Legacy\Yii\Base\Security;
-use ZnCore\Domain\Helpers\EntityHelper;
 
 class BearerTokenService implements TokenServiceInterface
 {
 
-    private $credentialRepository;
+    private $tokenRepository;
     private $security;
+    private $tokenLength = 64;
 
-    public function __construct(CredentialRepositoryInterface $credentialRepository, Security $security)
+    public function __construct(TokenRepositoryInterface $tokenRepository, Security $security)
     {
-        $this->credentialRepository = $credentialRepository;
+        $this->tokenRepository = $tokenRepository;
         $this->security = $security;
     }
 
-    public function getTokenByIdentity(IdentityEntityInterface $identityEntity): TokenEntity
+    public function getTokenLength(): int
     {
-        $token = $this->security->generateRandomString(32);
+        return $this->tokenLength;
+    }
+
+    public function setTokenLength(int $tokenLength): void
+    {
+        $this->tokenLength = $tokenLength;
+    }
+
+    public function getTokenByIdentity(IdentityEntityInterface $identityEntity): TokenValueEntity
+    {
+        $token = $this->security->generateRandomString($this->tokenLength);
         try {
-            $credentialEntity = $this->credentialRepository->oneByCredential($token, 'bearer');
+            $tokenEntity = $this->tokenRepository->oneByValue($token, 'bearer');
         } catch (NotFoundException $exception) {
-            $credentialEntity = new CredentialEntity();
-            EntityHelper::setAttributes($credentialEntity, [
-                'identity_id' => $identityEntity->getId(),
-                'type' => 'bearer',
-                'credential' => $token,
-                'validation' => $token,
-            ]);
-            $this->credentialRepository->create($credentialEntity);
+            $tokenEntity = new TokenEntity();
+            $tokenEntity->setIdentityId($identityEntity->getId());
+            $tokenEntity->setType('bearer');
+            $tokenEntity->setValue($token);
+            $this->tokenRepository->create($tokenEntity);
         }
-        $tokenEntity = new TokenEntity($token, 'bearer', $identityEntity->getId());
-        $tokenEntity->setId($credentialEntity->getId());
-        return $tokenEntity;
+        $resultTokenEntity = new TokenValueEntity($token, 'bearer', $identityEntity->getId());
+        $resultTokenEntity->setId($tokenEntity->getId());
+        return $resultTokenEntity;
     }
 
     public function getIdentityIdByToken(string $token): int
     {
         list($tokenType, $tokenValue) = explode(' ', $token);
-        $credentialEntity = $this->credentialRepository->oneByCredential($tokenValue, 'bearer');
-        return $credentialEntity->getIdentityId();
+        $tokenEntity = $this->tokenRepository->oneByValue($tokenValue, 'bearer');
+        return $tokenEntity->getIdentityId();
     }
 }

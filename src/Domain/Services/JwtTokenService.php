@@ -10,7 +10,7 @@ use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
 use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
 
-class TokenService implements TokenServiceInterface
+class JwtTokenService implements TokenServiceInterface
 {
 
     public function getTokenByIdentity(IdentityEntityInterface $identityEntity): TokenValueEntity
