@@ -3,24 +3,22 @@
 namespace ZnBundle\User\Yii2\Subscribers;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Yii;
+use yii\web\IdentityInterface;
+use yii\web\User;
 use ZnBundle\User\Domain\Enums\AuthEventEnum;
 use ZnBundle\User\Domain\Events\AuthEvent;
 use ZnBundle\User\Domain\Events\IdentityEvent;
-use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
-use ZnCore\Domain\Traits\EntityManagerTrait;
+use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 
 class AuthenticationIdentitySubscriber implements EventSubscriberInterface
 {
 
-    /*use EntityManagerTrait;
+    private $yiiUser;
 
-    public function __construct(
-        EntityManagerInterface $em
-    )
+    public function __construct(User $yiiUser)
     {
-        $this->setEntityManager($em);
-    }*/
+        $this->yiiUser = $yiiUser;
+    }
 
     public static function getSubscribedEvents()
     {
@@ -34,12 +32,15 @@ class AuthenticationIdentitySubscriber implements EventSubscriberInterface
 
     public function onAfterAuthSuccess(AuthEvent $event)
     {
-        Yii::$app->user->login($event->getIdentityEntity());
+        /** @var IdentityInterface $identity */
+        $identity = $event->getIdentityEntity();
+        $this->yiiUser->login($identity);
     }
 
     public function onBeforeGetIdentity(IdentityEvent $event)
     {
-        $identity = Yii::$app->user->identity;
+        /** @var IdentityEntityInterface $identity */
+        $identity = $this->yiiUser->identity;
         if ($identity) {
             $event->setIdentityEntity($identity);
         }
@@ -47,12 +48,12 @@ class AuthenticationIdentitySubscriber implements EventSubscriberInterface
 
     public function onBeforeGuest(IdentityEvent $event)
     {
-        $identity = Yii::$app->user->identity;
+        $identity = $this->yiiUser->identity;
         $event->setIsGuest(empty($identity));
     }
 
     public function onAfterLogout(IdentityEvent $event)
     {
-        Yii::$app->user->logout();
+        $this->yiiUser->logout();
     }
 }

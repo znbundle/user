@@ -10,7 +10,8 @@
 	],
 	"minimum-stability": "dev",
 	"require": {
-		"symfony/serializer": "4.*|5.*"
+		"symfony/serializer": "4.*|5.*",
+		"symfony/password-hasher": "^5.3|^6.0"
 	},
 	"autoload": {
 		"psr-4": {
