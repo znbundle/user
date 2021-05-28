@@ -2,20 +2,51 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
-class TokenEntity
+use DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
+use ZnCore\Domain\Interfaces\Entity\UniqueInterface;
+use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
+
+class TokenEntity implements ValidateEntityByMetadataInterface, UniqueInterface, EntityIdInterface
 {
 
-    private $id;
-    private $token;
-    private $type;
-    private $identityId;
-    private $identity;
+    private $id = null;
 
-    public function __construct(string $token = null, string $type = null, int $identityId = null)
+    private $identityId = null;
+
+    private $type = null;
+
+    private $value = null;
+
+    private $createdAt = null;
+
+    private $expiredAt = null;
+
+    public function __construct()
     {
-        $this->token = $token;
-        $this->type = $type;
-        $this->identityId = $identityId;
+        $this->createdAt = new DateTime;
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+//        $metadata->addPropertyConstraint('id', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('identityId', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('type', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('value', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('createdAt', new Assert\NotBlank);
+//        $metadata->addPropertyConstraint('expiredAt', new Assert\NotBlank);
+    }
+
+    public function unique() : array
+    {
+        return [];
+    }
+
+    public function setId($value) : void
+    {
+        $this->id = $value;
     }
 
     public function getId()
@@ -23,29 +54,9 @@ class TokenEntity
         return $this->id;
     }
 
-    public function setId($id): void
+    public function setIdentityId($value) : void
     {
-        $this->id = $id;
-    }
-
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    public function setToken($token): void
-    {
-        $this->token = $token;
-    }
-
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    public function setType($type): void
-    {
-        $this->type = $type;
+        $this->identityId = $value;
     }
 
     public function getIdentityId()
@@ -53,30 +64,44 @@ class TokenEntity
         return $this->identityId;
     }
 
-    public function setIdentityId($identityId): void
+    public function setType($value) : void
     {
-        $this->identityId = $identityId;
+        $this->type = $value;
     }
 
-    public function getIdentity()
+    public function getType()
     {
-        return $this->identity;
+        return $this->type;
     }
 
-    public function setIdentity($identity): void
+    public function setValue($value) : void
     {
-        $this->identity = $identity;
+        $this->value = $value;
     }
 
-    public function getTokenString()
+    public function getValue()
     {
-        if (empty($this->token)) {
-            return null;
-        }
-        if (empty($this->type)) {
-            return $this->token;
-        }
-        return $this->type . " " . $this->token;
+        return $this->value;
+    }
+
+    public function setCreatedAt($value) : void
+    {
+        $this->createdAt = $value;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setExpiredAt($value) : void
+    {
+        $this->expiredAt = $value;
+    }
+
+    public function getExpiredAt()
+    {
+        return $this->expiredAt;
     }
 
 }

@@ -2,7 +2,6 @@
 
 namespace ZnBundle\User\Domain\Interfaces\Services;
 
-use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnBundle\User\Domain\Exceptions\UnauthorizedException;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;

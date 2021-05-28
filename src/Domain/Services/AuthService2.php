@@ -8,7 +8,7 @@ use Yii;
 use yii\web\IdentityInterface;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
-use ZnBundle\User\Domain\Entities\TokenEntity;
+use ZnBundle\User\Domain\Entities\TokenValueEntity;
 use ZnBundle\User\Domain\Entities\User;
 use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
 use ZnBundle\User\Domain\Forms\AuthForm;
@@ -137,7 +137,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         return $userEntity;
     }
 
-    public function tokenByForm(AuthForm $form): TokenEntity
+    public function tokenByForm(AuthForm $form): TokenValueEntity
     {
         //prr($form);
         // @var User $userEntity */
@@ -196,12 +196,12 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         }
     }
 
-    protected function forgeTokenEntity(IdentityEntityInterface $identityEntity): TokenEntity
+    protected function forgeTokenEntity(IdentityEntityInterface $identityEntity): TokenValueEntity
     {
         $jwtEntity = new JwtEntity;
         $jwtEntity->subject = ['id' => $identityEntity->getId()];
         $token = $this->jwtService->sign($jwtEntity, 'auth');
-        $tokenEntity = new TokenEntity;
+        $tokenEntity = new TokenValueEntity;
         $tokenEntity->setIdentity($identityEntity);
         $tokenEntity->setType('jwt');
         $tokenEntity->setToken($token);

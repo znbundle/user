@@ -5,7 +5,7 @@ namespace ZnBundle\User\Domain\Services;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
-use ZnBundle\User\Domain\Entities\TokenEntity;
+use ZnBundle\User\Domain\Entities\TokenValueEntity;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
 use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
@@ -13,12 +13,12 @@ use ZnCrypt\Jwt\Domain\Entities\JwtEntity;
 class TokenService implements TokenServiceInterface
 {
 
-    public function getTokenByIdentity(IdentityEntityInterface $identityEntity): TokenEntity
+    public function getTokenByIdentity(IdentityEntityInterface $identityEntity): TokenValueEntity
     {
         $jwtEntity = new JwtEntity;
         $jwtEntity->subject = ['id' => $identityEntity->getId()];
         $token = $this->jwtService->sign($jwtEntity, 'auth');
-        $tokenEntity = new TokenEntity;
+        $tokenEntity = new TokenValueEntity;
         $tokenEntity->setIdentity($identityEntity);
         $tokenEntity->setType('jwt');
         $tokenEntity->setToken($token);

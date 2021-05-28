@@ -5,7 +5,7 @@ namespace ZnBundle\User\Domain\Services;
 use Illuminate\Support\Collection;
 use Psr\Log\LoggerInterface;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
-use ZnBundle\User\Domain\Entities\TokenEntity;
+use ZnBundle\User\Domain\Entities\TokenValueEntity;
 use ZnBundle\User\Domain\Entities\User;
 use ZnBundle\User\Domain\Enums\AuthEventEnum;
 use ZnBundle\User\Domain\Events\AuthEvent;
@@ -105,7 +105,7 @@ class AuthService3 implements AuthServiceInterface
         $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_LOGOUT);
     }
 
-    public function tokenByForm(AuthForm $loginForm): TokenEntity
+    public function tokenByForm(AuthForm $loginForm): TokenValueEntity
     {
         $userEntity = $this->getIdentityByForm($loginForm);
         $this->logger->info('auth tokenByForm');
