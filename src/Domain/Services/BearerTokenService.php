@@ -3,24 +3,22 @@
 namespace ZnBundle\User\Domain\Services;
 
 use ZnBundle\User\Domain\Entities\TokenEntity;
-use ZnBundle\User\Domain\Interfaces\Repositories\TokenRepositoryInterface;
 use ZnBundle\User\Domain\Entities\TokenValueEntity;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
+use ZnBundle\User\Domain\Interfaces\Repositories\TokenRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
 use ZnCore\Base\Exceptions\NotFoundException;
-use ZnCore\Base\Legacy\Yii\Base\Security;
+use ZnCore\Base\Libs\RandomString;
 
 class BearerTokenService implements TokenServiceInterface
 {
 
     private $tokenRepository;
-    private $security;
     private $tokenLength = 64;
 
-    public function __construct(TokenRepositoryInterface $tokenRepository, Security $security)
+    public function __construct(TokenRepositoryInterface $tokenRepository)
     {
         $this->tokenRepository = $tokenRepository;
-        $this->security = $security;
     }
 
     public function getTokenLength(): int
@@ -35,7 +33,8 @@ class BearerTokenService implements TokenServiceInterface
 
     public function getTokenByIdentity(IdentityEntityInterface $identityEntity): TokenValueEntity
     {
-        $token = $this->security->generateRandomString($this->tokenLength);
+        $token = $this->generateToken();
+
         try {
             $tokenEntity = $this->tokenRepository->oneByValue($token, 'bearer');
         } catch (NotFoundException $exception) {
@@ -55,5 +54,13 @@ class BearerTokenService implements TokenServiceInterface
         list($tokenType, $tokenValue) = explode(' ', $token);
         $tokenEntity = $this->tokenRepository->oneByValue($tokenValue, 'bearer');
         return $tokenEntity->getIdentityId();
+    }
+
+    private function generateToken(): string
+    {
+        $random = new RandomString();
+        $random->setLength($this->tokenLength);
+        $random->addCharactersAll();
+        return $random->generateString();
     }
 }

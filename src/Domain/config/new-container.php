@@ -5,6 +5,7 @@ return [
         'ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface' => \ZnBundle\User\Domain\Entities\IdentityEntity::class,
     ],
     'singletons' => [
+        \Symfony\Component\PasswordHasher\PasswordHasherInterface::class => \Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher::class,
         'ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface' => 'ZnBundle\User\Domain\Services\JwtTokenService',
         'ZnBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface' => 'ZnBundle\User\Domain\Services\ConfirmService',
         'ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface' => 'ZnBundle\User\Domain\Services\AuthService3',

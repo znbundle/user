@@ -2,13 +2,13 @@
 
 namespace ZnBundle\User\Domain\Services;
 
+use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\IdentityServiceInterface;
-use ZnCore\Base\Legacy\Yii\Base\Security;
 use ZnCore\Domain\Base\BaseCrudService;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 
@@ -21,16 +21,22 @@ class IdentityService extends BaseCrudService implements IdentityServiceInterfac
 {
 
     private $credentialRepository;
+    private $passwordHasher;
 
-    public function __construct(IdentityRepositoryInterface $repository, CredentialRepositoryInterface $credentialRepository)
+    public function __construct(
+        IdentityRepositoryInterface $repository,
+        CredentialRepositoryInterface $credentialRepository,
+        PasswordHasherInterface $passwordHasher
+    )
     {
         $this->setRepository($repository);
         $this->credentialRepository = $credentialRepository;
+        $this->passwordHasher = $passwordHasher;
     }
 
     public function create($attributes): EntityIdInterface
     {
-        $passwordHash = (new Security())->generatePasswordHash($attributes['password']);
+        $passwordHash = $this->passwordHasher->hash($attributes['password']);
         unset($attributes['password']);
         /** @var IdentityEntityInterface $identityEntity */
         $identityEntity = parent::create($attributes);
