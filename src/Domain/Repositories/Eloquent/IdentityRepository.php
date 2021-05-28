@@ -8,6 +8,7 @@ use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
+use ZnCore\Domain\Relations\relations\OneToManyRelation;
 use ZnLib\Db\Base\BaseEloquentCrudRepository;
 use ZnLib\Db\Capsule\Manager;
 use ZnSandbox\Sandbox\Casbin\Domain\Interfaces\Repositories\AssignmentRepositoryInterface;
@@ -40,7 +41,7 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
         return static::$entityClass;
     }
 
-    public function relations2()
+    /*public function relations2()
     {
         return [
             [
@@ -51,7 +52,7 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
                 'foreignAttribute' => 'identity_id',
             ],
         ];
-    }
+    }*/
 
     public function findUserByUsername(string $username, Query $query = null): IdentityEntityInterface
     {

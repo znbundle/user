@@ -123,7 +123,7 @@ class AuthService3 implements AuthServiceInterface
     {
         $userId = $this->tokenService->getIdentityIdByToken($token);
         $query = new Query;
-        $query->with('roles');
+        //$query->with('roles');
         /** @var User $userEntity */
         $userEntity = $this->identityRepository->oneById($userId, $query);
        // dd($userEntity);
