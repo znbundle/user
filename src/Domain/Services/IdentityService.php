@@ -34,20 +34,20 @@ class IdentityService extends BaseCrudService implements IdentityServiceInterfac
         $this->passwordHasher = $passwordHasher;
     }
 
-    public function create($attributes): EntityIdInterface
-    {
-        $passwordHash = $this->passwordHasher->hash($attributes['password']);
-        unset($attributes['password']);
-        /** @var IdentityEntityInterface $identityEntity */
-        $identityEntity = parent::create($attributes);
-        $credentialEntity = new CredentialEntity;
-        $credentialEntity->setIdentityId($identityEntity->getId());
-        $credentialEntity->setCredential($identityEntity->getLogin());
-        $credentialEntity->setValidation($passwordHash);
-        $credentialEntity->setType(CredentialTypeEnum::LOGIN);
-        $this->credentialRepository->create($credentialEntity);
-        return $identityEntity;
-    }
+//    public function create($attributes): EntityIdInterface
+//    {
+//        $passwordHash = $this->passwordHasher->hash($attributes['password']);
+//        unset($attributes['password']);
+//        /** @var IdentityEntityInterface $identityEntity */
+//        $identityEntity = parent::create($attributes);
+//        $credentialEntity = new CredentialEntity;
+//        $credentialEntity->setIdentityId($identityEntity->getId());
+//        $credentialEntity->setCredential($identityEntity->getLogin());
+//        $credentialEntity->setValidation($passwordHash);
+//        $credentialEntity->setType(CredentialTypeEnum::LOGIN);
+//        $this->credentialRepository->create($credentialEntity);
+//        return $identityEntity;
+//    }
 
     public function updateById($id, $data)
     {

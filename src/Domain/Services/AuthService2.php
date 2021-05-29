@@ -169,7 +169,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         $identityEntity->setId($identity->getId());
         $identityEntity->setLogin($identity->login);
         $identityEntity->setRoles($identity->roles);
-        $identityEntity->setStatus($identity->status);
+        $identityEntity->setStatusId($identity->status);
         //$identityEntity->setUpdatedAt($identity->updated_at);
         $identityEntity->setCreatedAt($identity->created_at);
         return $identityEntity;

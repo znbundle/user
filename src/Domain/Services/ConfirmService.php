@@ -7,7 +7,6 @@ use ZnBundle\Notify\Domain\Interfaces\Services\SmsServiceInterface;
 use ZnBundle\User\Domain\Entities\ConfirmEntity;
 use ZnBundle\User\Domain\Interfaces\Repositories\ConfirmRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface;
-use ZnBundle\User\Yii2\Helpers\ConfirmHelper;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
@@ -23,6 +22,14 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
 {
 
     private $smsService;
+    private $lengthCode = 6;
+
+    public function generateCode()
+    {
+        $min = '1' . str_repeat('0', $this->lengthCode - 2) . '1';
+        $max = str_repeat('9', $this->lengthCode);
+        return rand($min, $max);
+    }
 
     public function __construct(EntityManagerInterface $em, ConfirmRepositoryInterface $repository, SmsServiceInterface $smsService)
     {
@@ -64,7 +71,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
     public function add(ConfirmEntity $confirmEntity)
     {
         $this->checkExists($confirmEntity->getLogin(), $confirmEntity->getAction());
-        $code = ConfirmHelper::generateCode();
+        $code = $this->generateCode();
         $confirmEntity->setCode($code);
         $this->persist($confirmEntity);
     }

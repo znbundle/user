@@ -15,13 +15,10 @@ class m_2017_01_04_202556_create_user_identity_table extends BaseCreateTableMigr
     {
         return function (Blueprint $table) {
             $table->integer('id')->autoIncrement()->comment('Идентификатор');
-            $table->string('login')->comment('Логин');
-            $table->integer('status')->comment('Статус');
+            $table->string('username')->comment('Имя пользователя');
+            $table->integer('status_id')->comment('Статус');
             $table->dateTime('created_at')->comment('Время создания');
             $table->dateTime('updated_at')->comment('Время обновления');
-
-            $table->unique('login');
         };
     }
-
 }

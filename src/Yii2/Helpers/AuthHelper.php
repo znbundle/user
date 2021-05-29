@@ -9,8 +9,11 @@ use yii\web\Request;
 use yii2rails\extension\registry\helpers\Registry;
 use ZnCore\Base\Enums\Http\HttpHeaderEnum;
 use yii2bundle\account\domain\v3\dto\TokenDto;
-use ZnBundle\User\Yii2\Entities\LoginEntity;
+use ZnBundle\User\Yii2\Entities\YiiIdentityEntity;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Helpers\EnvHelper;
+
+DeprecateHelper::hardThrow();
 
 class AuthHelper {
 

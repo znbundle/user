@@ -4,23 +4,18 @@ namespace ZnBundle\User\Domain\Entities;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 use ZnCore\Base\Enums\StatusEnum;
-use ZnCore\Domain\Helpers\EntityHelper;
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 
 class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInterface, IdentityEntityInterface
 {
 
     protected $id = null;
-    protected $login = null;
     protected $username = null;
-    protected $roles = [];
-    protected $status = StatusEnum::ENABLED;
+    protected $statusId = StatusEnum::ENABLED;
     protected $createdAt = null;
     protected $updatedAt = null;
-    protected $assignments = null;
 
     public function __construct()
     {
@@ -43,36 +38,14 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
         return $this->id;
     }
 
-    public function setLogin($value)
+    public function setStatusId($value)
     {
-        $this->login = $value;
+        $this->statusId = $value;
     }
 
-    public function getLogin()
+    public function getStatusId()
     {
-        return $this->login;
-    }
-
-    public function getRoles(): ?array
-    {
-        return $this->roles;
-    }
-
-    public function setRoles(array $roles): void
-    {
-        if($roles) {
-            $this->roles = $roles;
-        }
-    }
-
-    public function setStatus($value)
-    {
-        $this->status = $value;
-    }
-
-    public function getStatus()
-    {
-        return $this->status;
+        return $this->statusId;
     }
 
     public function getCreatedAt()
@@ -95,32 +68,13 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
         $this->updatedAt = $updatedAt;
     }
 
-    public function getLogo()
-    {
-        return 'https://www.gravatar.com/avatar/' . md5($this->getLogin()) . '?d=retro';
-    }
-
     public function getUsername()
     {
-        return $this->getLogin();
+        return $this->username;
     }
 
     public function setUsername(string $username)
     {
-        return $this->setLogin($username);
+        $this->username = $username;
     }
-
-    public function getAssignments()
-    {
-        return $this->assignments;
-    }
-
-    public function setAssignments($assignments): void
-    {
-        if($assignments) {
-            $this->roles = EntityHelper::getColumn($assignments, 'itemName');
-        }
-        $this->assignments = $assignments;
-    }
-
 }

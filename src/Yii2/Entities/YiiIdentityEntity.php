@@ -7,7 +7,7 @@ use yii\web\IdentityInterface;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 
-class LoginEntity extends IdentityEntity implements IdentityInterface
+class YiiIdentityEntity extends IdentityEntity implements IdentityInterface
 {
 
     public static function findIdentity($id)
@@ -21,18 +21,16 @@ class LoginEntity extends IdentityEntity implements IdentityInterface
     {
     }
 
-    public function getId()
-    {
-        return intval($this->id);
-    }
-
     public function getAuthKey()
     {
-
     }
 
     public function validateAuthKey($authKey)
     {
-        return $this->getAuthKey() === $authKey;
+    }
+
+    public function getLogo()
+    {
+        return 'https://www.gravatar.com/avatar/' . md5($this->getUsername()) . '?d=retro';
     }
 }
