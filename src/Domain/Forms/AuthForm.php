@@ -20,14 +20,14 @@ class AuthForm implements ValidateEntityByMetadataInterface, BuildFormInterface
     private $password;
     private $rememberMe = false;
 
-    public function __construct($data = null)
+    /*public function __construct($data = null)
     {
         if($data) {
             foreach ($data as $name => $value) {
                 $this->{$name} = $value;
             }
         }
-    }
+    }*/
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
