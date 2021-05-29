@@ -29,8 +29,4 @@ class YiiIdentityEntity extends IdentityEntity implements IdentityInterface
     {
     }
 
-    public function getLogo()
-    {
-        return 'https://www.gravatar.com/avatar/' . md5($this->getUsername()) . '?d=retro';
-    }
 }
