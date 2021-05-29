@@ -10,6 +10,7 @@ use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Domain\Helpers\EntityHelper;
 use ZnLib\Rest\Yii2\Helpers\Behavior;
 use ZnLib\Web\Yii2\Helpers\ErrorHelper;
 
@@ -63,7 +64,8 @@ class AuthController extends Controller
         if ($isValid) {
             try {
 
-                $authForm = new AuthForm([
+                $authForm = new AuthForm();
+                EntityHelper::setAttributes($authForm, [
                     'login' => $form->login,
                     'password' => $form->password,
                     'rememberMe' => $form->rememberMe,

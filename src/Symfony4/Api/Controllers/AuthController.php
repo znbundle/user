@@ -3,6 +3,7 @@
 namespace ZnBundle\User\Symfony4\Api\Controllers;
 
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Domain\Helpers\EntityHelper;
 use ZnLib\Rest\Libs\Serializer\JsonRestSerializer;
 use ZnBundle\User\Domain\Entities\User;
 use ZnBundle\User\Domain\Forms\AuthForm;
@@ -49,7 +50,8 @@ class AuthController extends AbstractController
     public function login(Request $request)
     {
         $response = new JsonResponse();
-        $authForm = new AuthForm($request->request->all());
+        $authForm = new AuthForm();
+        EntityHelper::setAttributes($authForm, $request->request->all());
         try {
             /** @var User $userEntity */
             $userEntity = $this->authService->authentication($authForm);
