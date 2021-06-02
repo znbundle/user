@@ -23,12 +23,15 @@ class m_2021_05_05_091907_create_token_table extends BaseCreateTableMigration
             $table->dateTime('expired_at')->nullable()->comment('Время истечения срока годности');
 
             $table->unique(['type', 'value']);
-            $table
+
+            $this->addForeign($table, 'identity_id', 'user_identity');
+
+            /*$table
                 ->foreign('identity_id')
                 ->references('id')
                 ->on($this->encodeTableName('user_identity'))
                 ->onDelete(ForeignActionEnum::CASCADE)
-                ->onUpdate(ForeignActionEnum::CASCADE);
+                ->onUpdate(ForeignActionEnum::CASCADE);*/
         };
     }
 }
