@@ -2,6 +2,7 @@
 
 namespace ZnBundle\User\Yii2\Web;
 
+use Illuminate\Container\Container;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
@@ -11,6 +12,7 @@ use yii\base\InvalidValueException;
 use yii\filters\auth\AuthMethod;
 use yii\web\IdentityInterface;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
+use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Yii2\Helpers\AuthHelper;
 use ZnCore\Base\Helpers\EnvHelper;
 
@@ -38,7 +40,7 @@ class User extends \yii\web\User
 		}
 	}
 
-	public function login(IdentityInterface $identity, $duration = 0)
+	/*public function login(IdentityInterface $identity, $duration = 0)
 	{
 		if ($this->beforeLogin($identity, false, $duration)) {
 			$this->switchIdentity($identity, $duration);
@@ -59,7 +61,7 @@ class User extends \yii\web\User
 		}
 		
 		return !$this->getIsGuest();
-	}
+	}*/
 	
 	public function getIdentity($autoRenew = true)
 	{
@@ -74,14 +76,14 @@ class User extends \yii\web\User
 		return $identity;
 	}
 
-	public function loginByAccessToken($token, $type = null)
+	/*public function loginByAccessToken($token, $type = null)
 	{
 		$identity = \App::$domain->account->auth->authenticationByToken($token, $type);
 		if ($identity && $this->login($identity)) {
 			return $identity;
 		}
 		return null;
-	}
+	}*/
 
     protected function getIdentityAndDurationFromCookie()
     {
@@ -94,54 +96,60 @@ class User extends \yii\web\User
             list($id, $authKey, $duration) = $data;
             /* @var $class IdentityInterface */
             $class = $this->identityClass;
-            $identity = $class::findIdentity($id);
+            //$identity = $class::findIdentity($id);
+
+            /** @var IdentityRepositoryInterface $repository */
+            $repository = Container::getInstance()->get(IdentityRepositoryInterface::class);
+            $identity =  $repository->oneById($id);
+
             if ($identity !== null) {
-                if (!$identity instanceof IdentityInterface) {
-                    throw new InvalidValueException("$class::findIdentity() must return an object implementing IdentityInterface.");
-                /*} elseif (!$identity->validateAuthKey($authKey)) {
-                    Yii::warning("Invalid auth key attempted for user '$id': $authKey", __METHOD__);*/
-                } else {
-                    return ['identity' => $identity, 'duration' => $duration];
-                }
+                return ['identity' => $identity, 'duration' => $duration];
+//                if (!$identity instanceof IdentityInterface) {
+//                    throw new InvalidValueException("$class::findIdentity() must return an object implementing IdentityInterface.");
+//                /*} elseif (!$identity->validateAuthKey($authKey)) {
+//                    Yii::warning("Invalid auth key attempted for user '$id': $authKey", __METHOD__);*/
+//                } else {
+//                    return ['identity' => $identity, 'duration' => $duration];
+//                }
             }
         }
         $this->removeIdentityCookie();
         return null;
     }
 
-	protected function __renewAuthStatus()
-	{
-		/** @var IdentityEntityInterface|null $identity */
-		$identity = null;
-		$session = Yii::$app->getSession();
-		$id = $session->getHasSessionId() || $session->getIsActive() ? $session->get($this->idParam) : null;
-		if (!empty($id)) {
-			try {
-				$identity = \App::$domain->account->login->oneById($id);
-				AuthHelper::updateTokenViaSession();
-			} catch(NotFoundHttpException $e) {}
-		}
-
-		$this->setIdentity($identity);
-
-		if ($identity !== null && ($this->authTimeout !== null || $this->absoluteAuthTimeout !== null)) {
-			$expire = $this->authTimeout !== null ? $session->get($this->authTimeoutParam) : null;
-			$expireAbsolute = $this->absoluteAuthTimeout !== null ? $session->get($this->absoluteAuthTimeoutParam) : null;
-			if ($expire !== null && $expire < time() || $expireAbsolute !== null && $expireAbsolute < time()) {
-				$this->logout(false);
-			} elseif ($this->authTimeout !== null) {
-				$session->set($this->authTimeoutParam, time() + $this->authTimeout);
-			}
-		}
-
-		if ($this->enableAutoLogin) {
-			if ($this->getIsGuest()) {
-				$this->loginByCookie();
-			} elseif ($this->autoRenewCookie) {
-				$this->renewIdentityCookie();
-			}
-		}
-	}
+//	protected function __renewAuthStatus()
+//	{
+//		/** @var IdentityEntityInterface|null $identity */
+//		$identity = null;
+//		$session = Yii::$app->getSession();
+//		$id = $session->getHasSessionId() || $session->getIsActive() ? $session->get($this->idParam) : null;
+//		if (!empty($id)) {
+//			try {
+//				$identity = \App::$domain->account->login->oneById($id);
+//				AuthHelper::updateTokenViaSession();
+//			} catch(NotFoundHttpException $e) {}
+//		}
+//
+//		$this->setIdentity($identity);
+//
+//		if ($identity !== null && ($this->authTimeout !== null || $this->absoluteAuthTimeout !== null)) {
+//			$expire = $this->authTimeout !== null ? $session->get($this->authTimeoutParam) : null;
+//			$expireAbsolute = $this->absoluteAuthTimeout !== null ? $session->get($this->absoluteAuthTimeoutParam) : null;
+//			if ($expire !== null && $expire < time() || $expireAbsolute !== null && $expireAbsolute < time()) {
+//				$this->logout(false);
+//			} elseif ($this->authTimeout !== null) {
+//				$session->set($this->authTimeoutParam, time() + $this->authTimeout);
+//			}
+//		}
+//
+//		if ($this->enableAutoLogin) {
+//			if ($this->getIsGuest()) {
+//				$this->loginByCookie();
+//			} elseif ($this->autoRenewCookie) {
+//				$this->renewIdentityCookie();
+//			}
+//		}
+//	}
 
 	private function runAuthMethod() {
 		foreach($this->authMethod as $methodClass) {

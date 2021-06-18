@@ -139,7 +139,6 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
 
     public function tokenByForm(AuthForm $form): TokenValueEntity
     {
-        //prr($form);
         // @var User $userEntity */
         $userEntity = $this->identityRepository->findUserByUsername($form->getLogin());
 
