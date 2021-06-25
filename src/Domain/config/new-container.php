@@ -1,11 +1,17 @@
 <?php
 
+use Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher;
+use Symfony\Component\PasswordHasher\PasswordHasherInterface;
+use Symfony\Component\Security\Core\Security;
+use ZnBundle\User\Domain\Entities\IdentityEntity;
+
 return [
     'definitions' => [
-        'ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface' => \ZnBundle\User\Domain\Entities\IdentityEntity::class,
+        'ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface' => IdentityEntity::class,
     ],
     'singletons' => [
-        \Symfony\Component\PasswordHasher\PasswordHasherInterface::class => \Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher::class,
+        PasswordHasherInterface::class => NativePasswordHasher::class,
+        Security::class => \ZnBundle\User\Domain\Symfony\Core\Security::class,
         'ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface' => 'ZnBundle\User\Domain\Services\JwtTokenService',
         'ZnBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface' => 'ZnBundle\User\Domain\Services\ConfirmService',
         'ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface' => 'ZnBundle\User\Domain\Services\AuthService3',
