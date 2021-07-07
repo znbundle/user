@@ -11,6 +11,7 @@ use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\IdentityServiceInterface;
 use ZnCore\Domain\Base\BaseCrudService;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
+use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 
 /**
  * Class IdentityService
@@ -26,9 +27,11 @@ class IdentityService extends BaseCrudService implements IdentityServiceInterfac
     public function __construct(
         IdentityRepositoryInterface $repository,
         CredentialRepositoryInterface $credentialRepository,
-        PasswordHasherInterface $passwordHasher
+        PasswordHasherInterface $passwordHasher,
+        EntityManagerInterface $em
     )
     {
+        $this->setEntityManager($em);
         $this->setRepository($repository);
         $this->credentialRepository = $credentialRepository;
         $this->passwordHasher = $passwordHasher;
