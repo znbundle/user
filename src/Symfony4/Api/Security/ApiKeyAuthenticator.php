@@ -2,7 +2,6 @@
 
 namespace ZnBundle\User\Symfony4\Api\Security;
 
-use App\Security\ApiKeyUserProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
