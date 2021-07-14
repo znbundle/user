@@ -18,6 +18,7 @@ use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
+use ZnCore\Base\Enums\RegexpPatternEnum;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
@@ -148,7 +149,11 @@ class AuthService3 implements AuthServiceInterface
         $authEvent = new AuthEvent($loginForm);
         $this->getEventDispatcher()->dispatch($authEvent, AuthEventEnum::BEFORE_AUTH);
         try {
-            $credentialEntity = $this->credentialRepository->oneByCredential($loginForm->getLogin(), 'login');
+            if(preg_match(RegexpPatternEnum::EMAIL_REQUIRED, $loginForm->getLogin())) {
+                $credentialEntity = $this->credentialRepository->oneByCredential($loginForm->getLogin(), 'email');
+            } else {
+                $credentialEntity = $this->credentialRepository->oneByCredential($loginForm->getLogin(), 'login');
+            }
         } catch (NotFoundException $e) {
             $errorCollection = new Collection;
             $validateErrorEntity = new ValidateErrorEntity;
