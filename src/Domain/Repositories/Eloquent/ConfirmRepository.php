@@ -29,7 +29,7 @@ class ConfirmRepository extends BaseEloquentCrudRepository implements ConfirmRep
         $queryBuilder->delete();
     }
 
-    public function oneByUnique(string $login, string $action): ConfirmEntity
+    public function oneByUniqueAttributes(string $login, string $action): ConfirmEntity
     {
         $query = new Query;
         $query->whereNew(new Where('login', $login));

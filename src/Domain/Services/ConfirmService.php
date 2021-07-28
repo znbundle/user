@@ -89,7 +89,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
     private function oneByUnique(string $login, string $action): ConfirmEntity
     {
         /** @var ConfirmEntity $confirmEntity */
-        $confirmEntity = $this->getRepository()->oneByUnique($login, $action);
+        $confirmEntity = $this->getRepository()->oneByUniqueAttributes($login, $action);
         $lifeTime = $confirmEntity->getExpire() - time();
         if($lifeTime <= 0) {
             $this->getRepository()->deleteById($confirmEntity->getId());
@@ -127,7 +127,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
 
     private function getTimeLeft(string $login, string $action): int
     {
-        $confirmEntity = $this->getRepository()->oneByUnique($login, $action);
+        $confirmEntity = $this->getRepository()->oneByUniqueAttributes($login, $action);
         return $confirmEntity->getExpire() - time();
     }
 }

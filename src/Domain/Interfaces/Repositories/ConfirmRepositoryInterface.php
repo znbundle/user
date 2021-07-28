@@ -10,6 +10,6 @@ interface ConfirmRepositoryInterface extends CrudRepositoryInterface
 
     public function deleteExpired();
 
-    public function oneByUnique(string $login, string $action): ConfirmEntity;
+    public function oneByUniqueAttributes(string $login, string $action): ConfirmEntity;
 }
 
