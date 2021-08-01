@@ -36,6 +36,7 @@ $formRender->addFormOption('autocomplete', 'off');
 <div class="form-group field-form-rememberme">
     <div class="checkbox">
         <?= $formRender->input('rememberMe', 'checkbox') ?>
+        <?= $formRender->label('rememberMe') ?>
         <?= $formRender->hint('rememberMe') ?>
     </div>
 </div>
