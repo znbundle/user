@@ -23,7 +23,7 @@ use yii\bootstrap\ActiveForm;
 	])->checkbox();?>
 	
 	<div class="form-group">
-		<?=Html::submitButton(I18Next::t('user', 'auth.login_action'), ['class' => 'btn btn-primary btn-flat', 'name' => 'login-button']) ?>
+		<?=Html::submitButton(I18Next::t('user', 'auth.action.login'), ['class' => 'btn btn-primary btn-flat', 'name' => 'login-button']) ?>
 	</div>
 	
 <?php ActiveForm::end(); ?>

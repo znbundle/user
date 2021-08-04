@@ -40,10 +40,10 @@ class AuthForm implements ValidateEntityByMetadataInterface, BuildFormInterface
     {
         $formBuilder
             ->add('login', TextType::class, [
-                'label' => I18Next::t('user', 'auth.login')
+                'label' => I18Next::t('user', 'auth.attribute.login')
             ])
             ->add('password', PasswordType::class, [
-                'label' => I18Next::t('user', 'main.password')
+                'label' => I18Next::t('user', 'main.attribute.password')
             ])
             ->add('rememberMe', CheckboxType::class, [
                 'label' => I18Next::t('user', 'auth.remember_me'),
