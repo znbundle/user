@@ -1,0 +1,10 @@
+{
+  "jsonrpc": "2.0",
+  "method": "...",
+  "params": {
+    "body": {
+      "page": 1,
+      "per-page": 20
+    }
+  }
+}

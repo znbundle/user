@@ -1,0 +1,25 @@
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "meta": {
+      "totalCount": 285,
+      "pageCount": 95,
+      "currentPage": 1,
+      "perPage": 3
+    },
+    "body": [
+      {
+        "id": 1234,
+        "name": "The name 1234"
+      },
+      {
+        "id": 1235,
+        "name": "The name 1235"
+      },
+      {
+        "id": 1236,
+        "name": "The name 1236"
+      }
+    ]
+  }
+}

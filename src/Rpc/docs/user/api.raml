@@ -1,0 +1,67 @@
+
+description: "Пользователь <span class=\"label label-success\">Готово</span>"
+
+/all:
+    post:
+        securedBy: [ userAuth ]
+        description: "Получить коллекцию записей"
+        body:
+            application/json:
+                example: !include example/all-request.json
+        responses:
+            200:
+                body:
+                    application/json:
+                        example: !include example/all-reponse.json
+
+/oneById:
+    post:
+        securedBy: [ userAuth ]
+        description: "Получить одну запись"
+        body:
+            application/json:
+                example: !include example/oneById-request.json
+        responses:
+            200:
+                body:
+                    application/json:
+                        example: !include example/oneById-reponse.json
+
+/create:
+    post:
+        securedBy: [ userAuth ]
+        description: "Создать запись"
+        body:
+            application/json:
+                example: !include example/create-request.json
+        responses:
+            200:
+                body:
+                    application/json:
+                        example: !include example/create-reponse.json
+
+/update:
+    post:
+        securedBy: [ userAuth ]
+        description: "Обновить запись"
+        body:
+            application/json:
+                example: !include example/update-request.json
+        responses:
+            200:
+                body:
+                    application/json:
+                        example: !include example/update-reponse.json
+
+/delete:
+    post:
+        securedBy: [ userAuth ]
+        description: "Удалить запись"
+        body:
+            application/json:
+                example: !include example/delete-request.json
+        responses:
+            200:
+                body:
+                    application/json:
+                        example: !include example/delete-reponse.json
