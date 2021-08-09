@@ -1,4 +1,4 @@
-description: "Аутентификация пользователя <span class=\"label label-warning\">Готово частично</span>"
+description: "Аутентификация пользователя <span class=\"label label-success\">Готово</span>"
 
 /getTokenByPassword:
     post:
@@ -12,14 +12,14 @@ description: "Аутентификация пользователя <span class=
                     application/json:
                         example: !include example/getTokenByPassword-reponse.json
 
-/getTokenByEds:
-    post:
-        description: "Получение токена по ЭЦП"
-        body:
-            application/json:
-                example: !include example/getTokenByEds-request.json
-        responses:
-            200:
-                body:
-                    application/json:
-                        example: !include example/getTokenByEds-reponse.json
+#/getTokenByEds:
+#    post:
+#        description: "Получение токена по ЭЦП"
+#        body:
+#            application/json:
+#                example: !include example/getTokenByEds-request.json
+#        responses:
+#            200:
+#                body:
+#                    application/json:
+#                        example: !include example/getTokenByEds-reponse.json
