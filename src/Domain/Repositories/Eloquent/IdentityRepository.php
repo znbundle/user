@@ -3,9 +3,11 @@
 namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
+use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
+use ZnCore\Domain\Relations\relations\OneToOneRelation;
 use ZnLib\Db\Base\BaseEloquentCrudRepository;
 use ZnLib\Db\Capsule\Manager;
 
@@ -28,6 +30,19 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
     public function getEntityClass(): string
     {
         return $this->entityClass;
+    }
+
+    public function relations2()
+    {
+        return [
+            [
+                'class' => OneToOneRelation::class,
+                'relationAttribute' => 'id',
+                'relationEntityAttribute' => 'credential',
+                'foreignRepositoryClass' => CredentialRepositoryInterface::class,
+                'foreignAttribute' => 'identity_id'
+            ]
+        ];
     }
 
     public function findUserByUsername(string $username, Query $query = null): IdentityEntityInterface
