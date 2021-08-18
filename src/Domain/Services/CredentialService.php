@@ -19,7 +19,7 @@ class CredentialService extends BaseService implements CredentialServiceInterfac
     public function oneByIdentityIdAndType(int $identityId, string $type): CredentialEntity
     {
         $all = $this->getRepository()->allByIdentityId($identityId, [$type]);
-        if($all->count() == 0) {
+        if ($all->count() == 0) {
             throw new NotFoundException();
         }
         return $all->first();
@@ -28,5 +28,15 @@ class CredentialService extends BaseService implements CredentialServiceInterfac
     public function oneByCredentialValue(string $credential): CredentialEntity
     {
         return $this->getRepository()->oneByCredentialValue($credential);
+    }
+
+    public function hasByCredentialValue(string $credential): bool
+    {
+        try {
+            $this->oneByCredentialValue($credential);
+            return true;
+        } catch (NotFoundException $e) {
+            return false;
+        }
     }
 }

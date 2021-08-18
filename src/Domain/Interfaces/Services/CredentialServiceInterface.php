@@ -21,5 +21,7 @@ interface CredentialServiceInterface
      * @throws NotFoundException
      */
     public function oneByCredentialValue(string $credential): CredentialEntity;
+
+    public function hasByCredentialValue(string $credential): bool;
 }
 
