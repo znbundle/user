@@ -15,7 +15,7 @@ use ZnLib\Web\Symfony4\MicroApp\Enums\ControllerEventEnum;
 use ZnLib\Web\Symfony4\MicroApp\Events\ControllerEvent;
 use ZnLib\Web\Symfony4\MicroApp\Interfaces\ControllerAccessInterface;
 use ZnLib\Web\Symfony4\MicroApp\Libs\CookieValue;
-use ZnSandbox\Sandbox\Casbin\Domain\Interfaces\Services\ManagerServiceInterface;
+use ZnUser\Rbac\Domain\Interfaces\Services\ManagerServiceInterface;
 
 class WebAuthSubscriber implements EventSubscriberInterface
 {
