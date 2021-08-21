@@ -10,7 +10,7 @@ use ZnBundle\User\Domain\Enums\AuthEventEnum;
 use ZnBundle\User\Domain\Events\AuthEvent;
 use ZnBundle\User\Domain\Interfaces\Services\CredentialServiceInterface;
 use ZnCore\Domain\Traits\EntityManagerTrait;
-use ZnSandbox\Sandbox\UserNotify\Domain\Interfaces\Services\NotifyServiceInterface;
+use ZnUser\Notify\Domain\Interfaces\Services\NotifyServiceInterface;
 
 class AuthenticationAttemptSubscriber implements EventSubscriberInterface
 {
