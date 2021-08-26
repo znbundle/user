@@ -48,11 +48,13 @@ class WebAuthSubscriber implements EventSubscriberInterface
         if(!$identityArray) {
             $identityIdCookie = $event->getRequest()->cookies->get(WebCookieEnum::IDENTITY_ID);
             if($identityIdCookie) {
-                $cookieValue = new CookieValue(DotEnv::get('CSRF_TOKEN_ID'));
-                $identityId = $cookieValue->decode($identityIdCookie);
-                $identity = $this->identityService->oneById($identityId);
-                $this->authService->setIdentity($identity);
-                $this->session->set('user.identity', EntityHelper::toArray($identity));
+                try {
+                    $cookieValue = new CookieValue(DotEnv::get('CSRF_TOKEN_ID'));
+                    $identityId = $cookieValue->decode($identityIdCookie);
+                    $identity = $this->identityService->oneById($identityId);
+                    $this->authService->setIdentity($identity);
+                    $this->session->set('user.identity', EntityHelper::toArray($identity));
+                } catch (\DomainException $e) {}
             }
         }
     }
