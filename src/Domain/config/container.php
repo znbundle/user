@@ -3,6 +3,7 @@
 \ZnCore\Base\Helpers\DeprecateHelper::softThrow();
 
 return [
+    \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface::class => \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage::class,
     'ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface' => 'ZnBundle\User\Domain\Services\JwtTokenService',
     'ZnBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface' => 'ZnBundle\User\Domain\Services\ConfirmService',
     'ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface' => 'ZnBundle\User\Domain\Services\AuthService3',

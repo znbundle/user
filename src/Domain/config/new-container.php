@@ -2,6 +2,7 @@
 
 use Symfony\Component\PasswordHasher\Hasher\NativePasswordHasher;
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Security;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
 
@@ -12,6 +13,7 @@ return [
     'singletons' => [
         PasswordHasherInterface::class => NativePasswordHasher::class,
         Security::class => \ZnBundle\User\Domain\Symfony\Core\Security::class,
+        TokenStorageInterface::class => \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage::class,
         'ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface' => 'ZnBundle\User\Domain\Services\JwtTokenService',
         'ZnBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface' => 'ZnBundle\User\Domain\Services\ConfirmService',
         'ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface' => 'ZnBundle\User\Domain\Services\AuthService3',

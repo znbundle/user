@@ -4,6 +4,10 @@ namespace ZnBundle\User\Domain\Services;
 
 use Illuminate\Support\Collection;
 use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken;
+use Symfony\Component\Security\Core\Authentication\Token\NullToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Security;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\TokenValueEntity;
 use ZnBundle\User\Domain\Entities\User;
@@ -43,12 +47,14 @@ class AuthService3 implements AuthServiceInterface
     protected $identityRepository;
     protected $logger;
     protected $identityEntity;
+    protected $security;
 
     public function __construct(
         IdentityRepositoryInterface $identityRepository,
         CredentialRepositoryInterface $credentialRepository,
         PasswordService $passwordService,
         TokenServiceInterface $tokenService,
+        Security $security,
         LoggerInterface $logger
     )
     {
@@ -57,10 +63,20 @@ class AuthService3 implements AuthServiceInterface
         $this->credentialRepository = $credentialRepository;
         $this->logger = $logger;
         $this->tokenService = $tokenService;
+        $this->security = $security;
+        $this->resetAuth();
+    }
+
+    protected function resetAuth() {
+        $token = new NullToken();
+        $this->security->setToken($token);
     }
 
     public function setIdentity(IdentityEntityInterface $identityEntity)
     {
+        $token = new TestBrowserToken([], $identityEntity);
+        $this->security->setToken($token);
+
         //$event = new IdentityEvent($identityEntity);
         //$this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_SET_IDENTITY);
         $this->identityEntity = $identityEntity;
@@ -69,8 +85,14 @@ class AuthService3 implements AuthServiceInterface
 
     public function getIdentity(): IdentityEntityInterface
     {
+        $identityEntity = null;
+        if($this->security->getUser() != null) {
+            $identityEntity = $this->security->getUser();
+        } /*elseif($this->identityEntity) {
+            $identityEntity = $this->identityEntity;
+        }*/
         $event = new IdentityEvent();
-        $event->setIdentityEntity($this->identityEntity);
+        $event->setIdentityEntity($identityEntity);
         $this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_GET_IDENTITY);
         /*if($event->getIdentityEntity()) {
             return $event->getIdentityEntity();
@@ -84,7 +106,7 @@ class AuthService3 implements AuthServiceInterface
 
     public function isGuest(): bool
     {
-        if(is_object($this->identityEntity)) {
+        if($this->security->getUser() != null) {
             return false;
         }
         $event = new IdentityEvent($this->identityEntity);
@@ -102,6 +124,7 @@ class AuthService3 implements AuthServiceInterface
         $this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_LOGOUT);
         
         $this->identityEntity = null;
+        $this->resetAuth();
         $this->logger->info('auth logout');
         $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_LOGOUT);
     }

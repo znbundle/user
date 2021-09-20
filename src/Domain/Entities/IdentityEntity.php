@@ -2,13 +2,14 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnCore\Base\Enums\StatusEnum;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 
-class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInterface, IdentityEntityInterface
+class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInterface, IdentityEntityInterface, UserInterface
 {
 
     protected $id = null;
@@ -16,6 +17,7 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
     protected $statusId = StatusEnum::ENABLED;
     protected $createdAt = null;
     protected $updatedAt = null;
+    protected $roles = [];
 
     public function __construct()
     {
@@ -76,5 +78,29 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
     public function setUsername(string $username)
     {
         $this->username = $username;
+    }
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
+    }
+
+    public function getPassword()
+    {
+        // TODO: Implement getPassword() method.
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
