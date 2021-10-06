@@ -16,6 +16,13 @@ class NewBundle extends BaseBundle
         ];
     }
 
+    public function symfonyAdmin(): array
+    {
+        return [
+            __DIR__ . '/Symfony4/Web/config/routing.php',
+        ];
+    }
+
     public function symfonyWeb(): array
     {
         return [
