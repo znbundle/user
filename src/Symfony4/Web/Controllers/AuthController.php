@@ -2,6 +2,8 @@
 
 namespace ZnBundle\User\Symfony4\Web\Controllers;
 
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use ZnBundle\User\Domain\Enums\Rbac\AppUserPermissionEnum;
 use ZnBundle\User\Domain\Enums\WebCookieEnum;
 use ZnBundle\User\Symfony4\Web\Enums\WebUserEnum;
@@ -38,13 +40,15 @@ class AuthController extends BaseWebController implements ControllerAccessInterf
     protected $authService;
     protected $toastrService;
     protected $session;
+    private $urlGenerator;
 
     public function __construct(
         FormFactoryInterface $formFactory,
         CsrfTokenManagerInterface $tokenManager,
         ToastrServiceInterface $toastrService,
         AuthServiceInterface $authService,
-        SessionInterface $session
+        SessionInterface $session,
+        UrlGeneratorInterface $urlGenerator
     )
     {
         $this->setFormFactory($formFactory);
@@ -52,6 +56,7 @@ class AuthController extends BaseWebController implements ControllerAccessInterf
         $this->authService = $authService;
         $this->toastrService = $toastrService;
         $this->session = $session;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function access(): array
@@ -74,6 +79,7 @@ class AuthController extends BaseWebController implements ControllerAccessInterf
         }
         $form = new AuthForm();
         $buildForm = $this->buildForm($form, $request);
+        $authUrl = $this->urlGenerator->generate('user/auth');
         if ($buildForm->isSubmitted() && $buildForm->isValid()) {
             try {
                 $this->authService->authByForm($form);
@@ -90,7 +96,7 @@ class AuthController extends BaseWebController implements ControllerAccessInterf
 
                 $this->toastrService->success(['user', 'auth.login_success']);
                 $prevUrl = $this->session->get(WebUserEnum::UNAUTHORIZED_URL_SESSION_KEY);
-                if (empty($prevUrl) || $prevUrl == '/auth') {
+                if (empty($prevUrl) || $prevUrl == $authUrl) {
                     $response->setTargetUrl('/');
                     return $response;
                 }

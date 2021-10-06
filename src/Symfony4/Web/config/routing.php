@@ -5,11 +5,11 @@ use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return function (RoutingConfigurator $routes) {
     $routes
-        ->add('user_auth', '/auth')
+        ->add('user/auth', '/auth')
         ->controller([AuthController::class, 'auth'])
         ->methods(['GET', 'POST']);
     $routes
-        ->add('user_logout', '/logout')
+        ->add('user/logout', '/logout')
         ->controller([AuthController::class, 'logout'])
         ->methods(['POST']);
 };
