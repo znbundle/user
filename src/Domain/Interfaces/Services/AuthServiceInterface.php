@@ -13,7 +13,7 @@ interface AuthServiceInterface
      * @return IdentityEntityInterface
      * @throws UnauthorizedException
      */
-    public function getIdentity(): IdentityEntityInterface;
+    public function getIdentity(): ?IdentityEntityInterface;
     public function setIdentity(IdentityEntityInterface $identityEntity);
     //public function authenticationByForm(LoginForm $loginForm);
     public function authenticationByToken(string $token, string $authenticatorClassName = null);

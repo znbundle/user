@@ -59,7 +59,7 @@ class AuthController extends Controller
     public function actionLogin()
     {
 
-        if($this->authService->getIdentity() != null) {
+        if(!$this->authService->isGuest()) {
             return $this->redirect('/');
         }
 

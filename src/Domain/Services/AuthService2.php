@@ -55,7 +55,7 @@ class AuthService2 extends BaseCrudService implements AuthServiceInterface
         $this->logger = $logger;
     }
 
-    public function getIdentity(): IdentityEntityInterface
+    public function getIdentity(): ?IdentityEntityInterface
     {
         return Yii::$app->user->identity;
 //        $identityEntity = $this->forgeIdentityEntity(Yii::$app->user->identity);

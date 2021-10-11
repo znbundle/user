@@ -83,7 +83,7 @@ class AuthService3 implements AuthServiceInterface
         //$this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_SET_IDENTITY);
     }
 
-    public function getIdentity(): IdentityEntityInterface
+    public function getIdentity(): ?IdentityEntityInterface
     {
         $identityEntity = null;
         if($this->security->getUser() != null) {
