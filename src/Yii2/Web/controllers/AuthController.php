@@ -46,7 +46,7 @@ class AuthController extends Controller
                     [
                         'actions' => ['login'],
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => ['?', '@'],
                     ],
                 ],
             ],
@@ -58,6 +58,11 @@ class AuthController extends Controller
 
     public function actionLogin()
     {
+
+        if($this->authService->getIdentity() != null) {
+            return $this->redirect('/');
+        }
+
         $form = new LoginForm();
         $body = Yii::$app->request->post();
         $isValid = $form->load($body) && $form->validate();
