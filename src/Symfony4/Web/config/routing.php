@@ -11,5 +11,5 @@ return function (RoutingConfigurator $routes) {
     $routes
         ->add('user/logout', '/logout')
         ->controller([AuthController::class, 'logout'])
-        ->methods(['POST']);
+        ->methods(['GET', 'POST']);
 };
