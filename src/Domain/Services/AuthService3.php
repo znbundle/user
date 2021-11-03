@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken;
 use Symfony\Component\Security\Core\Authentication\Token\NullToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Url;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\TokenValueEntity;
 use ZnBundle\User\Domain\Entities\User;
@@ -40,7 +42,7 @@ class AuthService3 implements AuthServiceInterface
 
     use RepositoryAwareTrait;
     use EventDispatcherTrait;
-    
+
     protected $tokenService;
     protected $passwordService;
     protected $credentialRepository;
@@ -122,7 +124,7 @@ class AuthService3 implements AuthServiceInterface
     {
         $event = new IdentityEvent($this->identityEntity);
         $this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_LOGOUT);
-        
+
         $this->identityEntity = null;
         $this->resetAuth();
         $this->logger->info('auth logout');
@@ -136,7 +138,7 @@ class AuthService3 implements AuthServiceInterface
         //$authEvent = new AuthEvent($loginForm);
         return $this->tokenService->getTokenByIdentity($userEntity);
     }
-    
+
     public function authByForm(AuthForm $authForm)
     {
         $userEntity = $this->getIdentityByForm($authForm);
@@ -150,7 +152,7 @@ class AuthService3 implements AuthServiceInterface
         //$query->with('roles');
         /** @var User $userEntity */
         $userEntity = $this->identityRepository->oneById($userId, $query);
-       // dd($userEntity);
+        // dd($userEntity);
         $this->logger->info('auth authenticationByToken');
         return $userEntity;
     }
@@ -172,7 +174,10 @@ class AuthService3 implements AuthServiceInterface
         $authEvent = new AuthEvent($loginForm);
         $this->getEventDispatcher()->dispatch($authEvent, AuthEventEnum::BEFORE_AUTH);
         try {
-            if(preg_match(RegexpPatternEnum::EMAIL_REQUIRED, $loginForm->getLogin())) {
+            $errorCollection = ValidationHelper::validateValue($loginForm->getLogin(), [new Email()]);
+            $isEmail = $errorCollection->count() <= 0;
+
+            if ($isEmail) {
                 $credentialEntity = $this->credentialRepository->oneByCredential($loginForm->getLogin(), 'email');
             } else {
                 $credentialEntity = $this->credentialRepository->oneByCredential($loginForm->getLogin(), 'login');
