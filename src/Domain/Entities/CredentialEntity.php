@@ -2,13 +2,14 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
+use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
-use DateTime;
+use ZnCore\Domain\Interfaces\Entity\UniqueInterface;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 
-class CredentialEntity implements ValidateEntityByMetadataInterface, EntityIdInterface
+class CredentialEntity implements ValidateEntityByMetadataInterface, EntityIdInterface, UniqueInterface
 {
 
     private $id = null;
@@ -36,6 +37,13 @@ class CredentialEntity implements ValidateEntityByMetadataInterface, EntityIdInt
         $metadata->addPropertyConstraint('type', new Assert\NotBlank);
         $metadata->addPropertyConstraint('credential', new Assert\NotBlank);
         $metadata->addPropertyConstraint('validation', new Assert\NotBlank);
+    }
+
+    public function unique(): array
+    {
+        return [
+            ['type', 'credential']
+        ];
     }
 
     public function setId($value) : void
