@@ -2,14 +2,18 @@
 
 namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
+use App\Organization\Domain\Interfaces\Repositories\LanguageRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
+use ZnCore\Domain\Relations\relations\OneToManyRelation;
 use ZnCore\Domain\Relations\relations\OneToOneRelation;
 use ZnLib\Db\Base\BaseEloquentCrudRepository;
 use ZnLib\Db\Capsule\Manager;
+use ZnUser\Rbac\Domain\Interfaces\Repositories\AssignmentRepositoryInterface;
+use ZnUser\Rbac\Domain\Interfaces\Repositories\RoleRepositoryInterface;
 
 class IdentityRepository extends BaseEloquentCrudRepository implements IdentityRepositoryInterface
 {
@@ -41,7 +45,14 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
                 'relationEntityAttribute' => 'credential',
                 'foreignRepositoryClass' => CredentialRepositoryInterface::class,
                 'foreignAttribute' => 'identity_id'
-            ]
+            ],
+            [
+                'class' => OneToManyRelation::class,
+                'relationAttribute' => 'id',
+                'relationEntityAttribute' => 'assignments',
+                'foreignRepositoryClass' => AssignmentRepositoryInterface::class,
+                'foreignAttribute' => 'identity_id'
+            ],
         ];
     }
 

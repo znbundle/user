@@ -18,6 +18,7 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
     protected $createdAt = null;
     protected $updatedAt = null;
     protected $roles = [];
+    protected $assignments = null;
 
     public function __construct()
     {
@@ -87,6 +88,16 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
+    }
+
+    public function getAssignments()
+    {
+        return $this->assignments;
+    }
+
+    public function setAssignments($assignments): void
+    {
+        $this->assignments = $assignments;
     }
 
     public function getPassword()
