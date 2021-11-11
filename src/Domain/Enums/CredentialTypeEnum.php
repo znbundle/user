@@ -7,5 +7,6 @@ class CredentialTypeEnum
 
     const LOGIN = 'login';
     const EMAIL = 'email';
+    const PHONE = 'phone';
 
 }
