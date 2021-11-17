@@ -12,4 +12,11 @@ class IdentityController extends BaseCrudRpcController
     {
         $this->service = $authService;
     }
+
+    public function allowRelations(): array
+    {
+        return [
+            'person'
+        ];
+    }
 }
