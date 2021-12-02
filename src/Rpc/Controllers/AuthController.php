@@ -32,4 +32,16 @@ class AuthController
         $response->setResult($result);
         return $response;
     }
+
+    public function getToken(RpcRequestEntity $requestEntity): RpcResponseEntity
+    {
+        $form = new AuthForm();
+        EntityHelper::setAttributes($form, $requestEntity->getParams());
+        /** @var TokenValueEntity $tokenEntity */
+        $tokenEntity = $this->service->tokenByForm($form);
+        $result = EntityHelper::toArray($tokenEntity, true);
+        $response = new RpcResponseEntity();
+        $response->setResult($result);
+        return $response;
+    }
 }

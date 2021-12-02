@@ -46,6 +46,7 @@ class BearerTokenService implements TokenServiceInterface
         }
         $resultTokenEntity = new TokenValueEntity($token, 'bearer', $identityEntity->getId());
         $resultTokenEntity->setId($tokenEntity->getId());
+//        $resultTokenEntity->setIdentity($identityEntity);
         return $resultTokenEntity;
     }
 

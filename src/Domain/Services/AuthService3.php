@@ -32,6 +32,7 @@ use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Domain\Entities\ValidateErrorEntity;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnCore\Domain\Helpers\ValidationHelper;
+use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Traits\RepositoryAwareTrait;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
@@ -50,12 +51,14 @@ class AuthService3 implements AuthServiceInterface
     protected $logger;
     protected $identityEntity;
     protected $security;
+    protected $em;
 
     public function __construct(
         IdentityRepositoryInterface $identityRepository,
         CredentialRepositoryInterface $credentialRepository,
         PasswordService $passwordService,
         TokenServiceInterface $tokenService,
+        EntityManagerInterface $em,
         Security $security,
         LoggerInterface $logger
     )
@@ -66,6 +69,7 @@ class AuthService3 implements AuthServiceInterface
         $this->logger = $logger;
         $this->tokenService = $tokenService;
         $this->security = $security;
+        $this->em = $em;
         $this->resetAuth();
     }
 
@@ -134,9 +138,13 @@ class AuthService3 implements AuthServiceInterface
     public function tokenByForm(AuthForm $loginForm): TokenValueEntity
     {
         $userEntity = $this->getIdentityByForm($loginForm);
+
         $this->logger->info('auth tokenByForm');
         //$authEvent = new AuthEvent($loginForm);
-        return $this->tokenService->getTokenByIdentity($userEntity);
+        $tokenEntity = $this->tokenService->getTokenByIdentity($userEntity);
+        $tokenEntity->setIdentity($userEntity);
+//        $this->em->loadEntityRelations($tokenEntity, ['identity']);
+        return $tokenEntity;
     }
 
     public function authByForm(AuthForm $authForm)

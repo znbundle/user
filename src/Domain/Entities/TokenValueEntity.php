@@ -9,6 +9,7 @@ class TokenValueEntity
     private $token;
     private $type;
     private $identityId;
+    private $tokenString;
     private $identity;
 
     public function __construct(string $token = null, string $type = null, int $identityId = null)
