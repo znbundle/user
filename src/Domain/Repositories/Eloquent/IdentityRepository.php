@@ -12,6 +12,7 @@ use ZnCore\Domain\Relations\relations\OneToManyRelation;
 use ZnCore\Domain\Relations\relations\OneToOneRelation;
 use ZnLib\Db\Base\BaseEloquentCrudRepository;
 use ZnLib\Db\Capsule\Manager;
+use ZnLib\Db\Mappers\TimeMapper;
 use ZnUser\Rbac\Domain\Interfaces\Repositories\AssignmentRepositoryInterface;
 use ZnUser\Rbac\Domain\Interfaces\Repositories\RoleRepositoryInterface;
 
@@ -29,6 +30,13 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
         parent::__construct($em, $capsule);
         $entity = $this->getEntityManager()->createEntity(IdentityEntityInterface::class);
         $this->entityClass = get_class($entity);
+    }
+
+    public function mappers(): array
+    {
+        return [
+            new TimeMapper(['created_at', 'updated_at'])
+        ];
     }
 
     public function getEntityClass(): string

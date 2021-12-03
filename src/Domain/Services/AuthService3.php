@@ -143,7 +143,7 @@ class AuthService3 implements AuthServiceInterface
         //$authEvent = new AuthEvent($loginForm);
         $tokenEntity = $this->tokenService->getTokenByIdentity($userEntity);
         $tokenEntity->setIdentity($userEntity);
-//        $this->em->loadEntityRelations($tokenEntity, ['identity']);
+        $this->em->loadEntityRelations($userEntity, ['assignments']);
         return $tokenEntity;
     }
 

@@ -2,6 +2,7 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
+use Illuminate\Support\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
@@ -9,6 +10,7 @@ use ZnCore\Base\Enums\StatusEnum;
 use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
+use DateTime;
 
 class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInterface, IdentityEntityInterface, UserInterface
 {
@@ -23,8 +25,8 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime;
-        $this->updatedAt = new \DateTime;
+        $this->createdAt = new DateTime;
+        $this->updatedAt = new DateTime;
     }
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
@@ -62,7 +64,7 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
         $this->createdAt = $createdAt;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
@@ -91,14 +93,17 @@ class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInter
         $this->roles = $roles;
     }
 
-    public function getAssignments()
+    public function getAssignments(): ?Collection
     {
         return $this->assignments;
     }
 
-    public function setAssignments($assignments): void
+    public function setAssignments(?Collection $assignments): void
     {
         $this->assignments = $assignments;
+        if($assignments) {
+            $this->roles = EntityHelper::getColumn($assignments, 'itemName');
+        }
     }
 
     public function getPassword()
