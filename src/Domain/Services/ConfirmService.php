@@ -86,7 +86,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         $this->sendSmsWithCode($confirmEntity->getLogin(), $code, $i18Next);
     }
 
-    private function oneByUnique(string $login, string $action): ConfirmEntity
+    protected function oneByUnique(string $login, string $action): ConfirmEntity
     {
         /** @var ConfirmEntity $confirmEntity */
         $confirmEntity = $this->getRepository()->oneByUniqueAttributes($login, $action);
