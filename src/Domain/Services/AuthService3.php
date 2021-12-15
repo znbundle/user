@@ -80,6 +80,9 @@ class AuthService3 implements AuthServiceInterface
 
     public function setIdentity(IdentityEntityInterface $identityEntity)
     {
+        if(!$identityEntity->getRoles()) {
+            $this->em->loadEntityRelations($identityEntity, ['assignments']);
+        }
         $token = new TestBrowserToken([], $identityEntity);
         $this->security->setToken($token);
 
