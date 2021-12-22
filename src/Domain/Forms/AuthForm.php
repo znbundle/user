@@ -20,15 +20,6 @@ class AuthForm implements ValidateEntityByMetadataInterface, BuildFormInterface
     private $password;
     private $rememberMe = false;
 
-    /*public function __construct($data = null)
-    {
-        if($data) {
-            foreach ($data as $name => $value) {
-                $this->{$name} = $value;
-            }
-        }
-    }*/
-
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('login', new Assert\NotBlank);
@@ -53,7 +44,7 @@ class AuthForm implements ValidateEntityByMetadataInterface, BuildFormInterface
                 'label' => I18Next::t('user', 'auth.login_action')
             ]);
     }
-    
+
     public function getLogin(): string
     {
         return $this->login;
@@ -61,7 +52,7 @@ class AuthForm implements ValidateEntityByMetadataInterface, BuildFormInterface
 
     public function setLogin(string $login): void
     {
-        $this->login = $login;
+        $this->login = trim($login);
     }
 
     public function getPassword(): string
@@ -71,9 +62,9 @@ class AuthForm implements ValidateEntityByMetadataInterface, BuildFormInterface
 
     public function setPassword(string $password): void
     {
-        $this->password = $password;
+        $this->password = trim($password);
     }
-    
+
     public function getRememberMe(): bool
     {
         return $this->rememberMe;
