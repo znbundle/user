@@ -5,7 +5,7 @@ namespace ZnBundle\User\Domain\Repositories\Eloquent;
 use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnBundle\User\Domain\Interfaces\Repositories\TokenRepositoryInterface;
 use ZnCore\Domain\Libs\Query;
-use ZnLib\Db\Base\BaseEloquentCrudRepository;
+use ZnDatabase\Eloquent\Domain\Base\BaseEloquentCrudRepository;
 
 class TokenRepository extends BaseEloquentCrudRepository implements TokenRepositoryInterface
 {

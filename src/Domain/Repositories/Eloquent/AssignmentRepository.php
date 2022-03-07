@@ -5,7 +5,7 @@ namespace ZnBundle\User\Domain\Repositories\Eloquent;
 use Illuminate\Support\Collection;
 use ZnBundle\User\Domain\Entities\AssignmentEntity;
 use ZnCore\Domain\Libs\Query;
-use ZnLib\Db\Base\BaseEloquentCrudRepository;
+use ZnDatabase\Eloquent\Domain\Base\BaseEloquentCrudRepository;
 
 class AssignmentRepository extends BaseEloquentCrudRepository /*implements AssignmentRepositoryInterface*/
 {

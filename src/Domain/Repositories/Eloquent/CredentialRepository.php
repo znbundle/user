@@ -8,7 +8,7 @@ use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnCore\Domain\Libs\Query;
 
-class CredentialRepository extends \ZnLib\Db\Base\BaseEloquentCrudRepository implements CredentialRepositoryInterface
+class CredentialRepository extends \ZnDatabase\Eloquent\Domain\Base\BaseEloquentCrudRepository implements CredentialRepositoryInterface
 {
 
     public function tableName(): string

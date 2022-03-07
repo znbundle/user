@@ -6,7 +6,7 @@ use ZnBundle\User\Domain\Entities\SecurityEntity;
 use ZnBundle\User\Domain\Interfaces\Repositories\SecurityRepositoryInterface;
 use ZnCore\Base\Exceptions\DeprecatedException;
 use ZnCore\Domain\Libs\Query;
-use ZnLib\Db\Base\BaseEloquentCrudRepository;
+use ZnDatabase\Eloquent\Domain\Base\BaseEloquentCrudRepository;
 
 throw new DeprecatedException();
 
