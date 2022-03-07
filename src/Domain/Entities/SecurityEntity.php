@@ -2,7 +2,9 @@
 
 namespace ZnBundle\User\Domain\Entities;
 
-use yii2rails\domain\BaseEntity;
+use ZnCore\Base\Helpers\DeprecateHelper;
+
+DeprecateHelper::softThrow();
 
 class SecurityEntity {
 

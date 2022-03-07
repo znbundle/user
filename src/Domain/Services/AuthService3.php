@@ -5,8 +5,10 @@ namespace ZnBundle\User\Domain\Services;
 use Illuminate\Support\Collection;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken;
+use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\NullToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Url;
@@ -83,7 +85,8 @@ class AuthService3 implements AuthServiceInterface
         if(!$identityEntity->getRoles()) {
             $this->em->loadEntityRelations($identityEntity, ['assignments']);
         }
-        $token = new TestBrowserToken([], $identityEntity);
+//        $token = new AnonymousToken([], $identityEntity);
+        $token = new UsernamePasswordToken($identityEntity, 'main', $identityEntity->getRoles());
         $this->security->setToken($token);
 
         //$event = new IdentityEvent($identityEntity);
