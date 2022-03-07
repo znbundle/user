@@ -1,6 +1,6 @@
 <?php
 
-use ZnLib\Fixture\Domain\Libs\FixtureGenerator;
+use ZnDatabase\Fixture\Domain\Libs\FixtureGenerator;
 
 $fixture = new FixtureGenerator;
 $fixture->setCount(10);
