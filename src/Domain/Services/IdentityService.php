@@ -3,14 +3,10 @@
 namespace ZnBundle\User\Domain\Services;
 
 use Symfony\Component\PasswordHasher\PasswordHasherInterface;
-use ZnBundle\User\Domain\Entities\CredentialEntity;
-use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
-use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\IdentityServiceInterface;
 use ZnCore\Domain\Base\BaseCrudService;
-use ZnCore\Domain\Interfaces\Entity\EntityIdInterface;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 
 /**

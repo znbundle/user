@@ -8,7 +8,7 @@ use yii\web\User;
 use ZnBundle\User\Domain\Enums\AuthEventEnum;
 use ZnBundle\User\Domain\Events\AuthEvent;
 use ZnBundle\User\Domain\Events\IdentityEvent;
-use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
+use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 
 class AuthenticationIdentitySubscriber implements EventSubscriberInterface
 {

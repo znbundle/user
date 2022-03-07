@@ -9,6 +9,7 @@ use ZnBundle\User\Domain\Entities\IdentityEntity;
 return [
     'definitions' => [
         'ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface' => IdentityEntity::class,
+        'ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface' => IdentityEntity::class,
     ],
     'singletons' => [
         PasswordHasherInterface::class => NativePasswordHasher::class,
@@ -28,6 +29,7 @@ return [
     'entities' => [
         'ZnBundle\User\Domain\Entities\CredentialEntity' => 'ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface',
         'ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface' => 'ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface',
+        'ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface' => 'ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface',
         'ZnBundle\User\Domain\Entities\IdentityEntity' => 'ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface',
         'ZnBundle\User\Domain\Entities\TokenEntity' => 'ZnBundle\User\Domain\Interfaces\Repositories\TokenRepositoryInterface',
         'ZnBundle\User\Domain\Entities\ConfirmEntity' => 'ZnBundle\User\Domain\Interfaces\Repositories\ConfirmRepositoryInterface',
