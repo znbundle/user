@@ -47,7 +47,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
     public function isVerify(string $login, string $action, string $code): bool
     {
         try {
-            $confirmEntity = $this->oneByUnique($login, $action);
+            $confirmEntity = $this->oneByLoginAction($login, $action);
         } catch (NotFoundException $e) {
             throw new NotFoundException(I18Next::t('user', 'confirm.not_found'));
         }
@@ -57,7 +57,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
     public function activate(string $login, string $action, string $code)
     {
         /** @var ConfirmEntity $confirmEntity */
-        $confirmEntity = $this->oneByUnique($login, $action);
+        $confirmEntity = $this->oneByLoginAction($login, $action);
         $isValidCode = $code == $confirmEntity->getCode();
         if($isValidCode) {
             $confirmEntity->setIsActivated(true);
@@ -86,7 +86,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         $this->sendSmsWithCode($confirmEntity->getLogin(), $code, $i18Next);
     }
 
-    protected function oneByUnique(string $login, string $action): ConfirmEntity
+    protected function oneByLoginAction(string $login, string $action): ConfirmEntity
     {
         /** @var ConfirmEntity $confirmEntity */
         $confirmEntity = $this->getRepository()->oneByUniqueAttributes($login, $action);
@@ -97,6 +97,18 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         }
         return $confirmEntity;
     }
+
+//    protected function oneByUnique(string $login, string $action): ConfirmEntity
+//    {
+//        /** @var ConfirmEntity $confirmEntity */
+//        $confirmEntity = $this->getRepository()->oneByUniqueAttributes($login, $action);
+//        $lifeTime = $confirmEntity->getExpire() - time();
+//        if($lifeTime <= 0) {
+//            $this->getRepository()->deleteById($confirmEntity->getId());
+//            throw new NotFoundException();
+//        }
+//        return $confirmEntity;
+//    }
 
     private function checkExists(string $phone, string $action)
     {
