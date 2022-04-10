@@ -2,6 +2,7 @@
 
 namespace ZnBundle\User\Domain\Services;
 
+use App\User\Domain\Entities\IdentityEntity;
 use Illuminate\Support\Collection;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken;
@@ -27,6 +28,7 @@ use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Base\Enums\RegexpPatternEnum;
+use ZnCore\Base\Enums\StatusEnum;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
@@ -39,6 +41,8 @@ use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Traits\RepositoryAwareTrait;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Base\Domain\Services\PasswordService;
+use ZnSandbox\Sandbox\BlockChain\Domain\Helper\BitcoinHelper;
+use ZnUser\Rbac\Domain\Entities\AssignmentEntity;
 
 class AuthService3 implements AuthServiceInterface
 {
@@ -158,17 +162,34 @@ class AuthService3 implements AuthServiceInterface
         $userEntity = $this->getIdentityByForm($authForm);
         $this->setIdentity($userEntity);
     }
+    
+    protected function authByCrypto(string $tokenValue)
+    {
+        $document = hex2bin($tokenValue);
+        $documentEntity = BitcoinHelper::verifyDocument($document);
+        return $documentEntity->getPublic()->getAddress();
+    }
 
     public function authenticationByToken(string $token, string $authenticatorClassName = null)
     {
-        $userId = $this->tokenService->getIdentityIdByToken($token);
-        $query = new Query;
-        //$query->with('roles');
-        /** @var User $userEntity */
-        $userEntity = $this->identityRepository->oneById($userId, $query);
-        // dd($userEntity);
-        $this->logger->info('auth authenticationByToken');
-        return $userEntity;
+
+        // todo: refactor
+
+        list($tokenType, $tokenValue) = explode(' ', $token);
+        if($tokenType == 'crypto') {
+            $address = $this->authByCrypto($tokenValue);
+            $userEntity = new IdentityEntity();
+            $userEntity->setUsername($address);
+            $userEntity->setId($address);
+            return $userEntity;
+        } else {
+            $userId = $this->tokenService->getIdentityIdByToken($token);
+            $query = new Query;
+            /** @var User $userEntity */
+            $userEntity = $this->identityRepository->oneById($userId, $query);
+            $this->logger->info('auth authenticationByToken');
+            return $userEntity;
+        }
     }
 
     /*public function authenticationByForm(LoginForm $loginForm)
