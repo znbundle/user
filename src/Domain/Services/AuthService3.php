@@ -168,6 +168,7 @@ class AuthService3 implements AuthServiceInterface
         $document = hex2bin($tokenValue);
         $documentEntity = BitcoinHelper::verifyDocument($document);
         return $documentEntity->getPublic()->getAddress();
+//        return bin2hex($documentEntity->getPublic()->getPublicHash());
     }
 
     public function authenticationByToken(string $token, string $authenticatorClassName = null)
