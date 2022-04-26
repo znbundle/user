@@ -21,6 +21,7 @@ use ZnBundle\User\Domain\Events\AuthEvent;
 use ZnBundle\User\Domain\Events\IdentityEvent;
 use ZnBundle\User\Domain\Exceptions\UnauthorizedException;
 use ZnBundle\User\Domain\Forms\AuthForm;
+use ZnBundle\User\Domain\Helpers\TokenHelper;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
@@ -30,6 +31,7 @@ use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Base\Enums\RegexpPatternEnum;
 use ZnCore\Base\Enums\StatusEnum;
 use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Base\Exceptions\NotSupportedException;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
@@ -41,7 +43,6 @@ use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Traits\RepositoryAwareTrait;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Base\Domain\Services\PasswordService;
-use ZnSandbox\Sandbox\BlockChain\Domain\Helper\BitcoinHelper;
 use ZnUser\Rbac\Domain\Entities\AssignmentEntity;
 
 class AuthService3 implements AuthServiceInterface
@@ -144,7 +145,7 @@ class AuthService3 implements AuthServiceInterface
         $this->logger->info('auth logout');
         $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_LOGOUT);
     }
-
+    
     public function tokenByForm(AuthForm $loginForm): TokenValueEntity
     {
         $userEntity = $this->getIdentityByForm($loginForm);
@@ -163,33 +164,19 @@ class AuthService3 implements AuthServiceInterface
         $this->setIdentity($userEntity);
     }
     
-    protected function authByCrypto(string $tokenValue)
-    {
-        $document = hex2bin($tokenValue);
-        $documentEntity = BitcoinHelper::verifyDocument($document);
-        return $documentEntity->getPublic()->getAddress();
-//        return bin2hex($documentEntity->getPublic()->getPublicHash());
-    }
-
     public function authenticationByToken(string $token, string $authenticatorClassName = null)
     {
-
-        // todo: refactor
-
-        list($tokenType, $tokenValue) = explode(' ', $token);
-        if($tokenType == 'crypto') {
-            $address = $this->authByCrypto($tokenValue);
-            $userEntity = new IdentityEntity();
-            $userEntity->setUsername($address);
-            $userEntity->setId($address);
-            return $userEntity;
-        } else {
+        $tokenValueEntity = TokenHelper::parseToken($token);
+        if($tokenValueEntity->getType() == 'bearer') {
             $userId = $this->tokenService->getIdentityIdByToken($token);
             $query = new Query;
             /** @var User $userEntity */
             $userEntity = $this->identityRepository->oneById($userId, $query);
             $this->logger->info('auth authenticationByToken');
             return $userEntity;
+            
+        } else {
+            throw new NotSupportedException('Token type "' . $tokenValueEntity->getType() . '" not supported in ' . get_class($this));
         }
     }
 
