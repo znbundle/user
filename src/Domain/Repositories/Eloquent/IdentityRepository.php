@@ -6,6 +6,7 @@ use App\Organization\Domain\Interfaces\Repositories\LanguageRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
+use ZnBundle\User\Domain\Relations\IdentityRelation;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Relations\relations\OneToManyRelation;
@@ -21,15 +22,18 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
 
     protected $tableName = 'user_identity';
     protected $entityClass;
+    protected $identityRelation;
 
     public function __construct(
         EntityManagerInterface $em,
-        Manager $capsule
+        Manager $capsule,
+        IdentityRelation $identityRelation
     )
     {
         parent::__construct($em, $capsule);
         $entity = $this->getEntityManager()->createEntity(IdentityEntityInterface::class);
         $this->entityClass = get_class($entity);
+        $this->identityRelation = $identityRelation;
     }
 
     public function mappers(): array
@@ -46,7 +50,8 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
 
     public function relations2()
     {
-        return [
+        return $this->identityRelation->relations();
+        /*return [
             [
                 'class' => OneToOneRelation::class,
                 'relationAttribute' => 'id',
@@ -61,7 +66,7 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
                 'foreignRepositoryClass' => AssignmentRepositoryInterface::class,
                 'foreignAttribute' => 'identity_id'
             ],
-        ];
+        ];*/
     }
 
     public function findUserByUsername(string $username, Query $query = null): IdentityEntityInterface
