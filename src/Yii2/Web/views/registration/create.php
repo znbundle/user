@@ -7,8 +7,6 @@
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii2rails\app\domain\helpers\EnvService;
-use yii2bundle\rest\domain\helpers\ApiVersionConfig;
 
 $this->title = I18Next::t('user', 'registration.create_title');
 ////\App::$domain->navigation->breadcrumbs->create(['account/registration', 'title']);

@@ -3,7 +3,6 @@
 namespace ZnBundle\User\Yii2\Forms;
 
 use yii\base\Model;
-use yii2bundle\account\domain\v3\validators\PasswordValidator;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 
 class LoginForm extends Model

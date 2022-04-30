@@ -4,7 +4,6 @@ namespace ZnBundle\User\Yii2\Web\forms;
 
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use Yii;
-use yii2bundle\account\domain\v3\forms\RestorePasswordForm as ApiRestorePasswordForm;
 use yii\helpers\ArrayHelper;
 
 class RestorePasswordForm extends ApiRestorePasswordForm {

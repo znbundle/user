@@ -5,7 +5,6 @@ namespace ZnBundle\User\Yii2\Web\controllers;
 use Yii;
 use yii\base\Module;
 use yii\web\Controller;
-use yii2rails\domain\exceptions\UnprocessableEntityHttpException;
 use ZnBundle\Notify\Domain\Interfaces\Services\ToastrServiceInterface;
 use ZnBundle\User\Yii2\Web\forms\RestorePasswordForm;
 use ZnLib\Rest\Yii2\Helpers\Behavior;

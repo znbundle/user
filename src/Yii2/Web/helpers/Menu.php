@@ -5,9 +5,7 @@ namespace ZnBundle\User\Yii2\Web\helpers;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use Yii;
-use yii2rails\extension\menu\interfaces\MenuInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\Html;
-use yii2bundle\account\domain\v3\helpers\LoginHelper;
 
 DeprecateHelper::hardThrow();
 

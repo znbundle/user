@@ -5,7 +5,6 @@
 
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use yii\helpers\Html;
-use yii2rails\app\domain\helpers\EnvService;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 
 $this->title = I18Next::t('user', 'auth.login_title');
