@@ -3,9 +3,12 @@
 namespace ZnBundle\User\Domain\Entities;
 
 use ZnCore\Base\Enums\Measure\TimeEnum;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCrypt\Base\Domain\Enums\EncryptAlgorithmEnum;
 use ZnCrypt\Base\Domain\Enums\EncryptFunctionEnum;
 use ZnCrypt\Jwt\Domain\Enums\JwtAlgorithmEnum;
+
+DeprecateHelper::hardThrow();
 
 class JwtProfileEntity
 {

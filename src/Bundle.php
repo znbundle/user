@@ -7,6 +7,29 @@ use ZnCore\Base\Libs\App\Base\BaseBundle;
 class Bundle extends BaseBundle
 {
 
+    public function symfonyRpc(): array
+    {
+        return [
+            __DIR__ . '/Rpc/config/identity-routes.php',
+            __DIR__ . '/Rpc/config/account-routes.php',
+//            __DIR__ . '/Rpc/config/person-routes.php',
+        ];
+    }
+
+    public function symfonyAdmin(): array
+    {
+        return [
+            __DIR__ . '/Symfony4/Web/config/routing.php',
+        ];
+    }
+
+    public function symfonyWeb(): array
+    {
+        return [
+            __DIR__ . '/Symfony4/Web/config/routing.php',
+        ];
+    }
+
     public function i18next(): array
     {
         return [
@@ -24,7 +47,7 @@ class Bundle extends BaseBundle
     public function container(): array
     {
         return [
-            [__DIR__ . '/Domain/config/container.php', 'singletons'],
+            __DIR__ . '/Domain/config/new-container.php',
         ];
     }
 }

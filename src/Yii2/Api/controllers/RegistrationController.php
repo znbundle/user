@@ -6,7 +6,6 @@ use Illuminate\Support\Collection;
 use ZnBundle\User\Domain\Forms\Registration\CreateAccountForm;
 use ZnBundle\User\Domain\Forms\Registration\RequestCodeForm;
 use ZnBundle\User\Domain\Forms\Registration\VerifyCodeForm;
-use ZnBundle\User\Domain\Services\RegistrationService;
 use ZnCore\Domain\Entities\ValidateErrorEntity;
 use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
 use ZnCore\Domain\Helpers\EntityHelper;
