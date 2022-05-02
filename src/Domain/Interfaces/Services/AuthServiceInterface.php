@@ -2,9 +2,9 @@
 
 namespace ZnBundle\User\Domain\Interfaces\Services;
 
-use ZnBundle\User\Domain\Exceptions\UnauthorizedException;
+use ZnCore\Contract\User\Exceptions\UnauthorizedException;
 use ZnBundle\User\Domain\Forms\AuthForm;
-use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
+use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 
 interface AuthServiceInterface
 {

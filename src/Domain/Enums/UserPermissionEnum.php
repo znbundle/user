@@ -2,7 +2,7 @@
 
 namespace ZnBundle\User\Domain\Enums;
 
-use ZnCore\Base\Interfaces\GetLabelsInterface;
+use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
 
 class UserPermissionEnum implements GetLabelsInterface
 {

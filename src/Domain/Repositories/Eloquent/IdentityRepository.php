@@ -3,7 +3,7 @@
 namespace ZnBundle\User\Domain\Repositories\Eloquent;
 
 use App\Organization\Domain\Interfaces\Repositories\LanguageRepositoryInterface;
-use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
+use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Relations\IdentityRelation;

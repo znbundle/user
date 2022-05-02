@@ -11,7 +11,7 @@ use yii\base\InvalidConfigException;
 use yii\base\InvalidValueException;
 use yii\filters\auth\AuthMethod;
 use yii\web\IdentityInterface;
-use ZnBundle\User\Domain\Interfaces\Entities\IdentityEntityInterface;
+use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Yii2\Helpers\AuthHelper;
 use ZnCore\Base\Helpers\EnvHelper;
