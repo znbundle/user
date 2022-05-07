@@ -24,13 +24,6 @@ class m_2018_02_23_102260_create_user_credential_table extends BaseCreateTableMi
             $table->unique(['type', 'credential']);
 
             $this->addForeign($table, 'identity_id', 'user_identity');
-
-            /*$table
-                ->foreign('identity_id')
-                ->references('id')
-                ->on($this->encodeTableName('user_identity'))
-                ->onDelete(ForeignActionEnum::CASCADE)
-                ->onUpdate(ForeignActionEnum::CASCADE);*/
         };
     }
 
