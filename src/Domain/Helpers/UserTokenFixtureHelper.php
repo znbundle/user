@@ -2,7 +2,7 @@
 
 namespace ZnBundle\User\Domain\Helpers;
 
-use ZnCore\Base\Helpers\EnvHelper;
+use ZnCore\Base\Libs\App\Helpers\EnvHelper;
 
 class UserTokenFixtureHelper
 {
