@@ -13,6 +13,8 @@ return [
         'handler_class' => AuthController::class,
         'handler_method' => 'getTokenByPassword',
         'status_id' => 100,
+        'title' => null,
+        'description' => null,
     ],
     [
         'method_name' => 'authentication.getToken',
@@ -23,5 +25,7 @@ return [
         'handler_class' => AuthController::class,
         'handler_method' => 'getToken',
         'status_id' => 100,
+        'title' => null,
+        'description' => null,
     ],
 ];

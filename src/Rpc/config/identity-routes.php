@@ -12,6 +12,8 @@ return [
         'handler_class' => IdentityController::class,
         'handler_method' => 'all',
         'status_id' => 100,
+        'title' => null,
+        'description' => null,
     ],
     [
         'method_name' => 'user.oneById',
@@ -22,6 +24,8 @@ return [
         'handler_class' => IdentityController::class,
         'handler_method' => 'oneById',
         'status_id' => 100,
+        'title' => null,
+        'description' => null,
     ],
     [
         'method_name' => 'user.create',
@@ -32,6 +36,8 @@ return [
         'handler_class' => IdentityController::class,
         'handler_method' => 'add',
         'status_id' => 100,
+        'title' => null,
+        'description' => null,
     ],
     [
         'method_name' => 'user.update',
@@ -42,6 +48,8 @@ return [
         'handler_class' => IdentityController::class,
         'handler_method' => 'update',
         'status_id' => 100,
+        'title' => null,
+        'description' => null,
     ],
     [
         'method_name' => 'user.delete',
@@ -52,5 +60,7 @@ return [
         'handler_class' => IdentityController::class,
         'handler_method' => 'delete',
         'status_id' => 100,
+        'title' => null,
+        'description' => null,
     ],
 ];
