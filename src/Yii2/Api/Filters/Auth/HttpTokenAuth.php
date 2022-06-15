@@ -8,6 +8,7 @@ use yii\web\Request;
 use yii\web\Response;
 use ZnBundle\User\Yii2\Helpers\AuthHelper;
 use ZnBundle\User\Domain\Services\AuthService2;
+use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 
 class HttpTokenAuth extends AuthMethod
 {
@@ -21,7 +22,7 @@ class HttpTokenAuth extends AuthMethod
 
     public function __construct($config = [])
     {
-        $this->authService = Container::getInstance()->get(AuthService2::class);
+        $this->authService = ContainerHelper::getContainer()->get(AuthService2::class);
         parent::__construct($config);
     }
 
