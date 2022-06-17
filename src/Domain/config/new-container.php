@@ -28,7 +28,7 @@ return [
     'entities' => [
         'ZnBundle\User\Domain\Entities\CredentialEntity' => 'ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface',
         'ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface' => 'ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface',
-        'ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface' => 'ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface',
+//        'ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface' => 'ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface',
         'ZnBundle\User\Domain\Entities\IdentityEntity' => 'ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface',
         'ZnBundle\User\Domain\Entities\TokenEntity' => 'ZnBundle\User\Domain\Interfaces\Repositories\TokenRepositoryInterface',
         'ZnBundle\User\Domain\Entities\ConfirmEntity' => 'ZnBundle\User\Domain\Interfaces\Repositories\ConfirmRepositoryInterface',
