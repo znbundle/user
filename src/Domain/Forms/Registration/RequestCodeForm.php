@@ -4,7 +4,7 @@ namespace ZnBundle\User\Domain\Forms\Registration;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
-use ZnCore\Base\Helpers\StringHelper;
+use ZnCore\Base\Libs\Text\Helpers\StringHelper;
 use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 
 class RequestCodeForm implements ValidateEntityByMetadataInterface
