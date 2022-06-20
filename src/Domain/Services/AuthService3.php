@@ -33,7 +33,7 @@ use ZnCore\Base\Enums\StatusEnum;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Exceptions\NotSupportedException;
 use ZnCore\Base\Helpers\DeprecateHelper;
-use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
+use ZnCore\Base\Libs\EventDispatcher\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;

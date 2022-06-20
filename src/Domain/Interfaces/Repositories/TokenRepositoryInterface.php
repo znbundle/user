@@ -4,7 +4,7 @@ namespace ZnBundle\User\Domain\Interfaces\Repositories;
 
 use ZnBundle\User\Domain\Entities\TokenEntity;
 use ZnCore\Base\Exceptions\NotFoundException;
-use ZnCore\Domain\Interfaces\Repository\CrudRepositoryInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\CrudRepositoryInterface;
 
 interface TokenRepositoryInterface extends CrudRepositoryInterface
 {

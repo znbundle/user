@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
 use ZnCore\Base\Exceptions\NotFoundException;
-use ZnCore\Domain\Interfaces\Repository\CrudRepositoryInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\CrudRepositoryInterface;
 
 interface CredentialRepositoryInterface extends CrudRepositoryInterface
 {

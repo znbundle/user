@@ -6,7 +6,7 @@ use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\IdentityServiceInterface;
-use ZnCore\Domain\Base\BaseCrudService;
+use ZnCore\Base\Libs\Service\Base\BaseCrudService;
 use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
 
 /**

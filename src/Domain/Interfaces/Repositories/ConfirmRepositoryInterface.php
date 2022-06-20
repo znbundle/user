@@ -3,7 +3,7 @@
 namespace ZnBundle\User\Domain\Interfaces\Repositories;
 
 use ZnBundle\User\Domain\Entities\ConfirmEntity;
-use ZnCore\Domain\Interfaces\Repository\CrudRepositoryInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\CrudRepositoryInterface;
 
 interface ConfirmRepositoryInterface extends CrudRepositoryInterface
 {
