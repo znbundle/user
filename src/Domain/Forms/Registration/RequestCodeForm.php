@@ -6,9 +6,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 use ZnCore\Base\Libs\Text\Helpers\TextHelper;
-use ZnCore\Base\Libs\Entity\Interfaces\ValidateEntityByMetadataInterface;
+use ZnCore\Base\Libs\Validation\Interfaces\ValidationByMetadataInterface;
 
-class RequestCodeForm implements ValidateEntityByMetadataInterface
+class RequestCodeForm implements ValidationByMetadataInterface
 {
 
     protected $phone;

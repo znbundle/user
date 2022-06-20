@@ -7,7 +7,7 @@ use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Relations\IdentityRelation;
-use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
+use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Relations\relations\OneToManyRelation;
 use ZnCore\Domain\Relations\relations\OneToOneRelation;

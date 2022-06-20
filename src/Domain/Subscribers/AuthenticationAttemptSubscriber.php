@@ -9,13 +9,13 @@ use ZnBundle\Summary\Domain\Interfaces\Services\AttemptServiceInterface;
 use ZnBundle\User\Domain\Enums\AuthEventEnum;
 use ZnBundle\User\Domain\Events\AuthEvent;
 use ZnBundle\User\Domain\Interfaces\Services\CredentialServiceInterface;
-use ZnCore\Domain\Traits\EntityManagerTrait;
+use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
 use ZnUser\Notify\Domain\Interfaces\Services\NotifyServiceInterface;
 
 class AuthenticationAttemptSubscriber implements EventSubscriberInterface
 {
 
-    use EntityManagerTrait;
+    use EntityManagerAwareTrait;
 
     public $action = 'authorization';
     public $attemptCount = 3;

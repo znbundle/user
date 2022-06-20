@@ -3,7 +3,7 @@
 namespace ZnBundle\User\Domain\Forms\Registration;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
-ValidateEntityByMetadataInterface
+ValidationByMetadataInterface
 use ZnCore\Base\Enums\Http\HttpMethodEnum;
 use Symfony\Component\Validator\Constraints as Assert;
 

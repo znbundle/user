@@ -35,10 +35,10 @@ use ZnCore\Base\Exceptions\NotSupportedException;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
-use ZnCore\Domain\Entities\ValidateErrorEntity;
-use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
-use ZnCore\Domain\Helpers\ValidationHelper;
-use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
+use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
+use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
+use ZnCore\Base\Libs\Validation\Helpers\ValidationHelper;
+use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Traits\RepositoryAwareTrait;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
@@ -207,10 +207,10 @@ class AuthService3 implements AuthServiceInterface
             }
         } catch (NotFoundException $e) {
             $errorCollection = new Collection;
-            $validateErrorEntity = new ValidateErrorEntity;
-            $validateErrorEntity->setField('login');
-            $validateErrorEntity->setMessage(I18Next::t('user', 'auth.user_not_found'));
-            $errorCollection->add($validateErrorEntity);
+            $ValidationErrorEntity = new ValidationErrorEntity;
+            $ValidationErrorEntity->setField('login');
+            $ValidationErrorEntity->setMessage(I18Next::t('user', 'auth.user_not_found'));
+            $errorCollection->add($ValidationErrorEntity);
             $exception = new UnprocessibleEntityException;
             $exception->setErrorCollection($errorCollection);
             $this->logger->warning('auth authenticationByForm');
@@ -237,8 +237,8 @@ class AuthService3 implements AuthServiceInterface
             $this->logger->info('auth verificationPassword');
         } catch (InvalidPasswordException $e) {
             $errorCollection = new Collection;
-            $validateErrorEntity = new ValidateErrorEntity('password', I18Next::t('user', 'auth.incorrect_password'));
-            $errorCollection->add($validateErrorEntity);
+            $ValidationErrorEntity = new ValidationErrorEntity('password', I18Next::t('user', 'auth.incorrect_password'));
+            $errorCollection->add($ValidationErrorEntity);
             $exception = new UnprocessibleEntityException;
             $exception->setErrorCollection($errorCollection);
             $this->logger->warning('auth verificationPassword');

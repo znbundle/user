@@ -8,14 +8,14 @@ use ZnBundle\User\Domain\Enums\AuthEventEnum;
 use ZnBundle\User\Domain\Events\AuthEvent;
 use ZnBundle\User\Domain\Events\IdentityEvent;
 use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
-use ZnCore\Domain\Helpers\EntityHelper;
-use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
-use ZnCore\Domain\Traits\EntityManagerTrait;
+use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
+use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
 
 class SymfonyAuthenticationIdentitySubscriber implements EventSubscriberInterface
 {
 
-    use EntityManagerTrait;
+    use EntityManagerAwareTrait;
 
     private $session;
 
