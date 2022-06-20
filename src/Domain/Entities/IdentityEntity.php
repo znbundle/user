@@ -9,7 +9,7 @@ use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 use ZnCore\Base\Enums\StatusEnum;
 use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
+use ZnCore\Base\Libs\Entity\Interfaces\ValidateEntityByMetadataInterface;
 use DateTime;
 
 class IdentityEntity implements ValidateEntityByMetadataInterface, EntityIdInterface, IdentityEntityInterface, UserInterface
