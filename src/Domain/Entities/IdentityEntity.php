@@ -5,6 +5,7 @@ namespace ZnBundle\User\Domain\Entities;
 use Illuminate\Support\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 use ZnCore\Base\Enums\StatusEnum;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
@@ -102,7 +103,7 @@ class IdentityEntity implements ValidationByMetadataInterface, EntityIdInterface
     {
         $this->assignments = $assignments;
         if($assignments) {
-            $this->roles = EntityHelper::getColumn($assignments, 'itemName');
+            $this->roles = CollectionHelper::getColumn($assignments, 'itemName');
         }
     }
 
