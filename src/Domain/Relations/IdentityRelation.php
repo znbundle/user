@@ -3,8 +3,8 @@
 namespace ZnBundle\User\Domain\Relations;
 
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
-use ZnCore\Domain\Relations\relations\OneToManyRelation;
-use ZnCore\Domain\Relations\relations\OneToOneRelation;
+use ZnCore\Base\Libs\Relation\Libs\Types\OneToManyRelation;
+use ZnCore\Base\Libs\Relation\Libs\Types\OneToOneRelation;
 use ZnUser\Rbac\Domain\Interfaces\Repositories\AssignmentRepositoryInterface;
 
 class IdentityRelation
