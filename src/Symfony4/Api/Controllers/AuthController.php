@@ -2,13 +2,6 @@
 
 namespace ZnBundle\User\Symfony4\Api\Controllers;
 
-use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
-use ZnLib\Rest\Libs\Serializer\JsonRestSerializer;
-use ZnBundle\User\Domain\Entities\User;
-use ZnBundle\User\Domain\Forms\AuthForm;
-use ZnBundle\User\Domain\Services\AuthService;
-use ZnCore\Base\Enums\Http\HttpHeaderEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +13,13 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use ZnBundle\User\Domain\Entities\User;
+use ZnBundle\User\Domain\Forms\AuthForm;
+use ZnBundle\User\Domain\Services\AuthService;
+use ZnCore\Base\Enums\Http\HttpHeaderEnum;
+use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
+use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
+use ZnLib\Rest\Libs\Serializer\JsonRestSerializer;
 
 class AuthController extends AbstractController
 {
@@ -78,7 +78,12 @@ class AuthController extends AbstractController
             AbstractNormalizer::IGNORED_ATTRIBUTES => ['password']
         ];
         $encoders = [new XmlEncoder, new JsonEncoder];
-        $normalizers = [new DateTimeNormalizer, new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter)];
+        $normalizers = [
+            new DateTimeNormalizer,
+            new ObjectNormalizer(null,
+                new CamelCaseToSnakeCaseNameConverter
+            )
+        ];
 
         $serializer = new Serializer($normalizers, $encoders);
         $jsonContent = $serializer->serialize($userEntity, 'json', $context);
