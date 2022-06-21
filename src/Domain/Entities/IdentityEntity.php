@@ -9,7 +9,7 @@ use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 use ZnCore\Base\Enums\StatusEnum;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
-use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
+use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Base\Libs\Validation\Interfaces\ValidationByMetadataInterface;
 use DateTime;
 

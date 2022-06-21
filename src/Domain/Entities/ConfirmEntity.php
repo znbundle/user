@@ -3,7 +3,7 @@
 namespace ZnBundle\User\Domain\Entities;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
-use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
+use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
 use ZnCore\Base\Libs\Validation\Interfaces\ValidationByMetadataInterface;

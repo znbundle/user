@@ -13,7 +13,7 @@ use ZnCore\Base\Libs\Relation\Libs\Types\OneToManyRelation;
 use ZnCore\Base\Libs\Relation\Libs\Types\OneToOneRelation;
 use ZnDatabase\Eloquent\Domain\Base\BaseEloquentCrudRepository;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
-use ZnDatabase\Base\Domain\Mappers\TimeMapper;
+use ZnCore\Base\Libs\Repository\Mappers\TimeMapper;
 use ZnUser\Rbac\Domain\Interfaces\Repositories\AssignmentRepositoryInterface;
 use ZnUser\Rbac\Domain\Interfaces\Repositories\RoleRepositoryInterface;
 
