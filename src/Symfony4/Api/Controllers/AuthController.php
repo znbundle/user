@@ -17,7 +17,7 @@ use ZnBundle\User\Domain\Entities\User;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Services\AuthService;
 use ZnCore\Base\Enums\Http\HttpHeaderEnum;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
+use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
 use ZnLib\Rest\Libs\Serializer\JsonRestSerializer;
 

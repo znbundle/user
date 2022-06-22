@@ -5,11 +5,11 @@ namespace ZnBundle\User\Domain\Entities;
 use Illuminate\Support\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
-use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
+use ZnCore\Domain\Entity\Helpers\CollectionHelper;
 use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 use ZnCore\Base\Enums\StatusEnum;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
-use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
+use ZnCore\Domain\Entity\Helpers\EntityHelper;
+use ZnCore\Domain\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Base\Libs\Validation\Interfaces\ValidationByMetadataInterface;
 use DateTime;
 

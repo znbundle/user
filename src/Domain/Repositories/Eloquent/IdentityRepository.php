@@ -7,13 +7,13 @@ use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Relations\IdentityRelation;
-use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
-use ZnCore\Base\Libs\Query\Entities\Query;
-use ZnCore\Base\Libs\Relation\Libs\Types\OneToManyRelation;
-use ZnCore\Base\Libs\Relation\Libs\Types\OneToOneRelation;
+use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Domain\Query\Entities\Query;
+use ZnCore\Domain\Relation\Libs\Types\OneToManyRelation;
+use ZnCore\Domain\Relation\Libs\Types\OneToOneRelation;
 use ZnDatabase\Eloquent\Domain\Base\BaseEloquentCrudRepository;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
-use ZnCore\Base\Libs\Repository\Mappers\TimeMapper;
+use ZnCore\Domain\Repository\Mappers\TimeMapper;
 use ZnUser\Rbac\Domain\Interfaces\Repositories\AssignmentRepositoryInterface;
 use ZnUser\Rbac\Domain\Interfaces\Repositories\RoleRepositoryInterface;
 

@@ -10,10 +10,10 @@ use ZnBundle\User\Domain\Interfaces\Services\ConfirmServiceInterface;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
-use ZnCore\Base\Libs\Service\Base\BaseCrudService;
-use ZnCore\Base\Libs\Query\Entities\Where;
-use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
-use ZnCore\Base\Libs\Query\Entities\Query;
+use ZnCore\Domain\Service\Base\BaseCrudService;
+use ZnCore\Domain\Query\Entities\Where;
+use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Domain\Query\Entities\Query;
 
 /**
  * @method ConfirmRepositoryInterface getRepository

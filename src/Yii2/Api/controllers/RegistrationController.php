@@ -8,7 +8,7 @@ use ZnBundle\User\Domain\Forms\Registration\RequestCodeForm;
 use ZnBundle\User\Domain\Forms\Registration\VerifyCodeForm;
 use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
+use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnCore\Base\Libs\Validation\Helpers\ValidationHelper;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnLib\Rest\Yii2\Base\BaseController;

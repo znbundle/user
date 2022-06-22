@@ -5,8 +5,8 @@ namespace ZnBundle\User\Domain\Entities;
 use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
-use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
-use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
+use ZnCore\Domain\Entity\Interfaces\EntityIdInterface;
+use ZnCore\Domain\Entity\Interfaces\UniqueInterface;
 use ZnCore\Base\Libs\Validation\Interfaces\ValidationByMetadataInterface;
 
 class CredentialEntity implements ValidationByMetadataInterface, EntityIdInterface, UniqueInterface

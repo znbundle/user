@@ -10,7 +10,7 @@ use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
+use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnLib\Rest\Yii2\Helpers\Behavior;
 use ZnLib\Web\Yii2\Helpers\ErrorHelper;
 

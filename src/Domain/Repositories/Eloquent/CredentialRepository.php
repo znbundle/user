@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Enums\CredentialTypeEnum;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
-use ZnCore\Base\Libs\Query\Entities\Query;
+use ZnCore\Domain\Query\Entities\Query;
 
 class CredentialRepository extends \ZnDatabase\Eloquent\Domain\Base\BaseEloquentCrudRepository implements CredentialRepositoryInterface
 {

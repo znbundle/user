@@ -8,9 +8,9 @@ use ZnBundle\User\Domain\Enums\AuthEventEnum;
 use ZnBundle\User\Domain\Events\AuthEvent;
 use ZnBundle\User\Domain\Events\IdentityEvent;
 use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
-use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
-use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
+use ZnCore\Domain\Entity\Helpers\EntityHelper;
+use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Domain\EntityManager\Traits\EntityManagerAwareTrait;
 
 class SymfonyAuthenticationIdentitySubscriber implements EventSubscriberInterface
 {
