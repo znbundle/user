@@ -10,7 +10,7 @@ use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnCore\Base\Libs\Validation\Helpers\ValidationHelper;
-use ZnCore\Base\Exceptions\AlreadyExistsException;
+use ZnCore\Domain\Entity\Exceptions\AlreadyExistsException;
 use ZnLib\Rest\Yii2\Base\BaseController;
 use yii\base\Module;
 use Yii;

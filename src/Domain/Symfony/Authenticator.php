@@ -4,8 +4,8 @@ namespace ZnBundle\User\Domain\Symfony;
 
 use ZnBundle\User\Domain\Entities\User;
 use ZnBundle\User\Domain\Services\AuthService;
-use ZnCore\Base\Enums\Http\HttpHeaderEnum;
-use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Base\Libs\Http\Enums\HttpHeaderEnum;
+use ZnCore\Domain\Entity\Exceptions\NotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
