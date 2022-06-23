@@ -22,7 +22,7 @@ use ZnBundle\Summary\Domain\Exceptions\AttemptsExhaustedException;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnCore\Base\Http\Enums\HttpStatusCodeEnum;
-use ZnCore\Base\Measure\Enums\TimeEnum;
+use ZnCore\Base\Time\Enums\TimeEnum;
 use ZnCore\Base\DotEnv\Domain\Libs\DotEnv;
 use ZnCore\Base\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCrypt\Base\Domain\Enums\HashAlgoEnum;
