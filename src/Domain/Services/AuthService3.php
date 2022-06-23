@@ -2,48 +2,38 @@
 
 namespace ZnBundle\User\Domain\Services;
 
-use App\User\Domain\Entities\IdentityEntity;
 use Illuminate\Support\Collection;
 use Psr\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken;
-use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\NullToken;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\Url;
 use ZnBundle\User\Domain\Entities\CredentialEntity;
 use ZnBundle\User\Domain\Entities\TokenValueEntity;
 use ZnBundle\User\Domain\Entities\User;
 use ZnBundle\User\Domain\Enums\AuthEventEnum;
 use ZnBundle\User\Domain\Events\AuthEvent;
 use ZnBundle\User\Domain\Events\IdentityEvent;
-use ZnCore\Contract\User\Exceptions\UnauthorizedException;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Helpers\TokenHelper;
-use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\CredentialRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
-use ZnBundle\User\Yii2\Forms\LoginForm;
-use ZnCore\Base\Enums\RegexpPatternEnum;
-use ZnCore\Base\Libs\Status\Enums\StatusEnum;
-use ZnCore\Domain\Entity\Exceptions\NotFoundException;
-use ZnCore\Base\Exceptions\NotSupportedException;
-use ZnCore\Base\Libs\Develop\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\EventDispatcher\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCore\Base\Libs\Validation\Helpers\ValidationHelper;
+use ZnCore\Contract\Common\Exceptions\NotSupportedException;
+use ZnCore\Contract\User\Exceptions\UnauthorizedException;
+use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
+use ZnCore\Domain\Entity\Exceptions\NotFoundException;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\Query\Entities\Query;
 use ZnCore\Domain\Repository\Traits\RepositoryAwareTrait;
 use ZnCrypt\Base\Domain\Exceptions\InvalidPasswordException;
 use ZnCrypt\Base\Domain\Services\PasswordService;
-use ZnUser\Rbac\Domain\Entities\AssignmentEntity;
 
 class AuthService3 implements AuthServiceInterface
 {
@@ -80,14 +70,15 @@ class AuthService3 implements AuthServiceInterface
         $this->resetAuth();
     }
 
-    protected function resetAuth() {
+    protected function resetAuth()
+    {
         $token = new NullToken();
         $this->security->setToken($token);
     }
 
     public function setIdentity(IdentityEntityInterface $identityEntity)
     {
-        if(!$identityEntity->getRoles()) {
+        if (!$identityEntity->getRoles()) {
             $this->em->loadEntityRelations($identityEntity, ['assignments']);
         }
 //        $token = new AnonymousToken([], $identityEntity);
@@ -103,7 +94,7 @@ class AuthService3 implements AuthServiceInterface
     public function getIdentity(): ?IdentityEntityInterface
     {
         $identityEntity = null;
-        if($this->security->getUser() != null) {
+        if ($this->security->getUser() != null) {
             $identityEntity = $this->security->getUser();
         } /*elseif($this->identityEntity) {
             $identityEntity = $this->identityEntity;
@@ -114,7 +105,7 @@ class AuthService3 implements AuthServiceInterface
         /*if($event->getIdentityEntity()) {
             return $event->getIdentityEntity();
         }*/
-        if($this->isGuest()) {
+        if ($this->isGuest()) {
             throw new UnauthorizedException();
         }
         $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_GET_IDENTITY);
@@ -123,12 +114,12 @@ class AuthService3 implements AuthServiceInterface
 
     public function isGuest(): bool
     {
-        if($this->security->getUser() != null) {
+        if ($this->security->getUser() != null) {
             return false;
         }
         $event = new IdentityEvent($this->identityEntity);
         $this->getEventDispatcher()->dispatch($event, AuthEventEnum::BEFORE_IS_GUEST);
-        if(is_bool($event->getIsGuest())) {
+        if (is_bool($event->getIsGuest())) {
             return $event->getIsGuest();
         }
         $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_IS_GUEST);
@@ -145,7 +136,7 @@ class AuthService3 implements AuthServiceInterface
         $this->logger->info('auth logout');
         $this->getEventDispatcher()->dispatch($event, AuthEventEnum::AFTER_LOGOUT);
     }
-    
+
     public function tokenByForm(AuthForm $loginForm): TokenValueEntity
     {
         $userEntity = $this->getIdentityByForm($loginForm);
@@ -163,18 +154,18 @@ class AuthService3 implements AuthServiceInterface
         $userEntity = $this->getIdentityByForm($authForm);
         $this->setIdentity($userEntity);
     }
-    
+
     public function authenticationByToken(string $token, string $authenticatorClassName = null)
     {
         $tokenValueEntity = TokenHelper::parseToken($token);
-        if($tokenValueEntity->getType() == 'bearer') {
+        if ($tokenValueEntity->getType() == 'bearer') {
             $userId = $this->tokenService->getIdentityIdByToken($token);
             $query = new Query;
             /** @var User $userEntity */
             $userEntity = $this->identityRepository->oneById($userId, $query);
             $this->logger->info('auth authenticationByToken');
             return $userEntity;
-            
+
         } else {
             throw new NotSupportedException('Token type "' . $tokenValueEntity->getType() . '" not supported in ' . get_class($this));
         }
@@ -192,7 +183,8 @@ class AuthService3 implements AuthServiceInterface
         $this->logger->info('auth authenticationByForm');
     }*/
 
-    private function getIdentityByForm(AuthForm $loginForm): IdentityEntityInterface {
+    private function getIdentityByForm(AuthForm $loginForm): IdentityEntityInterface
+    {
         ValidationHelper::validateEntity($loginForm);
         $authEvent = new AuthEvent($loginForm);
         $this->getEventDispatcher()->dispatch($authEvent, AuthEventEnum::BEFORE_AUTH);
