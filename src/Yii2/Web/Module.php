@@ -4,7 +4,7 @@ namespace ZnBundle\User\Yii2\Web;
 
 use Yii;
 use yii\base\Module as YiiModule;
-use ZnCore\Base\Libs\I18Next\Facades\I18Next;
+use ZnCore\Base\I18Next\Facades\I18Next;
 
 class Module extends YiiModule
 {

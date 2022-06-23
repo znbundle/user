@@ -4,7 +4,7 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \ZnBundle\User\Domain\Forms\AuthForm */
 
-use ZnCore\Base\Libs\I18Next\Facades\I18Next;
+use ZnCore\Base\I18Next\Facades\I18Next;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 

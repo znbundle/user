@@ -8,7 +8,7 @@ use yii\web\Request;
 use yii\web\Response;
 use ZnBundle\User\Yii2\Helpers\AuthHelper;
 use ZnBundle\User\Domain\Services\AuthService2;
-use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
+use ZnCore\Base\Container\Helpers\ContainerHelper;
 
 class HttpTokenAuth extends AuthMethod
 {

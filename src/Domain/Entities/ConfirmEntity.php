@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use ZnCore\Domain\Entity\Interfaces\EntityIdInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use ZnCore\Domain\Entity\Interfaces\UniqueInterface;
-use ZnCore\Base\Libs\Validation\Interfaces\ValidationByMetadataInterface;
+use ZnCore\Base\Validation\Interfaces\ValidationByMetadataInterface;
 use DateTime;
 
 class ConfirmEntity implements ValidationByMetadataInterface, EntityIdInterface, UniqueInterface

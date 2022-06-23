@@ -6,7 +6,7 @@ use Illuminate\Container\Container;
 use yii\web\IdentityInterface;
 use ZnBundle\User\Domain\Entities\IdentityEntity;
 use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
-use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
+use ZnCore\Base\Container\Helpers\ContainerHelper;
 
 class YiiIdentityEntity extends IdentityEntity implements IdentityInterface
 {

@@ -7,7 +7,7 @@
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
+use ZnCore\Base\Container\Helpers\ContainerHelper;
 use ZnLib\Web\Symfony4\MicroApp\Libs\FormRender;
 
 /** @var CsrfTokenManagerInterface $tokenManager */
@@ -46,4 +46,4 @@ $formRender->addFormOption('autocomplete', 'off');
 
 <?= $formRender->endFrom() ?>
 
-<a href="/restore-password"><?= \ZnCore\Base\Libs\I18Next\Facades\I18Next::t('user', 'restore-password.request_action') ?></a>
+<a href="/restore-password"><?= \ZnCore\Base\I18Next\Facades\I18Next::t('user', 'restore-password.request_action') ?></a>
