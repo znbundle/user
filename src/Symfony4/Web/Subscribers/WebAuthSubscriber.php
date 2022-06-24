@@ -8,11 +8,14 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use ZnBundle\User\Domain\Enums\WebCookieEnum;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Domain\Interfaces\Services\IdentityServiceInterface;
+use ZnCore\Base\Develop\Helpers\DeprecateHelper;
 use ZnCore\Base\DotEnv\Domain\Libs\DotEnv;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnLib\Web\Symfony4\MicroApp\Enums\ControllerEventEnum;
 //use ZnLib\Web\Symfony4\MicroApp\Events\ControllerEvent;
 use ZnLib\Web\Symfony4\MicroApp\Libs\CookieValue;
+
+DeprecateHelper::hardThrow();
 
 class WebAuthSubscriber implements EventSubscriberInterface
 {
