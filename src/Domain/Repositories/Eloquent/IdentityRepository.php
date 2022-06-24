@@ -48,7 +48,7 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
         return $this->entityClass;
     }
 
-    public function relations2()
+    public function relations()
     {
         return $this->identityRelation->relations();
         /*return [
