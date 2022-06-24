@@ -2,7 +2,7 @@
 
 namespace ZnBundle\User;
 
-use ZnCore\Base\App\Base\BaseBundle;
+use ZnCore\Base\Bundle\Base\BaseBundle;
 
 class NewBundle extends BaseBundle
 {
