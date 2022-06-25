@@ -21,7 +21,7 @@ use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnBundle\User\Domain\Interfaces\Services\TokenServiceInterface;
 use ZnCore\Base\EventDispatcher\Traits\EventDispatcherTrait;
-use ZnCore\Base\I18Next\Facades\I18Next;
+use ZnLib\Components\I18Next\Facades\I18Next;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
 use ZnCore\Base\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCore\Base\Validation\Helpers\ValidationHelper;

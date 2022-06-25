@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Serializer;
 use ZnBundle\User\Domain\Entities\User;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Services\AuthService;
-use ZnCore\Base\Http\Enums\HttpHeaderEnum;
+use ZnLib\Components\Http\Enums\HttpHeaderEnum;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnCore\Base\Validation\Exceptions\UnprocessibleEntityException;
 use ZnLib\Rest\Libs\Serializer\JsonRestSerializer;

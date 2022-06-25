@@ -4,7 +4,7 @@ namespace ZnBundle\User\Domain\Forms\Registration;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 ValidationByMetadataInterface
-use ZnCore\Base\Http\Enums\HttpMethodEnum;
+use ZnLib\Components\Http\Enums\HttpMethodEnum;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class VerifyCodeForm extends RequestCodeForm implements ValidateEntityInterface

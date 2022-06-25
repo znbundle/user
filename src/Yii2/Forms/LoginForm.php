@@ -3,7 +3,7 @@
 namespace ZnBundle\User\Yii2\Forms;
 
 use yii\base\Model;
-use ZnCore\Base\I18Next\Facades\I18Next;
+use ZnLib\Components\I18Next\Facades\I18Next;
 
 class LoginForm extends Model
 {

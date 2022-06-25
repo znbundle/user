@@ -7,7 +7,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use ZnBundle\User\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Services\AuthService2;
-use ZnCore\Base\Http\Enums\HttpStatusCodeEnum;
+use ZnLib\Components\Http\Enums\HttpStatusCodeEnum;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnLib\Rest\Yii2\Base\BaseController;
 

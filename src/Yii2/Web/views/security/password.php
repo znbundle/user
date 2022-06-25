@@ -4,7 +4,7 @@
  * @var $model yii\base\Model
  */
 
-use ZnCore\Base\I18Next\Facades\I18Next;
+use ZnLib\Components\I18Next\Facades\I18Next;
 use yii\bootstrap\Tabs;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
