@@ -8,7 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use ZnCore\Base\Container\Helpers\ContainerHelper;
-use ZnLib\Web\Symfony4\MicroApp\Libs\FormRender;
+use ZnLib\Web\Components\Form\Libs\FormRender;
 
 /** @var CsrfTokenManagerInterface $tokenManager */
 $tokenManager = ContainerHelper::getContainer()->get(CsrfTokenManagerInterface::class);
