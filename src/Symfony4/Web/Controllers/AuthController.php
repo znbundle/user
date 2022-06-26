@@ -26,8 +26,8 @@ use ZnLib\Components\Time\Enums\TimeEnum;
 use ZnCore\Base\DotEnv\Domain\Libs\DotEnv;
 use ZnCore\Base\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCrypt\Base\Domain\Enums\HashAlgoEnum;
-use ZnLib\Web\Symfony4\MicroApp\BaseWebController;
-use ZnLib\Web\Symfony4\MicroApp\Interfaces\ControllerAccessInterface;
+use ZnLib\Web\Components\Controller\BaseWebController;
+use ZnLib\Web\Components\Controller\Interfaces\ControllerAccessInterface;
 use ZnLib\Web\Components\SignedCookie\Libs\CookieValue;
 use ZnLib\Web\Components\Form\Traits\ControllerFormTrait;
 
