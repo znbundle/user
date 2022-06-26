@@ -26,10 +26,10 @@ use ZnLib\Components\Time\Enums\TimeEnum;
 use ZnCore\Base\DotEnv\Domain\Libs\DotEnv;
 use ZnCore\Base\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCrypt\Base\Domain\Enums\HashAlgoEnum;
-use ZnLib\Web\Components\Controller\BaseWebController;
-use ZnLib\Web\Components\Controller\Interfaces\ControllerAccessInterface;
-use ZnLib\Web\Components\SignedCookie\Libs\CookieValue;
-use ZnLib\Web\Components\Form\Traits\ControllerFormTrait;
+use ZnLib\Web\Controller\Base\BaseWebController;
+use ZnLib\Web\Controller\Interfaces\ControllerAccessInterface;
+use ZnLib\Web\SignedCookie\Libs\CookieValue;
+use ZnLib\Web\Form\Traits\ControllerFormTrait;
 
 class AuthController extends BaseWebController implements ControllerAccessInterface
 {

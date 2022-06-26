@@ -11,9 +11,9 @@ use ZnBundle\User\Domain\Interfaces\Services\IdentityServiceInterface;
 use ZnCore\Base\Develop\Helpers\DeprecateHelper;
 use ZnCore\Base\DotEnv\Domain\Libs\DotEnv;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
-use ZnLib\Web\Components\Controller\Enums\ControllerEventEnum;
-//use ZnLib\Web\Components\Controller\Events\ControllerEvent;
-use ZnLib\Web\Components\SignedCookie\Libs\CookieValue;
+use ZnLib\Web\Controller\Enums\ControllerEventEnum;
+//use ZnLib\Web\Controller\Events\ControllerEvent;
+use ZnLib\Web\SignedCookie\Libs\CookieValue;
 
 DeprecateHelper::hardThrow();
 
