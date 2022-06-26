@@ -13,7 +13,7 @@ use ZnCore\Base\DotEnv\Domain\Libs\DotEnv;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnLib\Web\Symfony4\MicroApp\Enums\ControllerEventEnum;
 //use ZnLib\Web\Symfony4\MicroApp\Events\ControllerEvent;
-use ZnLib\Web\Symfony4\MicroApp\Libs\CookieValue;
+use ZnLib\Web\Components\SignedCookie\Libs\CookieValue;
 
 DeprecateHelper::hardThrow();
 
