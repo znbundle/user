@@ -28,7 +28,7 @@ class CredentialRepository extends \ZnDatabase\Eloquent\Domain\Base\BaseEloquent
             'identity_id' => $identityId,
             'type' => $types,
         ]);
-        return $this->all($query);
+        return $this->findAll($query);
     }
 
     public function oneByCredential(string $credential, string $type = CredentialTypeEnum::LOGIN): CredentialEntity

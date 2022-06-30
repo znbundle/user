@@ -34,7 +34,7 @@ class ConfirmRepository extends BaseEloquentCrudRepository implements ConfirmRep
         $query = new Query;
         $query->whereNew(new Where('login', $login));
         $query->whereNew(new Where('action', $action));
-        $collection = $this->all($query);
+        $collection = $this->findAll($query);
         if($collection->count() == 0) {
             throw new NotFoundException();
         }
