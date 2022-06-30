@@ -133,7 +133,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         $query = new Query;
         $query->whereNew(new Where('login', $login));
         $query->whereNew(new Where('action', $action));
-        $collection = $this->getRepository()->all($query);
+        $collection = $this->getRepository()->findAll($query);
         return $collection->count() > 0;
     }
 

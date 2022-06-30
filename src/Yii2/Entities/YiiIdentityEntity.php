@@ -15,7 +15,7 @@ class YiiIdentityEntity extends IdentityEntity implements IdentityInterface
     {
         /** @var IdentityRepositoryInterface $repository */
         $repository = ContainerHelper::getContainer()->get(IdentityRepositoryInterface::class);
-        return $repository->oneById($id);
+        return $repository->findOneById($id);
     }
 
     public static function findIdentityByAccessToken($token, $type = null)

@@ -162,7 +162,7 @@ class AuthService3 implements AuthServiceInterface
             $userId = $this->tokenService->getIdentityIdByToken($token);
             $query = new Query;
             /** @var User $userEntity */
-            $userEntity = $this->identityRepository->oneById($userId, $query);
+            $userEntity = $this->identityRepository->findOneById($userId, $query);
             $this->logger->info('auth authenticationByToken');
             return $userEntity;
 
@@ -216,7 +216,7 @@ class AuthService3 implements AuthServiceInterface
             throw $e;
         }
 
-        $userEntity = $this->identityRepository->oneById($credentialEntity->getIdentityId());
+        $userEntity = $this->identityRepository->findOneById($credentialEntity->getIdentityId());
         $authEvent->setIdentityEntity($userEntity);
         $this->getEventDispatcher()->dispatch($authEvent, AuthEventEnum::AFTER_AUTH_SUCCESS);
         return $userEntity;
