@@ -36,7 +36,7 @@ class BearerTokenService implements TokenServiceInterface
         $token = $this->generateToken();
 
         try {
-            $tokenEntity = $this->tokenRepository->oneByValue($token, 'bearer');
+            $tokenEntity = $this->tokenRepository->findOneByValue($token, 'bearer');
         } catch (NotFoundException $exception) {
             $tokenEntity = new TokenEntity();
             $tokenEntity->setIdentityId($identityEntity->getId());
@@ -53,7 +53,7 @@ class BearerTokenService implements TokenServiceInterface
     public function getIdentityIdByToken(string $token): int
     {
         list($tokenType, $tokenValue) = explode(' ', $token);
-        $tokenEntity = $this->tokenRepository->oneByValue($tokenValue, 'bearer');
+        $tokenEntity = $this->tokenRepository->findOneByValue($tokenValue, 'bearer');
         return $tokenEntity->getIdentityId();
     }
 

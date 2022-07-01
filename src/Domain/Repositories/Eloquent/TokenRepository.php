@@ -20,7 +20,7 @@ class TokenRepository extends BaseEloquentCrudRepository implements TokenReposit
         return TokenEntity::class;
     }
 
-    public function oneByValue(string $value, string $type): TokenEntity
+    public function findOneByValue(string $value, string $type): TokenEntity
     {
         $query = new Query;
         $query->whereByConditions([

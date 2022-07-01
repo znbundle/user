@@ -15,5 +15,5 @@ interface TokenRepositoryInterface extends CrudRepositoryInterface
      * @return TokenEntity
      * @throws NotFoundException
      */
-    public function oneByValue(string $value, string $type): TokenEntity;
+    public function findOneByValue(string $value, string $type): TokenEntity;
 }
