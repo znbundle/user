@@ -47,7 +47,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
     public function isVerify(string $login, string $action, string $code): bool
     {
         try {
-            $confirmEntity = $this->oneByLoginAction($login, $action);
+            $confirmEntity = $this->findOneByLoginAction($login, $action);
         } catch (NotFoundException $e) {
             throw new NotFoundException(I18Next::t('user', 'confirm.not_found'));
         }
@@ -57,7 +57,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
     public function activate(string $login, string $action, string $code)
     {
         /** @var ConfirmEntity $confirmEntity */
-        $confirmEntity = $this->oneByLoginAction($login, $action);
+        $confirmEntity = $this->findOneByLoginAction($login, $action);
         $isValidCode = $code == $confirmEntity->getCode();
         if($isValidCode) {
             $confirmEntity->setIsActivated(true);
@@ -86,7 +86,7 @@ class ConfirmService extends BaseCrudService implements ConfirmServiceInterface
         $this->sendSmsWithCode($confirmEntity->getLogin(), $code, $i18Next);
     }
 
-    protected function oneByLoginAction(string $login, string $action): ConfirmEntity
+    protected function findOneByLoginAction(string $login, string $action): ConfirmEntity
     {
         /** @var ConfirmEntity $confirmEntity */
         $confirmEntity = $this->getRepository()->findOneByUniqueAttributes($login, $action);

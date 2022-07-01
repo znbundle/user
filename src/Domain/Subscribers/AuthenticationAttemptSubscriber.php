@@ -58,7 +58,7 @@ class AuthenticationAttemptSubscriber implements EventSubscriberInterface
     public function onAfterAuthError(AuthEvent $event)
     {
         $login = $event->getLoginForm()->getLogin();
-        $credentialEntity = $this->credentialService->oneByCredentialValue($login);
+        $credentialEntity = $this->credentialService->findOneByCredentialValue($login);
         try {
             $this->attemptService->check($credentialEntity->getIdentityId(), $this->action, $this->lifeTime, $this->attemptCount);
             //} catch (NotFoundException $e) {

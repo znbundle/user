@@ -58,7 +58,7 @@ class SecurityController extends Controller {
 			}
 		} else {
 			/** @var SecurityEntity $securityEntity */
-			$securityEntity = \App::$domain->account->security->oneById(Yii::$app->user->id);
+			$securityEntity = \App::$domain->account->security->findOneById(Yii::$app->user->id);
 			$model->email = $securityEntity->email;
 		}
 		return $this->render('email', [

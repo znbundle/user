@@ -54,7 +54,7 @@ class IdentityService extends BaseCrudService implements IdentityServiceInterfac
         return parent::updateById($id, $data);
     }
 
-    public function oneByUsername(string $username)
+    public function findOneByUsername(string $username)
     {
         return $this->getRepository()->findUserByUsername($username);
     }

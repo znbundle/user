@@ -31,7 +31,7 @@ class CredentialRepository extends \ZnDatabase\Eloquent\Domain\Base\BaseEloquent
         return $this->findAll($query);
     }
 
-    public function oneByCredential(string $credential, string $type = CredentialTypeEnum::LOGIN): CredentialEntity
+    public function findOneByCredential(string $credential, string $type = CredentialTypeEnum::LOGIN): CredentialEntity
     {
         $query = new Query;
         $query->whereByConditions([
@@ -41,7 +41,7 @@ class CredentialRepository extends \ZnDatabase\Eloquent\Domain\Base\BaseEloquent
         return $this->findOne($query);
     }
 
-    public function oneByCredentialValue(string $credential): CredentialEntity
+    public function findOneByCredentialValue(string $credential): CredentialEntity
     {
         $query = new Query;
         $query->whereByConditions([
@@ -50,7 +50,7 @@ class CredentialRepository extends \ZnDatabase\Eloquent\Domain\Base\BaseEloquent
         return $this->findOne($query);
     }
 
-    public function oneByValidation(string $validation, string $type): CredentialEntity
+    public function findOneByValidation(string $validation, string $type): CredentialEntity
     {
         $query = new Query;
         $query->whereByConditions([

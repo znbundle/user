@@ -193,9 +193,9 @@ class AuthService3 implements AuthServiceInterface
             $isEmail = $errorCollection->count() <= 0;
 
             if ($isEmail) {
-                $credentialEntity = $this->credentialRepository->oneByCredential($loginForm->getLogin(), 'email');
+                $credentialEntity = $this->credentialRepository->findOneByCredential($loginForm->getLogin(), 'email');
             } else {
-                $credentialEntity = $this->credentialRepository->oneByCredential($loginForm->getLogin(), 'login');
+                $credentialEntity = $this->credentialRepository->findOneByCredential($loginForm->getLogin(), 'login');
             }
         } catch (NotFoundException $e) {
             $errorCollection = new Collection;
