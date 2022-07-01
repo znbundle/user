@@ -27,6 +27,6 @@ class TokenRepository extends BaseEloquentCrudRepository implements TokenReposit
             'value' => $value,
             'type' => $type,
         ]);
-        return $this->one($query);
+        return $this->findOne($query);
     }
 }
