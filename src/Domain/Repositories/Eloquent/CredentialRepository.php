@@ -38,7 +38,7 @@ class CredentialRepository extends \ZnDatabase\Eloquent\Domain\Base\BaseEloquent
             'credential' => $credential,
             'type' => $type,
         ]);
-        return $this->one($query);
+        return $this->findOne($query);
     }
 
     public function oneByCredentialValue(string $credential): CredentialEntity
@@ -47,7 +47,7 @@ class CredentialRepository extends \ZnDatabase\Eloquent\Domain\Base\BaseEloquent
         $query->whereByConditions([
             'credential' => $credential,
         ]);
-        return $this->one($query);
+        return $this->findOne($query);
     }
 
     public function oneByValidation(string $validation, string $type): CredentialEntity
@@ -57,6 +57,6 @@ class CredentialRepository extends \ZnDatabase\Eloquent\Domain\Base\BaseEloquent
             'validation' => $validation,
             'type' => $type,
         ]);
-        return $this->one($query);
+        return $this->findOne($query);
     }
 }

@@ -78,6 +78,6 @@ class IdentityRepository extends BaseEloquentCrudRepository implements IdentityR
     {
         $query = Query::forge($query);
         $query->whereFromCondition($condition);
-        return $this->one($query);
+        return $this->findOne($query);
     }
 }
