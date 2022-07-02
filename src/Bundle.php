@@ -14,7 +14,7 @@ class Bundle extends BaseBundle
         ];
     }
 
-    public function migration(): array
+    /*public function migration(): array
     {
         return [
             '/vendor/znbundle/user/src/Domain/Migrations',
@@ -26,5 +26,5 @@ class Bundle extends BaseBundle
         return [
             __DIR__ . '/Domain/config/new-container.php',
         ];
-    }
+    }*/
 }
