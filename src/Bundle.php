@@ -3,6 +3,9 @@
 namespace ZnBundle\User;
 
 use ZnCore\Base\Bundle\Base\BaseBundle;
+use ZnCore\Base\Develop\Helpers\DeprecateHelper;
+
+DeprecateHelper::hardThrow();
 
 class Bundle extends BaseBundle
 {
