@@ -1,6 +1,6 @@
 <?php
 
-use ZnBundle\User\Domain\Enums\Rbac\AppUserPermissionEnum;
+use ZnUser\Authentication\Domain\Enums\Rbac\AppUserPermissionEnum;
 use ZnBundle\User\Rpc\Controllers\AuthController;
 
 return [

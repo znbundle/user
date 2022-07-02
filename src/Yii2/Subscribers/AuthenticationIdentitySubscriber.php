@@ -5,8 +5,8 @@ namespace ZnBundle\User\Yii2\Subscribers;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use yii\web\IdentityInterface;
 use yii\web\User;
-use ZnBundle\User\Domain\Enums\AuthEventEnum;
-use ZnBundle\User\Domain\Events\AuthEvent;
+use ZnUser\Authentication\Domain\Enums\AuthEventEnum;
+use ZnUser\Authentication\Domain\Events\AuthEvent;
 use ZnUser\Identity\Domain\Events\IdentityEvent;
 use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 

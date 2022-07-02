@@ -2,9 +2,9 @@
 
 namespace ZnBundle\User\Rpc\Controllers;
 
-use ZnBundle\User\Domain\Entities\TokenValueEntity;
-use ZnBundle\User\Domain\Forms\AuthForm;
-use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
+use ZnUser\Authentication\Domain\Entities\TokenValueEntity;
+use ZnUser\Authentication\Domain\Forms\AuthForm;
+use ZnUser\Authentication\Domain\Interfaces\Services\AuthServiceInterface;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnLib\Rpc\Domain\Entities\RpcRequestEntity;

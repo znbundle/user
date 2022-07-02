@@ -5,7 +5,7 @@ namespace ZnBundle\User\Yii2\Api\controllers;
 use yii\base\Module;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use ZnBundle\User\Domain\Forms\AuthForm;
+use ZnUser\Authentication\Domain\Forms\AuthForm;
 use ZnBundle\User\Domain\Services\AuthService2;
 use ZnLib\Components\Http\Enums\HttpStatusCodeEnum;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
