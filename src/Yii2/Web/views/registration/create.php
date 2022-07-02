@@ -8,7 +8,7 @@ use ZnLib\Components\I18Next\Facades\I18Next;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = I18Next::t('user', 'registration.create_title');
+$this->title = I18Next::t('user.registration', 'registration.create_title');
 ////\App::$domain->navigation->breadcrumbs->create(['account/registration', 'title']);
 //\App::$domain->navigation->breadcrumbs->create($this->title);
 ?>
@@ -30,7 +30,7 @@ $this->title = I18Next::t('user', 'registration.create_title');
 				dataType: 'json',
 				data: data,
 				success: function () {
-					alert('<?= I18Next::t('user', 'registration.sms_with_code_sended') ?>');
+					alert('<?= I18Next::t('user.registration', 'registration.sms_with_code_sended') ?>');
 				},
 				error: function (jqXHR) {
 					var message = '';
@@ -48,7 +48,7 @@ $this->title = I18Next::t('user', 'registration.create_title');
         <div class="col-lg-5">
 			<?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 			
-			<?php $buttonGetCode = Html::submitButton(I18Next::t('user', 'registration.send_activation_code'), [
+			<?php $buttonGetCode = Html::submitButton(I18Next::t('user.registration', 'registration.send_activation_code'), [
 				'onclick' => 'return sendSms()',
 				'class' => 'btn btn-default btn-block',
 			]); ?>
