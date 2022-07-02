@@ -23,7 +23,7 @@ trait UserAwareTrait
     {
         $user = $this->tokenStorage->getToken()->getUser();
         if ( ! $user instanceof UserInterface) {
-            throw new UnauthorizedException;
+            throw new UnauthorizedException();
         }
         return $user;
     }

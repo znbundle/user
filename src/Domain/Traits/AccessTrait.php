@@ -20,5 +20,4 @@ trait AccessTrait
             throw new UnauthorizedHttpException('Unauthorized');
         }
     }
-
 }
