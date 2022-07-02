@@ -78,7 +78,7 @@ class AuthController extends Controller
                 $this->authService->authByForm($authForm);
                 
 //                $this->authService->authenticationByForm($form);
-                $this->toastrService->success(['user', 'auth.login_success']);
+                $this->toastrService->success(['authentication', 'auth.login_success']);
                 return $this->goBack();
             } catch (UnprocessibleEntityException $e) {
                 ErrorHelper::addErrorsFromException($e, $form);
@@ -92,7 +92,7 @@ class AuthController extends Controller
     public function actionLogout($redirect = null)
     {
         $this->authService->logout();
-        $this->toastrService->success(['user', 'auth.logout_success']);
+        $this->toastrService->success(['authentication', 'auth.logout_success']);
         return $this->goHome();
         /*if ($redirect) {
             return $this->redirect([SL . $redirect]);

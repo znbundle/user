@@ -3,9 +3,11 @@
 namespace ZnBundle\User\Domain\Forms\Registration;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
-ValidationByMetadataInterface
+use ZnCore\Base\Develop\Helpers\DeprecateHelper;
 use ZnLib\Components\Http\Enums\HttpMethodEnum;
 use Symfony\Component\Validator\Constraints as Assert;
+
+DeprecateHelper::hardThrow();
 
 class VerifyCodeForm extends RequestCodeForm implements ValidateEntityInterface
 {

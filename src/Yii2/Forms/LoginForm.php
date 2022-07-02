@@ -29,9 +29,9 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'login' => I18Next::t('user', 'auth.action.login'),
+            'login' => I18Next::t('authentication', 'auth.action.login'),
             'password' => I18Next::t('user', 'main.password'),
-            'rememberMe' => I18Next::t('user', 'auth.remember_me'),
+            'rememberMe' => I18Next::t('authentication', 'auth.remember_me'),
         ];
     }
 

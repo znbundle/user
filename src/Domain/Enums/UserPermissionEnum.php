@@ -2,7 +2,10 @@
 
 namespace ZnBundle\User\Domain\Enums;
 
+use ZnCore\Base\Develop\Helpers\DeprecateHelper;
 use ZnCore\Base\Enum\Interfaces\GetLabelsInterface;
+
+DeprecateHelper::hardThrow();
 
 class UserPermissionEnum implements GetLabelsInterface
 {

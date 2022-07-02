@@ -10,7 +10,7 @@ use yii\bootstrap\ActiveForm;
 
 ?>
 
-<p class="login-box-msg"><?= I18Next::t('user', 'auth.login_text') ?></p>
+<p class="login-box-msg"><?= I18Next::t('authentication', 'auth.login_text') ?></p>
 
 <?php $form = ActiveForm::begin(); ?>
 
@@ -23,12 +23,12 @@ use yii\bootstrap\ActiveForm;
 	])->checkbox();?>
 	
 	<div class="form-group">
-		<?=Html::submitButton(I18Next::t('user', 'auth.action.login'), ['class' => 'btn btn-primary btn-flat', 'name' => 'login-button']) ?>
+		<?=Html::submitButton(I18Next::t('authentication', 'auth.action.login'), ['class' => 'btn btn-primary btn-flat', 'name' => 'login-button']) ?>
 	</div>
 	
 <?php ActiveForm::end(); ?>
 
-<?= Html::a(I18Next::t('user', 'auth.register_new_user'), ['/user/registration']) ?>
+<?= Html::a(I18Next::t('authentication', 'auth.register_new_user'), ['/user/registration']) ?>
     <br/>
-<?= Html::a(I18Next::t('user', 'auth.i_forgot_my_password'), ['/user/restore-password']) ?>
+<?= Html::a(I18Next::t('authentication', 'auth.i_forgot_my_password'), ['/user/restore-password']) ?>
 

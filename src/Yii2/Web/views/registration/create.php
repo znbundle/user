@@ -15,7 +15,7 @@ $this->title = I18Next::t('user', 'registration.create_title');
 <div class="user-signup">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= I18Next::t('user', 'auth.signup_text') ?></p>
+    <p><?= I18Next::t('authentication', 'auth.signup_text') ?></p>
 
     <script>
 		function sendSms() {

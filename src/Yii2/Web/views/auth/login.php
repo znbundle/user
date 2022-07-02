@@ -7,7 +7,7 @@ use ZnLib\Components\I18Next\Facades\I18Next;
 use yii\helpers\Html;
 use ZnBundle\User\Yii2\Forms\LoginForm;
 
-$this->title = I18Next::t('user', 'auth.login_title');
+$this->title = I18Next::t('authentication', 'auth.login_title');
 
 $loginForm = $this->render('helpers/_loginForm.php', [
 	'model' => $model,
@@ -15,7 +15,7 @@ $loginForm = $this->render('helpers/_loginForm.php', [
 
 $items = [];
 $items[] = [
-	'label' => I18Next::t('user', 'auth.title'),
+	'label' => I18Next::t('authentication', 'auth.title'),
 	'content' => $loginForm,
 ];
 
