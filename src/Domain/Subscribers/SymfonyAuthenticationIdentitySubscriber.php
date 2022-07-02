@@ -6,7 +6,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use ZnBundle\User\Domain\Enums\AuthEventEnum;
 use ZnBundle\User\Domain\Events\AuthEvent;
-use ZnBundle\User\Domain\Events\IdentityEvent;
+use ZnUser\Identity\Domain\Events\IdentityEvent;
 use ZnCore\Contract\User\Interfaces\Entities\IdentityEntityInterface;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;

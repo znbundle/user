@@ -4,8 +4,8 @@ namespace ZnBundle\User\Yii2\Entities;
 
 use Illuminate\Container\Container;
 use yii\web\IdentityInterface;
-use ZnBundle\User\Domain\Entities\IdentityEntity;
-use ZnBundle\User\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
+use ZnUser\Identity\Domain\Entities\IdentityEntity;
+use ZnUser\Identity\Domain\Interfaces\Repositories\IdentityRepositoryInterface;
 use ZnCore\Base\Container\Helpers\ContainerHelper;
 
 class YiiIdentityEntity extends IdentityEntity implements IdentityInterface
